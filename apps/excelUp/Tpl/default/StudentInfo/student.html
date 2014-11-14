@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="gbk" />
+    <title></title>
+    <link href="css/index.css" rel="Stylesheet" type='text/css' />
+    <script src="__APP__/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="__APP__/json2.js" type="text/javascript"></script>
+    <script src="__APP__/index.js" type="text/javascript"></script>
+    <script src="__APP__/sen.js" type="text/javascript"></script>
+</head>
+<body onload='ClientInit()'>
+<div class="searchZone">
+    <div class='blockStart'></div>
+    <input type='text' class='searchInput' id='searchInput' value='请输入人员名称'/>
+    <div class='searchBtn' id='searchBtn' ></div>
+    <div class='blockEnd'></div>
+</div>
+
+<div style="background-color:#17B4FF; height:3px;">
+</div>
+
+<div id = "peopleList"  class="peopleList" >
+</div>
+<div class="people">
+    <div class="name" style="text-align:center; float:none;">
+        <input id='ok' type="button" onclick="builePeopleList()" style="color:red;font-family:宋体;" value="确定" />
+    </div>
+</div>
+
+<script src="sen.js"></script>
+</body>
+</html>

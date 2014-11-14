@@ -1,0 +1,53 @@
+<?php
+class QuestionListViewWidget extends Widget {
+
+
+
+    /*
+     * array(1) {
+    ["questionListArray"] => array(11) {
+    ["app"] => string(8) "question"
+    ["mod"] => string(12) "QuestionEdit"
+    ["act"] => string(16) "ajaxQuestionList"
+    ["gradeListIDView"] => string(9) "1307S1702"
+    ["knowledgeLevel1ID"] => string(12) "110104960551"
+    ["knowledgeLevel2ID"] => string(17) "11010496055124911"
+    ["knowledgeLevel3ID"] => string(22) "1101049605512491139393"
+    ["questionTypeIDView"] => string(1) "1"
+    ["questionDifficultIDView"] => string(1) "2"
+    ["questionTeacherLoginView"] => string(11) "13711715571"
+    ["whereIDView"] => string(1) "2"
+  }
+}
+     *
+     *
+     * 根据上面条件判断查询即可
+     *
+     */
+	public function render($data)
+	{
+
+        $data = array_filter($data['questionListArray'],function($v) {
+            return !empty($v);
+        });
+        $questionList = $this->getQuestionList($data);
+        //dump($questionList);
+
+		$var['arrayListView'] = $questionList;
+		// 渲染模版
+		$content = $this->renderFile(dirname(__FILE__) . "/question.html", $var);
+
+		return $content;
+	}
+
+
+    private function getQuestionList($map=null){
+        $result = M('uteach_question')->where($map)->select();
+        if($result){
+            return $result;
+        }
+
+    }
+
+}
+

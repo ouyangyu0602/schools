@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>uTeach后台</title>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap.css"/>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap-theme.min.css"/>
+    <script src="__THEME__/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="__THEME__/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+
+</head>
+<style>
+    body{
+        margin-right: 8px;
+        margin-left: 8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .questionContent{
+        margin: 10px;
+    }
+    .addLeft{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .knowledgeTable{
+        font-size: 23px;
+        font-weight: bolder;
+    }
+    .addLeftContent{
+        font-size: 23px;
+        font-weight: bolder;
+    }
+    .addRightContent{
+        font-size: 23px;
+        width: 50%;
+
+    }
+    body{
+        margin-right: 8px;
+        margin-left: 8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    #leftTree div{
+
+        background-color: #ebecee;
+        border-bottom: 1px solid #d4d4d4;
+    }
+    #leftTree a{
+
+        font-size: 15px;
+        color: #000000;
+    }
+
+    #knowledgeLeftTree{
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    #knowledgeLeftTree div a{
+        text-align: left;width:100%;font-size: 21px;color: #000000;
+    }
+</style>
+
+<body style="">
+<div class="row" style="border-bottom: 1px solid #C8CBCB;">
+
+
+    <nav class="navbar .navbar-fixed-top" role="navigation" style="margin: 0px">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span style="font-size: 21px;margin-left: 10px;color: #000000"><b>uTeach</b></span>
+                            <span style="font-size: 21px;margin-left: 10px;color: #167efb"><b>题库</b></span>
+                            <span style="font-size: 21px;margin-left: 10px;color: #167efb">v</span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" style="text-align: center">
+                            <li><a href="{:U('excelUp/Index/index')}">体测</a></li>
+                            <li><a href="{:U('houtai/Index/index')}">设置</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{:U('public/Index/Index')}">首页</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown " >
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span style="font-size: 21px;"><b>欧阳宇</b></span>
+                            <span style="font-size: 21px;margin-left: 10px">v</span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#" style="border-bottom: 1px solid #70BF41;color: #70BF41">修改密码</a></li>
+                            <li><a href="#" style="border-bottom: 1px solid #70BF41;color: #70BF41">个人信息</a></li>
+                            <li><a href="{:U('public/Passport/logout')}" style="border-bottom: 1px solid #70BF41;color: #70BF41">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav" style="display: table;margin: 0 auto;table-layout: auto;float: none">
+                    <li style="margin-right: 50px" >
+                        <a href="{:U('question/QuestionEdit/index')}" style="">
+                            <span class=""  style="font-size: 21px;"><img src="__APP__/images/edit.png"></span>
+                        </a>
+                    </li>
+                    <li style="margin-left: 0px">
+                        <a href="{:U('question/QuestionEdit/questionRecord')}" style="">
+                            <span class=""  style="font-size: 21px;"><img src="__APP__/images/record.png"></span>
+                        </a>
+                    </li>
+
+
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>
+<!-- 导航条结束   -->
+
+<div class="row" style="border-bottom: 1px solid #C8CBCB;">
+    <div class="container-fluid" style="">
+
+
+        <div class="row" style="background-color: #ffffff;" >
+            <div class="col-md-3 " style="border-right: 2px solid #C8CBCB;text-align: center;">
+                <div class="row" style="margin-right: 20px;margin-left: 20px">
+                    <select class=" form-control" name='grade_list_id' >
+                        <volist name="gradeList" id="selectGradeList">
+                            <option value="{$selectGradeList['grade_list_id']}" <?php echo $selectGradeList['grade_list_id'] == $grade_list_id ? 'selected="selected"' : ''?>>{$selectGradeList['grade_list_name']}</option>
+
+                        </volist>
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-md-9" style="text-align: center">
+                <div class="row container-fluid" style="margin-top: 5px;margin-bottom: 5px;">
+                        <span class="" style="font-size: 25px">添加区域知识点大纲</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 说明结束 -->
+
+
+<!-- 中间部分开始-->
+
+<div class="row" style="">
+<div class="container-fluid">
+<div class="row" style="background-color: #ffffff" >
+    <div class="col-md-3 " id="leftTree" style="border-right: 2px solid #C8CBCB;">
+        <volist name="knowledgeListArray['level1']" id="level1">
+            <div class="row" >
+                <a href="#" data-level="{$level1['level']}" data-knowledge_id="{$level1['knowledge_id']}" class="btn btn-lg container-fluid" type="button" >
+                    {$level1['knowledge_name']}
+                    </a>
+            </div>
+            <volist name="level1['level2']" id="level2">
+                <div class="row" >
+                    <div class="col-md-10 col-md-offset-2">
+                        <a href="#" data-level="{$level2['level']}" data-knowledge_id="{$level2['knowledge_id']}" class="btn btn-lg container-fluid" type="button" >
+                            {$level2['knowledge_name']}
+                        </a>
+                    </div>
+
+                </div>
+                <volist name="level2['level3']" id="level3">
+                    <div class="row" >
+                        <div class="col-md-8 col-md-offset-4">
+                            <a href="#" data-level="{$level3['level']}" data-knowledge_id="{$level3['knowledge_id']}" class="btn btn-lg container-fluid" type="button" >
+                                {$level3['knowledge_name']}
+                            </a>
+                        </div>
+
+                    </div>
+                </volist>
+            </volist>
+        </volist>
+    </div>
+    <div class="col-md-9 col-md-offset-0" style="margin-top: 20px">
+        <input id="grade_list_id" value="{$grade_list_id}" style="display: none">
+
+
+        <div class="row" id="knowledgeLevel1">
+            <form method="post" id="knowledgeForm">
+
+                <div class="row addLeft" style="margin-top: 20px">
+                    <div class=" col-md-3 col-md-offset-1">
+                        <div class="row container-fluid" style="text-align: right">
+                            <span class="knowledgeTable">区域:</span>
+
+                        </div>
+                    </div>
+                    <div class="addRight col-md-6 col-md-offset-0">
+                        <div class="row container-fluid" style="font-size: 23px">
+                            {:W('Area',array('curPro'=>1,'curCity'=>2,'area'=>3,'tpl'=>'selectArea'))}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row addLeft" style="margin-top: 20px">
+                    <div class=" col-md-3 col-md-offset-1">
+                        <div class="row container-fluid" style="text-align: right">
+                            <span class="knowledgeTable">科目:</span>
+
+                        </div>
+                    </div>
+                    <div class="addRight col-md-3 col-md-offset-0">
+                        <select class=" form-control" name='subject_id' style="" >
+                            <volist name="subjectList" id="selectSubject">
+                                <option value="{$selectSubject['subject_type']}" >{$selectSubject['subject_type_desc']}</option>
+
+                            </volist>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="row addLeft" style="margin-top: 20px">
+                    <div class=" col-md-3 col-md-offset-1">
+                        <div class="row container-fluid" style="text-align: right">
+                            <span class="knowledgeTable">年级:</span>
+
+                        </div>
+                    </div>
+                    <div class="addRight col-md-3 col-md-offset-0">
+                        <select class=" form-control" name='grade_type' style="" >
+                            <volist name="gradeMast" id="selectGrade">
+                                <option value="{$selectGrade['grade_type']}-{$selectGrade['grade_order']}" >{$selectGrade['grade_type_desc']}</option>
+
+                            </volist>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row addLeft" style="margin-top: 10px">
+                    <div class=" col-md-3 col-md-offset-1">
+                        <div class="row container-fluid" style="text-align: right">
+                            <span class="addLeftContent ">一级知识点名称:</span>
+
+                        </div>
+                    </div>
+                    <div class="addRight col-md-6 col-md-offset-0">
+                        <div class="row container-fluid" >
+                            <input class="addRightContent" type="text" name='knowledgeName' size='20' style="width: 50%"><span style="color: red;font-size: 23px">*</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row addLeft" style="margin-top: 10px">
+                    <div class=" col-md-3 col-md-offset-1">
+                        <div class="row container-fluid" style="text-align: right">
+                            <span class="addLeftContent ">一级知识点排序:</span>
+
+                        </div>
+                    </div>
+                    <div class="addRight col-md-6 col-md-offset-0">
+                        <div class="row container-fluid" >
+                            <input class="addRightContent" type="text" name='order_value' size='20' style="width: 50%"><span style="color: red;font-size: 23px">*</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-4" style="text-align: center;background-color: #008E00;margin-top: 50px">
+                        <a class="btn btn-lg " type="button" id="knowledgeSubmit"  style="color: #ffffff;font-size: 23px;font-weight: bolder">确定</a>
+                    </div>
+
+                </div>
+
+
+            </form>
+        </div>
+
+
+        <div class="row" id="knowledgeLevel2" style="display: none">
+            <input style="display: none" id="level2ParentID" value="">
+            <div class="row addLeft" style="margin-top: 10px">
+                    <div class=" col-md-3 col-md-offset-1">
+                        <div class="row container-fluid" style="text-align: right">
+                            <span class="addLeftContent ">二级知识点名称:</span>
+
+                        </div>
+                    </div>
+                    <div class="addRight col-md-6 col-md-offset-0">
+                        <div class="row container-fluid" >
+                            <input class="addRightContent" type="text" id="knowledgeLevel2Name" size='20' style="width: 50%"><span style="color: red;font-size: 23px">*</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-4" style="text-align: center;background-color: #008E00;margin-top: 50px">
+                        <a class="btn btn-lg " type="button" id="knowledgeLevel2Submit"  style="color: #ffffff;font-size: 23px;font-weight: bolder">确定</a>
+                    </div>
+
+                </div>
+
+
+
+        </div>
+        <div class="row" id="knowledgeLevel3" style="display: none">
+
+
+
+
+                <input style="display: none" id="level3ParentID" value="">
+
+                <div class="row addLeft" style="margin-top: 10px">
+                    <div class=" col-md-3 col-md-offset-1">
+                        <div class="row container-fluid" style="text-align: right">
+                            <span class="addLeftContent ">三级知识点名称:</span>
+
+                        </div>
+                    </div>
+                    <div class="addRight col-md-6 col-md-offset-0">
+                        <div class="row container-fluid" >
+                            <input class="addRightContent" type="text" id="knowledgeLevel3Name"  size='20' style="width: 50%"><span style="color: red;font-size: 23px">*</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-4" style="text-align: center;background-color: #008E00;margin-top: 50px">
+                        <a class="btn btn-lg " type="button" id="knowledgeLevel3Submit"  style="color: #ffffff;font-size: 23px;font-weight: bolder">确定</a>
+                    </div>
+
+                </div>
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+</div>
+    </div>
+
+
+
+<!--尾部开始-->
+<script>
+
+    var height = screen.height - 200;
+    $('input[name="order_value"]').focus(function(){
+        $(this).next().html("<span style='color: #008000';>请按知识点顺序填</span>");
+    }).blur(function(){
+        if($(this).val()==""){
+            $(this).next().text('不能为空！');
+        }else{
+            if($(this).val().search(/^[1-9]\d{0,1}$/)==-1){
+                $(this).next().text('输入2位内数字！');
+                asd = false;
+            }else{
+                $(this).next().html("<span style='color:green';>√</span>");
+                asd = true;
+            }
+        }
+    });
+
+    $("#containerID").css("min-height",height);
+    $("#leftTree").css("height",height);
+    $('input[name="knowledgeName"]').focus(function(){
+        $(this).next().html("<span style='color: #008000';>请输入知识点名称</span>")
+    }).blur(function(){
+        if($(this).val()==""){
+            $(this).next().text('知识点名称不能为空');
+        }
+    });
+
+
+    $(function() {
+
+        $('#knowledgeSubmit').bind('click', function() {
+            if($('input[name="knowledgeName"]').val()=="" | $('select[name="area"]').val()=="0" | $('select[name="grade_type"]').val()=="" | $("select[name='subject_id']").val()=="" ){
+                alert("请填写完整信息！！！");
+
+                return false
+            }
+            var formData = $('#knowledgeForm').serialize();
+            //.serialize() 方法创建以标准 URL 编码表示的文本字符串
+            $.ajax({
+                type : "POST",
+                url  : "{:U('houtai/Knowledge/ajaxAddKnowledge')}",
+                cache : false,
+                data : formData,
+                success : onSuccess,
+                error : onError
+            });
+            return false;
+        });
+    });
+
+    $("#knowledgeLevel2Submit").click(function(){
+        $.post("{:U('houtai/Knowledge/ajaxAddMoreKnowledge')}", {'parent_id':$('#level2ParentID').val(),'grade_list_id': $('#grade_list_id').val(),'knowledge_name':$('#knowledgeLevel2Name').val()}, function (data) {
+            $('#knowledgeLevel2Name').val("");
+            $('#knowledgeLevel2Name').focus();
+            alert(data);
+        });
+    });
+    $("#knowledgeLevel3Submit").click(function(){
+        $.post("{:U('houtai/Knowledge/ajaxAddMoreKnowledge')}", {'parent_id':$('#level3ParentID').val(),'grade_list_id': $('#grade_list_id').val(),'knowledge_name':$('#knowledgeLevel3Name').val()}, function (data) {
+            $('#knowledgeLevel3Name').val("");
+            $('#knowledgeLevel3Name').focus();
+            alert(data);
+        });
+    });
+
+    $("#leftTree a").click(function(){
+        $('#leftTree a').css('background-color','#ebecee');
+        $(this).css('background-color','#d4d4d4');
+        var level = $(this).attr('data-level');
+        var knowledgeID = $(this).attr('data-knowledge_id');
+        if(level == '1') {
+            $("#knowledgeLevel2").show('fast');
+            $("#knowledgeLevel1").hide();
+            $("#knowledgeLevel3").hide();
+            $('#level2ParentID').val(knowledgeID);
+
+        }
+        if(level == '2'){
+            $("#knowledgeLevel3").show('fast');
+            $("#knowledgeLevel2").hide();
+            $("#knowledgeLevel1").hide();
+            $('#level3ParentID').val(knowledgeID);
+        }
+
+
+    });
+
+    function onSuccess(data,status){
+        data = $.trim(data); //去掉前后空格
+        $('input[name="knowledgeName"]').val("");
+        alert(data);
+    }
+    function onError(data,status){
+        //进行错误处理
+    }
+
+
+</script>
+<script type="text/javascript">
+
+
+</script>
+</body>
+
+</html> 

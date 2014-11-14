@@ -1,0 +1,126 @@
+<div class="row" style="border-bottom: 5px solid #70BF41;margin-bottom: 30px">
+    <h3 style="font-weight: bolder">学校年级列表</h3>
+</div>
+
+<div class="row schoolTitle" style="border-bottom: 3px solid #9C4896">
+
+    <div class="col-md-3" style="text-align: center">
+        <span class="text" >学校</span>
+    </div>
+    <div class="col-md-2">
+        <span class="text">年级名称</span>
+    </div>
+    <div class="col-md-2">
+        <span class="text">简称</span>
+    </div>
+    <div class="col-md-2">
+        <span class="text">年级排序</span>
+    </div>
+
+    <div class="col-md-1">
+        <input id="mulSel" type="checkbox">
+        <span class="text">全选</span>
+    </div>
+    <div class="col-md-1">
+        <input type="button" id="mulDel" class="text" value="全选删除">
+    </div>
+    <div class="col-md-1">
+        <span class="text">修改</span>
+    </div>
+
+</div>
+<?php
+    if(empty($schoolGradeList)) {
+?>
+<div class="row" style="margin-top: 50px;text-align: center">
+    <h1 style="font-weight: bolder">请添加年级！</h1>
+</div>
+
+<?php
+}
+?>
+<volist name="schoolGradeList" id="vo">
+
+
+    <div class="row schoolTitle" style="border-bottom: 1px solid #C8CBCB;margin-top: 10px;">
+
+        <div class="col-md-3" style="text-align: center">
+            <span class="text" style="">{$vo.schoolName}</span>
+        </div>
+        <div class="col-md-2">
+            <span class="text">{$vo.title}</span>
+        </div>
+        <div class="col-md-2">
+            <span class="text">{$vo.short_name}</span>
+        </div>
+        <div class="col-md-2">
+            <span class="text">{$vo.sort_order}</span>
+        </div>
+
+        <div class="col-md-1">
+            <input type="checkbox" value="{$vo['grade_id']}" />
+        </div>
+        <div class="col-md-2">
+            <div class="col-md-6">
+                <a href="{:U('houtai/Grade/delGradeInfo',array('grade_id'=>$vo['grade_id'],'school_id'=>$vo['school_id']))}" onclick="return confirm('你确定删除这条数据吗？')">删除</a>
+            </div>
+            <div class="col-md-6">
+                <a href="javascript:void(0);" onclick="modify('{$vo['grade_id']}','{$vo['school_id']}')">修改</a>
+            </div>
+        </div>
+
+
+    </div>
+</volist>
+
+
+<script language="JavaScript">
+
+    //checkbox点击事件
+    $("#mulSel").click(
+            function (){
+                $check=$(this).prop('checked');
+                if($check)
+                    $(".schoolTitle :checkbox").prop('checked',true);
+                else
+                    $(".schoolTitle :checked").prop('checked',false);
+            }
+    );
+    //多个删除按钮点击事件
+    $("#mulDel").click(
+            function (){
+                $list=$(".schoolTitle :checkbox");
+                $strId="";
+                for($i=0;$i<$list.length;$i++)
+                {
+                    if($list[$i].checked==true)
+                        $strId+=$list[$i].value+",";
+                }
+                $strIdAfterSplit=$strId.substr(0,$strId.length-1);
+                //alert($strIdAfterSplit);
+                if($strIdAfterSplit==null||$strIdAfterSplit=="")
+                {
+                    alert('未选择删除的记录！');
+                }
+                else
+                {
+                    //alert($strIdAfterSplit);
+                    $urlStr="{:U('houtai/grade/grade',array('ids'=>'"+$strIdAfterSplit+"'))}";
+                    $.ajax({
+                        type:'post',
+                        url:$urlStr,
+                        cache:false,
+                        //async:false,
+                        dataType:'json',
+                        timeout:30000,
+                        error:function(data){
+                            alert(data['info']);
+                        },
+                        success:function(da){
+                            alert(da['info']);
+                        }
+                    });
+                }
+            }
+    );
+</script>

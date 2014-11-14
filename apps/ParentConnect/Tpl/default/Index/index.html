@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+<title>云测评</title>
+<!-- <link rel='stylesheet' id='base-style-css' href='__APP__/base.css'
+	type='text/css' media='all' /> -->
+<link rel='stylesheet' id='header-style-css' href='__APP__/header.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='index-style-css' href='__APP__/jiazhang.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css'  href='__APP__/footer.css' type='text/css' media='all' />
+<script type="text/javascript" src="__APP__/jquery-1.9.0.min.js"></script>
+<script type='text/javascript' src='__APP__/jquery.simplemodal.js'></script>
+<script type='text/javascript' src='__APP__/jquery.placeholder.js'></script>
+
+</head>
+
+<body>
+<include file="__THEME__/public_header" />
+
+<!-----头部结束-------->
+
+
+<div id="body_center">
+
+<div id="body_right">
+	<h1>
+		<b>留言板</b> 
+		<span>您共有{$replynum}条回复</span>
+	</h1>
+	<div class="ly_con">
+	<volist name="messageparenttotech" id="voMsgPtoT" >
+		<ul>
+			<li>
+				<h2>{$voMsgPtoT.studentname}的家长</h2>
+				<a class="reply">回复</a>
+			</li>
+			<input type="hidden" class="messageid" value="{$voMsgPtoT['message_id']}"/>					
+			<input type="hidden" class="paperid"  value="{$voMsgPtoT['paper_id']}"/>	
+			<volist name="voMsgPtoT['conversation']" id="voAll" >		
+			<php> if( $voAll['message_receiver'] == $voMsgPtoT['message_receiver'] ) { </php>
+				<php> if( $voAll['comefrom'] == 1 ) { </php>
+					<li>
+						<h2>{$voMsgPtoT.studentname}的家长：</h2>
+						<span>{$voAll.sendmessage_date}</span> 
+					</li>
+					<li>{$voAll.message_content}</li>
+					<input type="hidden" class="messageid" value="{$voAll['message_id']}"/>					
+					<input type="hidden" class="paperid"  value="{$voAll['paper_id']}"/>					
+					<php> } else { </php>
+					<li>
+						<h3>{$uname}老师:</h3>
+						<span>{$voAll.sendmessage_date}</span>
+					</li>
+					<li>{$voAll.message_content}</li>
+					<input type="hidden" class="messageid" value="{$voAll['message_id']}"/>					
+					<input type="hidden" class="paperid"  value="{$voAll['paper_id']}"/>		
+				<php> } </php>
+			<php> } </php>		
+			</volist>			
+			<li class="lyk"><INPUT TYPE="text" NAME="" value="" placeholder="回复：">
+				<button TYPE="button" class="send" id="{$voMsgPtoT['message_receiver']}" >发送</button>
+			</li>
+		</ul>
+	</volist> 
+</div>
+</div>
+
+
+<div id="body_left">
+<h1>选择班级</h1>
+<div id="banji">
+<volist name="classlist" id="voclass"> <a
+	id="{$voclass.classid}"
+	href="{:U('ParentConnect/Index/index', array('selectedClassId'=>$voclass['classid']))}">{$voclass.classname}</a>
+</volist></div>
+
+<p class="t"><span class="k1">日期</span> <span class="k2">章节</span> <span
+	class="k3">个人留言</span> <span class="k4">个人分析发送</span></p>
+<volist name="evaluationlist" id="voEvaluation">
+<p><span class="k1">{$voEvaluation.createdate}</span> 
+
+		<!-- chg start by baoyt 20131124  -->
+				<span class="k2">{$voEvaluation.paper_title} {$voEvaluation.section_title} </span>
+				<span class="k3">
+					<a></a>
+				</span>
+				<if condition="$voEvaluation.send_status eq '0'">
+					<span class="k4 y">
+						<a href="{:U('ParentConnect/Index/index',array('paper_id'=>$voEvaluation['paper_id'],'selectedClassId'=>$voEvaluation['selectedClassId']))}"></a>
+					</span>
+				<else />
+					<span class="k4">
+							<a ></a>
+					</span>		
+				</if>
+				<!-- chg end by baoyt 20131124  -->
+
+</p>
+
+<dl class="liuyan_list">
+	<h1>发送留言</h1>
+	<blockquote><span class="w1">学号</span> <span class="w2">姓名</span>
+	<span class="w3">测评时间</span> <span class="w4">错题率</span> <span
+		class="w5">得分</span> <span class="w6">班级平均分</span> <span class="w7">百分位</span>
+	<span class="w8">留言</span></blockquote>
+
+	<div class="liuyan">		
+	<!-- add start by baoyt 20131124  -->
+					<volist name="voEvaluation['student']" id="v">
+					<div class="tr">
+							<span class="w1">{$v.login}</span>
+							<span class="w2">{$v.uname}</span>
+							<span class="w3">{$voEvaluation.examdate}</span>
+							<span class="w4">{$v.wrong_rate}%</span>
+							<span class="w5">{$v.score}</span>
+							<span class="w6">{$voEvaluation.avg}</span>
+							<span class="w7">{$v.percentRate}</span>
+							<if condition="$v.msg_status eq '0'">
+								<span class="w8">
+									<a class="y"></a>
+								</span>
+							<else />
+								<span class="w8">
+									<a class="n"></a>
+								</span>	
+							</if>
+					</div>
+					<div class="shuru">
+						<input type="hidden" id="{$v.parent_id}" value="{$v.parent_id}" />
+						<input type="hidden" id="{$voEvaluation.paper_id}" value="{$voEvaluation.paper_id}" />
+					
+						<TEXTAREA NAME="" ROWS="" COLS="" placeholder="留言内容：" id="shuru_value"></TEXTAREA>
+						<INPUT type="button" value="发送" onclick="">
+					</div>
+					</volist>
+				<!-- add end by baoyt 20131124  -->
+	
+	
+	</div>
+</dl>
+</volist>
+
+	<div class="pager">
+
+			{$pages}
+	</div>
+</div>
+
+
+<div class="clear"></div>
+</div>
+<!-----页面主体部分完成------------>
+
+
+
+<script type="text/javascript"><!--
+	jQuery(function($) {
+
+		//$("#user_info").html("Kami");
+		$(".jiazhang").addClass("this");
+
+		$searchParameter = window.location.search;//?之后的url
+		$searchArray = $searchParameter.split('&');
+		for ($i = 0; $i < $searchArray.length; $i++) {
+			$a=0;
+			if ($searchArray[$i].split('=')[0] == "selectedClassId") {
+				
+				$("#" + $searchArray[$i].split('=')[1]).css("background","#1eabc6");
+				$("#" + $searchArray[$i].split('=')[1]).css("color","#fff");
+				$a++;
+			}
+			//alert($a);
+			//if($a==1)
+			//if ($searchArray[$searchArray.length-1].split('=')[0]!="selectedClassId")
+			//{
+				//$("#banji a").first().css("background","#1eabc6");
+			//}
+		}
+		//alert($a);
+			if($a==0)				
+			{
+				$("#banji a").first().css("background","#1eabc6");
+				$("#banji a").first().css("color","#fff");
+			}
+		/* $("#user_info").click(function(e){
+		 $("#editpass").css("display","none");
+		 $('#user_info_content').modal({
+		 containerCss:{
+		 height:268, 
+		 width:320
+		 }
+		 });
+		 return false;
+		 }); */
+
+		/* $("#xgmm").click(function(){
+		 $('#simplemodal-container').css("height","486px");
+		 $("#editpass").css("display","block");
+		 }); */
+
+		//鼠标移上左侧表格，打开留言框
+		//	$("#body_left p .k3 aa").click(function(){
+		//	$("#body_left p").removeClass("this");
+		//	$(this).parent().parent().addClass("this");
+		//
+		//	$(".liuyan_list").hide();
+		//	$(this).parent().parent().next("#body_left .liuyan_list").show();
+		//	});
+		$("#body_left p .k3 a").click(
+				function() {
+					$(this).parent().parent().next("#body_left .liuyan_list")
+							.toggle(function() {
+							});
+					$(this).toggleClass("this");
+				});
+
+		$(".shuru").hide();
+		$(".w8 a").click(function() {
+			$(".liuyan_list .tr .w8 a").removeClass("this");
+			$(this).addClass("this");
+			$(".shuru").hide();
+			$(this).parent().parent().next("div.shuru").show();
+		});
+
+	/*	//点击左侧列表中的留言发送按钮后，执行的动作（关闭输入框）
+		$(".shuru input").click(function() {
+			$(this).parent().hide();
+			$(".liuyan_list .tr .w8 a").removeClass("this");								
+		});*/
+		
+		
+		
+		//点击左侧列表中的留言发送按钮后，执行的动作（关闭输入框）
+		$(".shuru input").click(function() {
+			$(this).parent().hide();
+			var c = $(this).prev().val();
+			var paper_id = $(this).prev().prev().val();
+			var parent_id = $(this).prev().prev().prev().val();
+			var url = "{:U('ParentConnect/Index/insertMessages')}";
+			url += "&paper_id=" + paper_id + "&parent_id=" + parent_id;
+			//$(this).parent().prev().children().last().children().attr('class','n this');
+			//alert($(this).parent().prev().children().last().children().attr('class'));
+			  $.post(url,{
+						'content' : c
+					}, function(da) {
+						//$('#timu_list').html(
+						//	data);
+						//document.write(da[0]);
+						//alert(da['info']);
+						//alert(da['status']);
+						//alert(state);
+						if(da['status']=='1')
+							{
+								alert('回复成功！');
+								//$(".liuyan_list .tr .w8 a").addClass("n");
+								//$(this).parent().prev().children().last().children().attr('class','n this');
+							}
+					},'json'); 
+			
+			$(".liuyan_list .tr .w8 a").removeClass("this");
+			$(this).parent().parent().next("div.shuru").hide();
+			
+		});
+		
+		
+		
+		
+		/* //表格鼠标点击“您点击了发送”时候触发的动作
+		$(".k4").click(function() {
+			if ($(this).hasClass("y")) {
+				//alert("您点击了已发送！");
+			} else {
+				//alert("您点击了发送！");
+			}
+		});*/
+
+		//操作右侧留言板
+		$(".lyk").hide();
+		$(".reply").click(function() {
+			$(".lyk").hide();
+			$(this).parent().parent().find(".lyk").show();
+		});
+		//发送按钮点击事件
+		$('.send').click(function (){
+			//$(this).attr('id');//获取id
+			//alert($(this).parent().prevAll().filter(".paperid").val());
+			//alert($(this).parent().prevAll().filter(".messageid").val());//
+			//alert($(this).prevAll().find("input").first().prev().val());
+			var datea ={
+					parentId : $(this).attr("id"),
+					content:$(this).prev('input').val(),
+					paperId:$(this).parent().prevAll().filter(".paperid").val(),
+					messageId:$(this).parent().prevAll().filter(".messageid").val()					
+				}
+			
+			//alert($(this).prev('input').val());	
+			//alert($(this).attr("id"));
+			if(($(this).prev('input').val()!="")&&($(this).prev('input').val()!='undefined'))
+			$.post(
+				"{:U('ParentConnect/Index/index')}",
+				datea, function(data) {
+					location.reload();
+					//alert(data);
+					//document.write(data);
+					$(".lyk").hide();
+				});
+			else
+				alert('发送消息为空！');
+			//window.location.href="{:U('ParentConnect/Index/index',array('parentId'=>"+$(this).attr('name')+"))}";
+		});
+		$('input, textarea').placeholder();
+	});
+</script>
+<div id="footer">
+
+<img src="__PUBLIC__/123456789.jpg">
+
+</div>
+</body>
+</html>

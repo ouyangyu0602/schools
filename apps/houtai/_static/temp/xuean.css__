@@ -1,0 +1,176 @@
+/*框架样式*/
+html{
+	max-height: auto;
+	max-width: 1000px;
+	width:expression(this.width>400?"400px":this.width);
+	height:expression(this.height>350?"350px":this.height);
+	overflow:hidden;
+	border:0;
+	padding-left: 190px;	
+}
+.main{
+	text-align: center;
+	background-color: #FFFACD;
+}
+/*头部样式设置*/
+.top{
+	background-color: #9ACD32;
+	overflow: auto;
+	max-height: 250px;
+	height: 70px;
+}
+.top_left{
+	float: left;
+	padding-top: 30px;
+	font-size: 20px
+}
+.top_middle,.top_right,.top_search{
+	float: left;
+	padding-top: 30px;
+	padding-left: 10px;
+}
+.top_riqi{
+	float: left;
+	padding-top: 30px;
+	padding-left: 10px;
+}
+/*.top_middle{
+	float: left;
+	padding-top: 20px;
+	padding-left: 10px;
+	
+}
+.top_right{
+	float: left;
+	padding-top: 20px;
+	padding-left: 10px;
+}
+.top_riqi{
+	float: left;
+	padding-top: 20px;
+	padding-left: 10px;
+}
+.top_search{
+	float: left;
+	padding-top: 20px;
+	padding-left: 10px;
+
+}*/
+.top_riqi > input{
+	height: 20px;
+	width: 80px;
+}
+
+.top_search > input{
+	width: 50px;
+	height: 30px;
+	
+	
+
+}
+/*给头部的选框设置样式*/
+.top_riqi > input,.top_search > input,select {
+	background-color: #FFFACD;
+	border-right-style: none;
+	border-left-style: none;
+	border-bottom-style: none;
+	border-top-style: none;
+}
+/*底部样式设置*/
+.bottom{
+	background-color: #FFF68F;
+	max-height: auto;
+}
+
+.bottom > ul > li{
+	list-style: none;
+	display: inline-block;
+	height: 50px;
+	padding-top: 20px;
+	
+}
+.bottom > ul > li > table{
+	background-color: #FFEC8B;
+	padding-top: 20px;
+	padding-left: 20px;
+	border-left: 1px solid #FFA500;
+	border-bottom: 1px solid #FFA500;
+	border-right: 1px solid #FFA500;
+	border-top: 1px solid #FFA500;
+}
+
+/*按钮样式设置*/
+a.yourcssclass{ 
+	display:block; 
+	width:122px; 
+	height:41px; 
+	font-family:'微软雅黑';
+	color:#A8A8A8;  
+	background-color:#FFEC8B; 
+	text-decoration:none; 
+	line-height:41px;
+	border-top: 1px solid #FFA500;
+	border-left: 1px solid #FFA500;
+	border-bottom: 1px solid #FFA500;
+	border-right: 1px solid #FFA500;
+}
+a.yourcssclass span.a1{ 
+	font-weight:bolder;  
+	font-size:30px;  
+	padding:0 10px; 
+	vertical-align:middle; 
+}
+a.yourcssclass span.a2{ 
+	font-size:20px; 
+	vertical-align:middle;
+}
+
+/*详细成绩页面样式设置*/
+.detail_html{
+	max-height: 1500px;
+	max-width: 700px;
+	width:expression(this.width>400?"400px":this.width);
+	height:expression(this.height>350?"350px":this.height);
+	overflow:hidden;
+	border:0;
+	padding-left: 280px;
+	
+
+}
+.detail_body{
+	text-align: center;
+	padding-top: 10px;
+	background-color: #EEE9BF;
+	width: 700px;
+	height: 1500px;
+}
+
+.detail_main{
+	padding-left: 50px;
+	text-align: center;
+	background-color: #FFFACD;
+}
+
+.detail_table{
+	text-align: center;
+	height: 1000px;
+	width: 600px;
+	border-top: 1px solid #FFA500;
+	border-left: 1px solid #FFA500;
+	border-bottom: 1px solid #FFA500;
+	border-right: 1px solid #FFA500;
+}
+.detail_table  td{
+	border-top: 1px solid #FFA500;
+	border-left: 1px solid #FFA500;
+	border-bottom: 1px solid #FFA500;
+	border-right: 1px solid #FFA500;
+	
+}
+
+
+
+
+
+
+

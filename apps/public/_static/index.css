@@ -1,0 +1,71 @@
+@charset "utf-8";
+/*body{background:#4c4d54 url(images/index_bg.jpg);overflow: hidden;}*/
+body{background:#4c4d54 url(images/uteachLogin.jpg);overflow: hidden;}
+
+
+
+
+
+#index_div{display:none;}
+.logo{left:0px; top:30px;position:relative;z-index:999;}
+#user_info{width:auto; height:38px; right:50px; top:50px; line-height:38px; position:absolute;z-index:999;font-size:23px; color:#fff;cursor:pointer;}
+#user_info img{ vertical-align:middle;}
+
+.school{width:289px; height:60px; margin:20px auto;}
+.index_icon{width:1009px; height:170px; margin:235px auto 120px;overflow: hidden;}
+.index_icon a{width:157px; height:157px; margin:4px 3px;}
+.index_icon a img{width:157px; height:157px; -webkit-box-shadow: 2px 2px 0px; -moz-box-shadow: 2px 2px 0px; box-shadow: 2px 2px 10px #232b32;}
+
+#mima{
+    line-height: 21px;
+    font-size: 21px;
+}
+#loginRememberStyle{
+    margin-top: 30px;
+    margin-left: 170px;
+}
+#login_div{display:none;}
+
+#logo{width:328px; height:65px; margin:0px auto;}
+.login{width:820px; height:320px; margin:0px auto;top:30%;position:absolute;z-index:999;}
+.login input{vertical-align:middle; color:#706c70; font-size:14px;line-height:180%; font-weight:300;}
+.login #name{
+    width:271px;
+    height:37px;
+    line-height:21px;
+background-image: url(images/uteachInput.png);
+    font-size: 21px;
+    float:left;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-right: 20px;
+   padding-left:15px;
+background:no-repeat 0 0 scroll #EEEEEE;
+    border:none;
+    outline:medium;
+}
+.login #pass{
+    width:271px;
+    height:37px;
+    line-height:21px;
+background-image: url(images/uteachInput.png);
+    font-size: 21px;
+    margin-top: 20px;
+    float:left;
+    border-radius: 5px;
+    margin-left: 20px;
+   padding-left:15px;
+background:no-repeat 0 0 scroll #EEEEEE;
+    border:none;
+    outline:medium;
+}
+.login #login{width:328px; height:36px; border:0;padding:0; background:url(images/enter.gif) no-repeat;  right:1px; top:173px;position:absolute;}
+.login label{position:relative;left:30%;color:#c8c6ce;line-height:40px;margin:50px auto;font-size:16px;}
+.login a{float:right;color:#c8c6ce;line-height:40px;margin:10px 20px 0 0; font-size:16px;}
+
+
+#login_bg{width:100%; height:100%;overflow: hidden;left:0px; top:0px;position:absolute;z-index:1;}
+#login_bg img{width:100%; height:100%;}
+
+.copyright{width:1020px; height:170px; margin:150px auto 0px;overflow: hidden;}
+.copyright a{color:#c2bebf;}

@@ -1,0 +1,46 @@
+<!-- $Id: start.htm 17216 2011-01-19 06:03:12Z liubo $ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<form method="post" action="{:U('houtai/Student/saveStudentInfo',array('id'=>$data['uid']))}">
+    <table cellspacing='1' cellpadding='3'>
+        <tr>
+            <th colspan="4" class="group-title">学生信息管理-->修改信息</th>
+        </tr>
+        <tr>
+            <td>姓名：</td>
+            <td><input type="text" name='uname' size='20' value="{$data.uname}"></td>
+        </tr>
+
+        <tr>
+            <td>邮箱：</td>
+            <td><input type="text" name='email' size='20' value="{$data.email}"></td>
+        </tr>
+
+        <tr>
+            <td>性别：</td>
+            <td>
+                <input type="radio" name='sex' size='20'  value="0" <php>if($data['sex']==0){echo 'checked';}</php>>男
+                <input type="radio" name='sex' size='20' value="1" <php>if($data['sex']==1){echo 'checked';}</php>>女
+            <td>
+        </tr>
+
+        <tr>
+            <td>地址:</td>
+            <td><input type="text" name='location' size='20' value="{$data.location}"></td>
+        </tr>
+    </table>
+    <div style="height:40px; width:100%;padding-top:10px; text-align:center;">
+        <input type="submit" value="确定" style="margin-left:-80px;">
+        <a href="{:U('houtai/Student/studentInfo')}" style="margin-left:60px;">返回</a>
+    </div>
+</form>
+</div>
+</body>
+</html>

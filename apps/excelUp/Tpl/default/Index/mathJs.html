@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>UbbCode</title>
+<script type="text/javascript" src="__APP__/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="__APP__/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/mathjax/MathJax.js?config=default"></script>
+
+</head>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+	 CKEDITOR.replace( 'editor1',{
+			toolbar: [
+					//[ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ]
+					['EqnEditor','-','Source','-','Image','uploadimg','hello']
+			 ]
+     });
+});
+
+</script>
+
+<body>
+
+<h1>MathJs</h1>
+
+<br>
+<div>  
+	<div style="width: 300px; float: left;" id ="editor1">
+	</div>
+
+</div>
+{:W("Editor"),array("width"=>"300px","height"=>"300px","contentName"=>"mycontent","value"=>"默认值")}
+
+
+
+</body>
+</html>

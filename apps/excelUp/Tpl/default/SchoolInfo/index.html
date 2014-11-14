@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>数据上传</title>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap.css"/>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap-theme.min.css"/>
+    <script src="__THEME__/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="__THEME__/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body style="background-color: #164B0F">
+<div class="bs-docs-header" id="content" style="background-color: #6f5499;padding-top:60px;padding-bottom:60px;font-size:24px;text-align:left;">
+    <div class="container">
+        <h1 style="display: block;  font-size: 3em;  -webkit-margin-before:-0.33em;  -webkit-margin-after: 0.50em;  -webkit-margin-start: 0px;  -webkit-margin-end: 0px;  font-weight: bold;color: white;">
+            后台信息上传</h1>
+        <p style="color:white">上传学校信息、上传年级班级信息、上传教师科目信息、上传学生家长信息</p>
+
+    </div>
+</div>
+
+
+<div class="container" style="margin-top: 40px">
+    <div class="row">
+        <div class="col-md-12" style="margin-left: -30px;">
+        <div class="col-md-3">
+            <div class="col-md-12" >
+                <div class="col-md-3">
+                    <span class="step1" style="padding:5px 8px;background-color: #39A85D;color: #fff;border-bottom-left-radius: 10px 10px;border-top-left-radius: 10px 10px;font-size: 40px">1</span>
+                </div>
+            <div class="col-md-8" style="">
+                <a class="btn btn-lg {$step}" type="button" href="{:U('excelUp/SchoolInfo/index',array('step'=>1))}" style="text-align:center;margin-left:-14px;padding: 16px 70px;text-align:center;background-color: #39A85D;color: #fff;border-bottom-right-radius: 10px 10px;border-top-right-radius: 10px 10px;">学校信息
+                </a>
+                <div class="" style="">
+                    <php> if($step > 1) echo '<span class="glyphicon glyphicon-ok" style="color: red"></span>';
+                        elseif($step == 1 || $step == 0) echo '<span class="glyphicon glyphicon-pencil" style="color: red"></span>'
+                    </php>
+                </div>
+
+            </div>
+            </div>
+        </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <span class="step1" style="padding:5px 8px;background-color: #3942A8;color: #fff;border-bottom-left-radius: 10px 10px;border-top-left-radius: 10px 10px;font-size: 40px">2</span>
+                    </div>
+                    <div class="col-md-8" style="">
+                        <a class="btn btn-lg " type="button" href="{:U('excelUp/SchoolInfo/index',array('step'=>2))}" style="margin-left:-14px;padding: 16px 70px;text-align:center;background-color: #3942A8;color: #fff;border-bottom-right-radius: 10px 10px;border-top-right-radius: 10px 10px;">班级信息</a>
+                        <php> if($step > 2) echo '<span class="glyphicon glyphicon-ok" style="color: red"></span>';
+                        elseif($step == 2) echo '<span class="glyphicon glyphicon-pencil" style="color: red"></span>'
+                        </php>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <span class="step1" style="padding:5px 8px;background-color: #851E53;color: #fff;border-bottom-left-radius: 10px 10px;border-top-left-radius: 10px 10px;font-size: 40px">3</span>
+                    </div>
+                    <div class="col-md-8" style="">
+                        <a class="btn btn-lg " type="button" href="{:U('excelUp/SchoolInfo/index',array('step'=>3))}" style="margin-left:-14px;padding: 16px 70px;text-align:center;background-color: #851E53;color: #fff;border-bottom-right-radius: 10px 10px;border-top-right-radius: 10px 10px;">教师信息</a>
+                        <php> if($step > 3) echo '<span class="glyphicon glyphicon-ok" style="color: red"></span>';
+                              elseif($step == 3) echo '<span class="glyphicon glyphicon-pencil" style="color: red"></span>'
+                        </php>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <span class="step1" style="padding:5px 8px;background-color: #EB9538;color: #fff;border-bottom-left-radius: 10px 10px;border-top-left-radius: 10px 10px;font-size: 40px">4</span>
+                    </div>
+                    <div class="col-md-8" style="">
+                        <a class="btn btn-lg " type="button" href="{:U('excelUp/SchoolInfo/index',array('step'=>4))}" style="margin-left:-14px;padding: 16px 70px;text-align:center;background-color: #EB9538;color: #fff;border-bottom-right-radius: 10px 10px;border-top-right-radius: 10px 10px;">学生信息</a>
+                        <php> if($step > 4) echo '<span class="glyphicon glyphicon-ok" style="color: red"></span>';
+                            elseif($step == 4) echo '<span class="glyphicon glyphicon-pencil" style="color: red"></span>'
+                        </php>
+
+                    </div>
+                </div>
+            </div>
+</div>
+    </div>
+
+    <div class="row" style="margin-top: 40px">
+        <div class="col-md-11" style="margin-left: 50px;">
+        <div class="alert alert-success" role="alert">
+                <p style="font-size: 18px">{$alertInfo}</p>
+        </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 40px">
+        <div id="page-wrap" align="center">
+            <form id="upload" method='post' action="{:U('excelUp/SchoolInfo/upload',array('step'=>$step))}" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                <input name="fileExcel" type="file" style="font-size:20px;height:54px;width:450px;background-color: #1babc6">
+                </div> <div class="col-md-6" style="width: 10%">
+                            <input class="btn " type="submit" value="上传" style="padding: 16px 70px;text-align:center;background-color: #39A85D;color: #fff;border-bottom-right-radius: 10px 10px;border-top-right-radius: 10px 10px;">
+                </div></div></div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script type="text/javascript">
+    /*$('lefile').change(function() {
+        alert($(this).val());
+        $('#photoCover').val($(this).val());
+    });*/
+    function uploadFile() {
+        $('#lefile').click();
+        $('#lefile').change(function() {
+            alert($(this).val());
+            $('#photoCover').val($(this).val());
+        });
+    }
+</script>
+</html>

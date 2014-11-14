@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>云测评</title>
+<link rel='stylesheet' id='header-style-css' href='__APP__/header.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css' href='__APP__/footer.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css' href='__APP__/houtai.css'
+	type='text/css' media='all' />
+<script type="text/javascript" src="__APP__/jquery-1.9.0.min.js"></script>
+<script type='text/javascript' src='__APP__/jquery.simplemodal.js'></script>
+<script src="__APP__/jquery-ui.js"></script>
+</head>
+<style>
+    #list span{
+        height: 1px;
+    }
+</style>
+<body>
+	<include file="__THEME__/public_header" />
+
+	<div id="body_center">
+		<!--添加纪录开始  -->
+		<!--<div id="add">-->
+			<!--<h2 class="titleh2">新增学生</h2>-->
+            <!--<form action="{:U('houtai/Student/addStudentInfo')}" method="post">-->
+			<!--<dl>-->
+				<!--<dd>-->
+                     <!--<span>-->
+						<!--学校ID:-->
+						<!--<SELECT id="schoolid">-->
+                            <!--<volist name="schoolMsg" id="svo">-->
+                                <!--<OPTION  value="{$svo.schoolid}" >{$svo.title}</OPTION>-->
+                            <!--</volist>-->
+                        <!--</SELECT>-->
+                         <!--<input name="school_id" type="hidden" id="schid" >-->
+					<!--</span>-->
+					<!--<span>-->
+						<!--姓名:-->
+						<!--<INPUT name="uname" type="text"/>-->
+					<!--</span>-->
+					<!--<span>-->
+						<!--邮箱:-->
+						<!--<INPUT name="email" type="text" />-->
+					<!--</span>-->
+					<!--<span>-->
+						<!--性别:-->
+					<!--<input name="sex" type="radio" value="0" style="width:25px"/>男-->
+					<!--<input name="sex" type="radio" value="1" style="width:25px"/>女-->
+					<!--</span>-->
+					<!--<span>-->
+                        <!--省：-->
+                        <!--<select name="province" >-->
+                            <!--<option selected="selected" value="">请选择省份</option>-->
+                            <!--<volist name="address" id="vo">-->
+                                <!--<option value="{$vo.area_id}">{$vo.title}</option>-->
+                            <!--</volist>-->
+                        <!--</select>-->
+					<!--</span>-->
+                    <!--<span>-->
+                        <!--<select name="city" style="width: 100px;">-->
+                            <!--<option selected="selected" value="">请选择城市</option>-->
+                            <!--<volist name="address" id="voa">-->
+                                <!--<volist name="voa['son']" id="vob">-->
+                                    <!--<option name="{$vob.pid}" value="{$vob.area_id}" style="display:none">{$vob.title}</option>-->
+                                <!--</volist>-->
+                            <!--</volist>-->
+                        <!--</select>-->
+					<!--</span>-->
+                    <!--<sapn>-->
+                        <!--<select name="area">-->
+                            <!--<option selected="selected" value="">请选择地区</option>-->
+                            <!--<volist name="address" id="voa">-->
+                                <!--<volist name="voa['son']" id="vob">-->
+                                    <!--<volist name="vob['son']" id="voc">-->
+                                        <!--<option value="{$voc.area_id}"  name ="{$voc.pid}" style="display:none">{$voc.title}</option>-->
+                                    <!--</volist>-->
+                                <!--</volist>-->
+                            <!--</volist>-->
+                        <!--</select>-->
+                    <!--</sapn>-->
+					<!--<input type="submit" value="  新&nbsp;增  ">-->
+				<!--</dd>-->
+			<!--</dl>-->
+            <!--</form>-->
+		<!--</div>-->
+		<!--添加纪录结束  -->
+		<!--列表开始  -->
+		<div id="list">
+			<h2 class="titleh2">学生列表&nbsp;
+                <!--<SELECT>-->
+                    <!--<option>请选择学校</option>-->
+                    <!--<volist name="schoolMsg" id="svo">-->
+                        <!--<OPTION  value="{$svo.schoolid}" >{$svo.title}</OPTION>-->
+                    <!--</volist>-->
+                <!--</SELECT>-->
+            </h2>
+			<dl>
+				<dt>
+					<span class="w1">
+						用户名
+						<br />
+						(login)
+					</span>
+                    <span class="w1">
+						姓名
+						<br />
+						(uname)
+					</span>
+					<span class="w2">
+						邮箱
+						<br />
+						(email)
+					</span>
+					<span class="w3">
+						性别
+						<br />
+						(sex)
+					</span>
+					<span class="w4">
+						地址
+						<br />
+						(location)
+					</span>
+					<span class="w5">
+						学校
+						<br />
+						(school_id)
+					</span>
+					
+					<span class="w6" style="width:50px;">
+						选中
+						<br />
+						<INPUT id="mulSel" type="checkbox" />
+						<!-- <a href="javascript:;" onclick="">全选</a> -->
+					</span>
+					<span class="w7">
+						删除
+						<br />
+						<INPUT id="mulDel" type="BUTTON" value="删除选中" />
+					</span>
+					<span class="w8" style="width:50px;">修改</span>
+				</dt>
+				<volist name="student" id="vo">
+					<dd>
+						<span class="w1">{$vo.login}</span>
+						<span class="w1">{$vo.uname}</span>
+						<span class="w2">{$vo.email}</span>
+						<span class="w3"><php>if($vo['sex']==0){echo "男";}elseif($vo['sex']==1){echo "女";}</php></span>
+						<span class="w4">{$vo.location}</span>
+						<span class="w5">{$vo.school_id}</span>
+						<span class="w6" style="width:50px;">
+							<input type="checkbox" value="{$vo['uid']}" />
+						</span>
+						<span class="w7">
+							<a href="javascript:void(0);" onclick="del('{$vo['uid']}')">删除</a>
+						</span>
+						<span class="w8" style="width:50px;">
+							<a href="{:U('houtai/Student/selectSaveStudentInfo',array('id'=>$vo['uid']))}" >修改</a>
+							<!-- <a href="javascript:void(0);" onclick="modify('{$vo['grade_id']}')">修改</a> -->
+							
+						</span>
+					</dd>
+				</volist>
+			</dl>
+		</div>
+		<!--列表结束  -->
+		<div class="pager">
+			{$page}
+		</div>
+        <a href="{:U('houtai/Student/addInfo')}">添加信息</a>
+        <a href="{:U('houtai/Index/index')}">返回</a>
+	</div>
+	<div id="footer">
+		<img src="__PUBLIC__/123456789.jpg">
+	</div>
+	<script>
+	jQuery(function($) {
+		$("dd :checkbox").click(
+			function (){
+				$chkNum=$("dd :checkbox");
+				//$chkedNum=$("dd :checked");
+				$countChecked=0;
+				for($i=0;$i<$chkNum.length;$i++)
+				{
+					if($chkNum[$i].checked==true)
+					//$strId+=$list[$i].value+",";
+						$countChecked++;
+				}
+				//if($chkNum.length==$chkedNum.length)
+				if($chkNum.length==$countChecked){
+					$("dt :checkbox").prop('checked',true);				
+				}
+				else{
+					$("dt :checkbox").prop('checked',false);
+				}
+			}
+		);		
+		//checkbox点击事件
+		$("#mulSel").click(
+			function (){				
+				$check=$(this).prop('checked');
+				if($check)
+				$("dd :checkbox").prop('checked',true);
+				else
+				$("dd :checked").prop('checked',false);
+			}
+		);
+		//多个删除按钮点击事件
+		$("#mulDel").click(
+			function (){
+				$list=$("dd :checkbox");
+				$strId="";
+				for($i=0;$i<$list.length;$i++)
+				{
+					if($list[$i].checked==true)
+					$strId+=$list[$i].value+",";
+				}
+//				$strIdAfterSplit=$strId.substr(0,$strId.length-1);
+				$strIdAfterSplit=$strId.substr(0,$strId.length-1);
+				if($strIdAfterSplit==null||$strIdAfterSplit=="")
+				{
+					alert('未选择删除的记录！');
+				}
+				else
+				{
+					//alert($strIdAfterSplit);
+					 $urlStr="{:U('houtai/Student/mulDeleteStudentInfo',array('ids'=>'"+$strIdAfterSplit+"'))}";
+					$.ajax({
+						type:'post',
+						 url:$urlStr,
+						 cache:false,
+						 //async:false,
+						 dataType:'json',
+						 timeout:30000,
+						 error:function(data){
+							 alert(data['info']);
+							 }, 
+						 success:function(da){
+							 alert(da['info']);
+                             $("dt:checkbox").prop("checkbox","false");
+                             location.reload([true]);
+						 }	
+					});
+				}													
+			}		
+		);
+		$("#classname").blur(
+
+			function (){
+				$selectSchoolId=$("#schoolid option:selected").val();//获取被选择的学校id
+				$seed=$(this).val();//获取当前班级的value
+                $subSeed = $seed.substring(0,3);
+				switch($subSeed)
+				{
+					case "一年级":
+					setValue($selectSchoolId,1,true);
+					break;
+					case "二年级":
+					setValue($selectSchoolId,2,true);
+					break;
+					case "三年级":
+					setValue($selectSchoolId,3,true);
+					break;
+					case "四年级":
+					setValue($selectSchoolId,4,true);
+					break;
+					case "五年级":
+					setValue($selectSchoolId,5,true);
+					break;
+					case "六年级":
+					setValue($selectSchoolId,6,false);
+					break;
+					case "七年级":
+					setValue($selectSchoolId,7,true);
+					break;
+					case "八年级":
+					setValue($selectSchoolId,8,true);
+					break;
+					case "九年级":
+					setValue($selectSchoolId,9,false);
+					break;
+
+				}
+			}
+		);
+        $("#classname").blur(
+                function (){
+//                    $selectSchoolId=$("#schoolid option:selected").val();//获取被选择的学校id
+                    $gradeid = $("#gradeid").val();
+                    $seed=$(this).val();//获取当前班级的value
+                    $subseed = $seed.substring(3,5);
+                    switch($subseed)
+                    {
+                        case "一班":
+                            setClassValue($gradeid,1,true);
+                            break;
+                        case "二班":
+                            setClassValue($gradeid,2,true);
+                            break;
+                        case "三班":
+                            setClassValue($gradeid,3,true);
+                            break;
+                        case "四班":
+                            setClassValue($gradeid,4,true);
+                            break;
+                        case "五班":
+                            setClassValue($gradeid,5,true);
+                            break;
+                        case "六班":
+                            setClassValue($gradeid,6,false);
+                            break;
+                        case "七班":
+                            setClassValue($gradeid,7,true);
+                            break;
+                        case "八班":
+                            setClassValue($gradeid,8,true);
+                            break;
+                        case "九班":
+                            setClassValue($gradeid,9,false);
+                            break;
+                        case "十班":
+                            setClassValue($gradeid,9,false);
+                            break;
+                    }
+
+                }
+        );
+	});
+    //设置下一个学校/年级id文本框中的值。
+    function setValue(scid,grade,hasnextgrade)
+    {
+        if(hasnextgrade)
+        {
+            $("#schid").val(scid);
+            $("#gradeid").val(scid+"00"+grade);
+//            $nextGradeObj=document.getElementById('nextgradeid');
+//            $gradeIdObj=document.getElementById('gradeid');
+//            $nextGradeObj.value=""+scid+"00"+(grade+1);
+//            $gradeIdObj.value=""+scid+"00"+grade;
+        }
+        else
+        {
+            $("#schid").val(scid);
+            $("#gradeid").val(scid+"00"+grade);
+        }
+    }
+    //设置班级id文本框中的值
+    function setClassValue(grade,clas,hasclass){
+        if(hasclass){
+            $("#classid").val(grade+"00"+clas);
+        }
+        else
+        {
+            $("#classid").val(grade+"00"+clas);
+        }
+    }
+
+	//删除---
+	function del(id)
+	{
+		if(!confirm('确认要删除该条数据吗？')) return;
+		 $urlStr="{:U('houtai/Student/delStudentInfo',array('id'=>'"+id+"'))}";
+		 //alert($urlStr);
+		 $.ajax({
+			 type:'post',
+			 url:$urlStr,
+			 cache:false,
+			 async:false,
+			 dataType:'json',
+			 timeout:30000,
+			 success:function(da){
+				 alert(da['info']);
+                 location.reload([true]);
+			 },error:function(data){
+				 alert(data['info']);
+			 }
+		 });			
+	}
+	//修改
+	function modify(id)
+	{
+		//alert(id);
+		$url="{:U('houtai/grade/modifyGrade')}";
+		//alert($url);
+		   $.post($url,{'id':id}, function(da){			   
+			   document.write(da); 
+		   	}); 
+	}
+	</script>
+</body>
+</html>

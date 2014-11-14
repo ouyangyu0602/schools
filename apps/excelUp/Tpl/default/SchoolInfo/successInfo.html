@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>上传信息页</title>
+    <title></title>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap.css"/>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap-theme.min.css"/>
+    <script src="__THEME__/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="__THEME__/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body style="background-color: #164B0F">
+    <div class="container" style="margin-top: 20%">
+            <div class="row">
+            <h1 style="text-align:center;display: block;  font-size: 3em;  -webkit-margin-before:-0.33em;  -webkit-margin-after: 0.50em;  -webkit-margin-start: 0px;  -webkit-margin-end: 0px;  font-weight: bold;color: white;">
+            数据上传成功，文件数据共{$fileCount}条！<br>
+
+            <volist name='msg' id='vo' key="k">
+                成功插入{$vo.count}条数据到{$vo.table}数据库表！<br>
+
+            </volist>
+
+        </h1>
+    </div>
+
+</div>
+</body>
+<script>
+
+
+    function Jump(){
+        window.location.href = '{$jumpUrl}';
+    }
+
+    document.onload = setTimeout("Jump()" , {$waitSecond}* 1000);
+</script>
+</html>

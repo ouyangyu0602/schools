@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>uTeach后台</title>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap.css"/>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap-theme.min.css"/>
+    <script src="__THEME__/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="__THEME__/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<style>
+    .btn-lg{
+        margin-top: 40px;
+    }
+    .col-md-3{
+        height: 150px;
+    }
+    h1{
+        color: #06F152;
+        font-size: 50px;
+    }
+</style>
+
+<body style="overflow-x:hidden; ">
+
+<div class="row" style="margin-left: 20px">
+    <a href="{:U('public/Index/Index')}" class="logo"><img
+            src="__THEME__/images/back2.png"></a>
+</div>
+
+<div class="container" style="margin-top: 0px">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3" >
+                <a href = "{:U('houtai/Schools/getSchoolInfoList',array(school_id =>$schoolID))}" type="{$schoolId|default='allSchools'}buttom" class="container-fluid btn btn-lg" >
+                    <h1>学校信息</h1>
+                </a>
+            </div>
+            <div class="col-md-3 col-md-offset-1" >
+                <a href = "{:U('houtai/Grade/grade')}"  class="container-fluid btn btn-lg" >
+                    <h1>年级信息</h1>
+                </a>
+            </div>
+
+            <div class="col-md-3 col-md-offset-1" >
+                <a href="{:U('houtai/Knowledge/index')}"  class="container-fluid btn btn-lg" >
+                    <h1>区域大纲</h1>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col-md-12">
+            <div class="col-md-3 " >
+                <a href = "{:U('houtai/Class/getClassInfoList')}"  class="container-fluid btn btn-lg" >
+                    <h1>班级信息</h1>
+                </a>
+            </div>
+            <div class="col-md-3 col-md-offset-1" >
+                <a href="{:U('houtai/TeacherSubjectClass/getTeacherInfoList')}"  class="container-fluid btn btn-lg" >
+                    <h1>教师科目</h1>
+                </a>
+            </div>
+            <div class="col-md-3 col-md-offset-1" >
+                <a href="{:U('houtai/Logo/logo')}"  class="container-fluid btn btn-lg" >
+                    <h1>logo更换</h1>
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-md-12">
+            <div class="col-md-3 " >
+                <a href = "{:U('houtai/Teacher/teacherInfo')}"  class="container-fluid btn btn-lg" >
+                    <h1>教师信息</h1>
+                </a>
+            </div>
+            <div class="col-md-3 col-md-offset-1" >
+                <a href="{:U('houtai/Student/studentInfo')}"class="container-fluid btn btn-lg" >
+                    <h1>学生信息</h1>
+                </a>
+            </div>
+            <div class="col-md-3 col-md-offset-1" >
+                <a href="{:U('houtai/SubjectVersion/SubjectVersion')}"  class="container-fluid btn btn-lg" >
+                    <h1>科目信息</h1>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-md-12">
+
+            <div class="col-md-3" >
+                <a href="{:U('houtai/BookVersion/getBookVersionInfoList')}"  class="container-fluid btn btn-lg" >
+                    <h1>教材版本</h1>
+                </a>
+            </div>
+            <div class="col-md-3 col-md-offset-1" >
+                <a href="{:U('houtai/BookGrade/BookGrade')}"  class="container-fluid btn btn-lg" >
+                    <h1>教材年级</h1>
+                </a>
+            </div>
+            <div class="col-md-3 col-md-offset-1" >
+                <a href="{:U('houtai/BookCatalog/BookCatalog')}"  class="container-fluid btn btn-lg" >
+                    <h1>教材目录</h1>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html> 

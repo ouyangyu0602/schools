@@ -1,0 +1,15 @@
+#header{width:1003px; height:59px; margin:0 auto;clear:both;background:#34495e;}
+#header #logo{width:147px; height:59px;float:left;background:url("images/logo.gif") no-repeat;}
+
+#nav a.this{background-position:0 bottom;}
+
+#user_info{width:161px; height:59px;line-height:59px;text-align:center; float:right; font-size:16px; font-weight:400;color:#fff;background-image:url(images/top_userinfo.gif);cursor:pointer;}
+
+.liucheng{width:1003px; height:27px;margin:21px auto 26px; text-align:center;}
+.liucheng a{width:200px; height:27px;line-height:26px;margin:0px 2px; display:inline-block; background:#c3c3c3;}
+.liucheng a b{width:43px; height:27px;display:inline-block;background:url(images/lc_off.gif) 0 0; font-size:20px; font-weight:bolder;color:#fff;font-family:"Microsoft Sans Serif";float:left;}
+.liucheng a span{width:150px; height:27px;display:inline-block;color:#fff;float:right;}
+
+
+
+

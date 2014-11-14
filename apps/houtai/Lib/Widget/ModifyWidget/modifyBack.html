@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='' ?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=' />
+<script type="text/javascript" src="__APP__/jquery-1.9.0.min.js"></script>
+<title>修改年级信息</title>
+</head>
+<body>
+<!-- {$gradeMsgOut[0].school_id} -->
+	<center>
+		<form id="gradeInfo" action="" method="post"  >
+			<dl >
+				<dd>学校ID：<input type="text" name="schoolid" id="schoolid"  value="{$gradeMsgOut['school_id']}" /></dd>
+				<dd>简称：<input type="text" name="shortname" id="shortname" value="{$gradeMsgOut['short_name']}"/></dd>
+				<dd>名称：<input type="text" name="title" id="title" value="{$gradeMsgOut['title']}"/></dd>
+				<dd>下一年级：<input type="text" name="nextgrade" id="nextgrade" value="{$gradeMsgOut['next_grade_id']}" /></dd>
+				<dd>排序：<input type="text" name="sortorder" id="sortorder" value="{$gradeMsgOut['sort_order']}" /></dd>
+				<dd>年级ID：<input type="text" name="gradeid" id="gradeid" value="{$gradeMsgOut['grade_id']}" /></dd>
+				<dd> <input type="button" id="sub" value="修改" onclick="mGradeInfo()" /><input type="button" value="返回" onclick="window.history.back();" /></dd>
+			</dl>
+		</form>
+		<script>
+		function mGradeInfo(){
+			var frm=document.getElementById("gradeInfo");
+			//alert(frm.children[0]);
+			frm.method = "post";
+			frm.action = "{:U ('houtai/grade/afterModifyGrade')}";
+			frm.submit();
+			//window.history.back();
+		}
+		</script>
+	</center>
+</body>
+</html>

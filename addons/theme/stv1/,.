@@ -1,0 +1,133 @@
+<div class="row selectQuestion" style="overflow-x: hidden">
+    <!--提示下载java-->
+    <div class="row" style="background-color: #FFF198;font-size: 15px;" id="">
+        <div class="container-fluid" id="JDKWordImage" style="display: none">
+
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 30px" >
+        <div class="col-sm-1" style="padding: 0px">
+            <span class="pull-right" style="font-size: 15px">题干:</span>
+        </div>
+
+        <div class="col-sm-10" >
+
+            <textarea id="questionContentEdit" name="question_content"><?php
+				if (isset($questionClick['question_content'])) {
+					echo htmlentities($questionClick['question_content'], ENT_QUOTES, 'UTF-8');
+				}
+			?>
+            </textarea>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px" >
+        <div class="container-fluid" id="blanksRightAnswer" style="display: none;padding: 0px">
+            <div class="col-sm-1" style="padding: 0px">
+                <span class="pull-right" style="font-size: 15px">答案:</span>
+            </div>
+            <div class="col-sm-10">
+                <textarea id="blanksTypeAnswer" name="selectTypeAnswer">
+                    <?php
+				if (isset($questionClick['answer'])) {
+					echo htmlentities($questionClick['answer'], ENT_QUOTES, 'UTF-8');
+				}
+			?>
+                </textarea>
+            </div>
+        </div>
+        <div class="col-sm-11" id="PhotoLabel" style="display: none">
+            <span style="margin-left: 10px">选择正确答案：</span>
+            <span style="margin-left: 20px"><input onclick="checkboxAnswer(event)" name="selectTypeAnswer" type="checkbox" value="A">A</span>
+            <span style="margin-left: 20px"><input onclick="checkboxAnswer(event)" name="selectTypeAnswer" type="checkbox" value="B">B</span>
+            <span style="margin-left: 20px"><input onclick="checkboxAnswer(event)" name="selectTypeAnswer" type="checkbox" value="C">C</span>
+            <span style="margin-left: 20px"><input onclick="checkboxAnswer(event)" name="selectTypeAnswer" type="checkbox" value="D">D</span>
+
+            <span id="addAnswer" class="glyphicon glyphicon-plus" style="margin-left: 20px;font-size: 15px"></span>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-sm-1" style="padding: 0px">
+            <span class="pull-right" style="font-size: 15px">题干:</span>
+        </div>
+        <div class="col-sm-10" >
+            <textarea id="answerTextEdit" name="answer_text">
+                <?php
+				if (isset($questionClick['answer_text'])) {
+					echo htmlentities($questionClick['answer_text'], ENT_QUOTES, 'UTF-8');
+				}
+			?>
+            </textarea>
+        </div>
+    </div>
+    <input id="grade_list_id" name="grade_list_id" value="{$grade_list_id}" type="hidden">
+    <input value="" name="knowledgeLevel1ID" id="knowledgeLevel1ID" type="hidden">
+    <input value="" name="knowledgeLevel2ID" id="knowledgeLevel2ID" type="hidden">
+    <input value="" id="knowledgeLevel3ID" name="knowledgeLevel3ID" type="hidden">
+    <input value="" id="questionType" name="questionType" type="hidden">
+    <input value="" id="questionTypeName" name="questionTypeName" type="hidden">
+    <input value="" id="questionDifficult" name="questionDifficult" type="hidden">
+    <input value="" id="questionDifficultName" name="questionDifficultName" type="hidden">
+    <input value="" id="where_name_text" name="where_name_text" type="hidden">
+
+
+    <div class="row" style="height: 46px;bottom: 0px;position: absolute;right:15px;width: 100%">
+        <div class="container-fluid" style="border-top: 1px solid #C8CBCB;margin-left: 0px">
+            <div class="col-sm-3 pull-right" style="text-align: center">
+                <!--
+                                <a href="#" class="btn" onclick="questionSave(event)" type="submit" style="font-weight: bolder;font-size: 21px">保存</a>
+                -->
+                <a href="#" class="btn" onclick='questionSave(event)' type="submit" style="font-weight: bolder;font-size: 18px">保存</a>
+
+            </div>
+            <div class="col-sm-3 pull-right" style="text-align: center">
+                <a id="questionViewSelect" href="#" class="btn" data-toggle="modal" data-target="#questionView" style="font-weight: bolder;font-size: 18px">
+                    预览</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+    /* CKEDITOR.config.toolbar_Full =
+     [
+     { name: 'document', items : [ 'Source'] },
+     { name: 'clipboard', items : [ 'Cut','Copy','Paste','-','Undo','Redo' ] },
+     { name: 'editing', items : [ 'Find'] },
+     { name: 'basicstyles', items : [ 'Bold','Italic','Underline'] },
+     { name: 'paragraph', items : [ 'JustifyLeft','JustifyCenter','JustifyRight'] },
+     { name: 'styles', items : [ 'Font','FontSize' ] },
+     { name: 'colors', items : [ 'TextColor','BGColor' ] }
+     ];*/
+
+    var questionContentEdit =  CKEDITOR.replace('questionContentEdit');
+
+
+    var answerTextEdit = CKEDITOR.replace('answerTextEdit');
+    var blanksTypeAnswerEdit = CKEDITOR.replace('blanksTypeAnswer');
+    //构建图片上传地址
+    var sUrl ='__ROOT__/phpUpload/upload_json.php';
+    //构建应用名称，如本系统名称为‘wordimg’，如果为根应用，请写为空字符串''
+    var appName = '__APP__/';
+    var imageURL = "__ROOT__/"
+    //创建WordImageUploader对象\
+    var uploader = new WordImageUploader(sUrl, appName,imageURL);
+    //var uploader2 = new WordImageUploader(sUrl, appName,imageURL);
+
+
+    //当ckeditor内容改变时，自动检测并上传内容中的本地图片
+    CKEDITOR.instances['questionContentEdit'].on("change", function() {
+        uploader.uploadWordImagesFromCKEditor(CKEDITOR.instances['questionContentEdit'], '');
+    });
+
+    CKEDITOR.instances['answerTextEdit'].on("change", function() {
+        uploader.uploadWordImagesFromCKEditor(CKEDITOR.instances['answerTextEdit'], '');
+    });
+    CKEDITOR.instances['blanksTypeAnswer'].on("change", function() {
+        uploader.uploadWordImagesFromCKEditor(CKEDITOR.instances['blanksTypeAnswer'], '');
+    });
+</script>

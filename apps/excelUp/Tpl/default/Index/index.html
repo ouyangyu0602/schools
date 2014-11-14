@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>成绩发送</title>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap.css"/>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap-theme.min.css"/>
+    <script src="__THEME__/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="__THEME__/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<style type="text/css">
+    #my_Modal.modal-body {
+
+        max-height: 800px;
+    }
+    #my_Modal {
+        margin: 90px 0px 0px 0px; /* PLAY THE WITH THE VALUES TO SEE GET THE DESIRED EFFECT */
+    }
+</style>
+<body style="overflow-y:hidden;background-color: #ffffff">
+<div class="modal fade" id="my_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #F39019">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel" style="font-size:23px;color:#ffffff;text-align: center">
+                    <b>创建考试成绩</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                    <div class="row" style="border-bottom: 1px solid #DCDEE0">
+                        <p style="text-align:center;font-size:23px;color:#F39019;">下载创建考试模板文件</p>
+                    </div>
+                <div class="row" style="margin-top: 20px">
+                    <p style="font-size:23px;color:#F39019;">成绩名称</p>
+                </div>
+                <div class="row" style="border-bottom: 1px solid #DCDEE0">
+                    <include file="addScorebody" />
+                </div>
+                <div class="row">
+                    <div id="page-wrap" >
+                       <form id="upload" method='post' action="{:U('excelUp/SchoolInfo/upload',array('step'=>$step))}" enctype="multipart/form-data">
+                          <input name="fileExcel" type="file" value="上传成绩" style="font-size:23px;margin-top: 20px">
+                          <input class="btn " type="submit" value="上传成绩" style="background-color#ffffff;font-size:23px;color:#F39019;margin-top: 20px">
+                       </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <span type="button" class="btn" data-dismiss="modal" style="font-size:23px;color:#F39019;">取消</span>
+                <span type="button" class="btn" data-dismiss="modal" style="font-size:23px;color:#F39019;">完成</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="container-fluid" style="margin-top: 10px">
+        <div class="row">
+        <div id="" class="col-md-3" style="background-color: #fff9dd">
+            <div class="row" style="border-bottom: 1px solid #F8DE5A "><!--左侧头部-->
+                <div class="col-md-12">
+                    <div class="row" style="">
+
+                            <ul class="nav nav-tabs" >
+                                <div class="navbar-header">
+                                    <a class="navbar-brand" href="#" style="color: #000000;font-size: 23px">uTeach</a>
+                                </div>
+                                <li role="presentation" class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:23px;color: #E4983A">
+                                        <b>考试成绩&nbsp;&nbsp;v</b>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{:U('excelUp/StudentInfo/index')}" style="font-size:23px;color: #B5DE9D">学生信息</a></li>
+                                        <li class="divider"></li>
+
+                                    </ul>
+                                </li>
+                                <li class="pull-right">
+                                    <a class="btn" data-target="#my_Modal" data-toggle="modal"  style="color:#414039;font-size: 23px">
+                                        <span class="glyphicon glyphicon-plus-sign"></span></a>
+                                </li>
+                            </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="" id="leftXue">
+            <div class="row " style="background-color: #F6AD50;border-bottom: 1px solid #F8DE5A ">
+                    <a href="#" class=" active btn btn-lg container-fluid" type="button" style="width:100%;font-size: 23px;color:#000000;font-weight: bolder">
+                        2013-2014</a>
+
+            </div>
+            <div class="row " style="border-bottom: 1px solid #F8DE5A">
+                <a href="#" class="btn btn-lg container-fluid" type="button" style="width:100%;font-size: 23px;color:#000000;font-weight: bolder">
+                    2012-2013</a>
+
+            </div>
+            <div class="row" style="border-bottom: 1px solid #F8DE5A">
+                <a href="#" class="btn btn-lg container-fluid" type="button" style="width:100%;font-size: 23px;color:#000000;font-weight: bolder">
+                    2011-2012</a>
+
+            </div>
+
+            <div class="row navbar-static-bottom" style="height:600px;border-bottom: 1px solid #F8DE5A">
+
+            </div>
+            </div>
+
+
+           <!-- <div class="row navbar-static-bottom" style="border-bottom: 1px solid #F8DE5A">
+                <nav class="navbar navbar-static-bottom" >
+                    <a href="#" class="btn btn-lg container-fluid" type="button" style="width:100%;font-size: 23px;color: #E4983A">
+                        <span class="glyphicon glyphicon-plus pull-center" style="text-align: center;font-size: 23px"></span></a>
+
+                </nav>
+            </div>-->
+
+
+
+
+        </div>
+        <div class="col-md-9" style="background-color: #FFFFFF">
+            <div class="row" style="font-size:23px;"><!--头部结束-->
+                <nav class="navbar navbar-default" role="navigation" style="border-bottom: 1px solid #F8DE5A">
+                    <div class="container-fluid">
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <include file="addScorebody" />
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#" class="glyphicon glyphicon-time" style="color: #E4983A"></a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #E4983A"><b>欧阳宇&nbsp;&nbsp;v</b></a>
+                                    <ul class="dropdown-menu" role="menu" style="font-size: 23px">
+                                        <li><a href="#" style="border-bottom: 1px solid #F8DE5A;color: #E4983A">修改密码</a></li>
+                                        <li><a href="#" style="border-bottom: 1px solid #F8DE5A;color: #E4983A">个人信息</a></li>
+                                        <li><a href="#" style="border-bottom: 1px solid #F8DE5A;color: #E4983A">退出</a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+
+            </div>
+
+            <div class="row" style="margin-top: 20px">
+                <div class="col-md-3 col-md-offset-0" >
+
+
+                    <div class="jumbotron" style="padding-top: 20px;padding-bottom: 0px;background-color:#ffffff;border: 1px solid #F8DE5A;margin-bottom: 1px;">
+                        <p style="font-size:15px;text-align:center;font-weight:bold;">初一年级(四班)语文<br>第一学期期中考试成绩</p>
+                        <p style="font-size:8px;text-align:center;">2014年10月10日 11:38</p>
+                    </div>
+
+                    <div style="background-color: #F39019;border-bottom: 1px solid #F8DE5A ;border-bottom-right-radius:0px 0px">
+                        <a href="#" class=" active btn btn-lg container-fluid" type="button" style="width:100%;font-size: 23px;color: #ffffff">
+                                发送</a>
+
+                    </div>
+                </div>
+                <div class="col-md-3 col-md-offset-0" >
+                    <div class="jumbotron" style="padding-top: 20px;padding-bottom: 0px;background-color:#ffffff;border: 1px solid #F8DE5A;margin-bottom: 1px">
+                        <p style="font-size:15px;text-align:center;font-weight:bold;">初一年级(四班)语文<br>第一学期期中考试成绩</p>
+                        <p style="font-size:8px;text-align:center;">2014年10月10日 11:38</p>
+                    </div>
+                    <div  style="border: 1px solid #F8DE5A;">
+                        <a href="#" class=" active btn btn-lg container-fluid" type="button" style="width:100%;font-size: 23px;color: #A6AAA9">
+                            已发送</a>
+
+                    </div>
+                </div>
+                <div class="col-md-3 col-md-offset-0" >
+                    <div class="jumbotron" style="padding-top: 20px;padding-bottom: 0px;background-color:#ffffff;border: 1px solid #F8DE5A;margin-bottom: 1px">
+                        <p style="font-size:15px;text-align:center;font-weight:bold;">初一年级(四班)语文<br>第一学期期中考试成绩</p>
+                        <p style="font-size:8px;text-align:center;">2014年10月10日 11:38</p>
+                    </div>
+                    <div  style="border: 1px solid #F8DE5A ">
+                        <a href="#" class=" active btn btn-lg container-fluid" type="button" style="width:100%;font-size: 23px;color: #A6AAA9">
+                            已发送</a>
+
+                    </div>
+                </div>
+                <div class="col-md-3 col-md-offset-0" >
+                    <div class="jumbotron" style="padding-top: 20px;padding-bottom: 0px;background-color:#ffffff; border: 1px solid #F8DE5A;margin-bottom: 1px">
+                        <p style="font-size:15px;text-align:center;font-weight:bold;">初一年级(四班)语文<br>第一学期期中考试成绩</p>
+                        <p style="font-size:8px;text-align:center;">2014年10月10日 11:38</p>
+                    </div>
+                    <div  style="border: 1px solid #F8DE5A ">
+                        <a href="#" class=" active btn btn-lg container-fluid" type="button" style="width:100%;font-size: 23px;color: #A6AAA9">
+                              已发送</a>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row" style="border-bottom: 1px solid #F8DE5A">
+
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+
+
+</body>
+<script language="JavaScript">
+    $('#leftXue a').click(function() {
+        $('#leftXue div').css('background-color','');
+        $(this).parent().css('background-color','#E4983A');
+    });
+</script>
+</html>

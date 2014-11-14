@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<include file="__THEME__/_header" />
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>uTeach</title>
+<link rel='stylesheet' id='base-style-css'  href='__APP__/base.css' type='text/css' media='all' />
+<link rel='stylesheet' id='index-style-css'  href='__APP__/index.css' type='text/css' media='all' />
+<!--<script src="__APP__/jquery-1.9.0.min.js" type="text/javascript"></script>
+--><script src="__APP__/jquery.placeholder.js" type="text/javascript"></script>
+<script type='text/javascript' src='__APP__/jquery.simplemodal.js'></script>
+
+<script>
+
+</script>
+</head>
+
+<body>
+<div id="login_div">
+ <form id="ajax_login_form" method="POST" action="{:U('public/Passport/doLogin')}">
+<div class="login" id="uteachloginwith">
+<div id="logo"><img src="__APP__/images/uteachLogo.gif"></div>
+    <div class="row" style="height: 140px">
+        <input type="text" name="login_email" id="name" placeholder="账号">
+        <span style="margin-top: 20px;float: left;color: #ffffff;font-size: 30px">...</span>
+        <span style="float: left;margin-left: 10px;margin-right: 10px"><img src="__APP__/images/uteachSchoolLogo.gif"></span>
+        <span style="margin-top: 20px;float: left;color: #ffffff;font-size: 30px">...</span>
+        <input type="password" name="login_password" id="pass" onkeydown="enterLogin(event)" placeholder="密码"  onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" >
+
+    </div>
+    <div class="row" style=";height:40px;width:800px;margin-left: 320px">
+            <a href="javascript:;" onclick="$('#ajax_login_form').submit();" class="" style="border-radius: 6px;float:left;margin: 0px;padding: 0px;" ><img style="width: 100%;height: 100%" src="__APP__/images/uteachEnter.png"></li></a>
+
+    </div>
+	
+	 <!--<input type="submit" name="login" value="" id="login"><li class="actionBtn"><a href="javascript:;" onclick="$('#ajax_login_form').submit();" class="btn-login">登录</a></li>
+	<label><INPUT TYPE="checkbox" NAME=""> 记住密码</label> -->
+	<div class="row" id="loginRememberStyle">
+        <label>
+            <INPUT id="mima" TYPE="checkbox" name="login_remember" onclick="mimaclick();">记住密码
+        </label>
+    </div>
+
+</div>
+
+<div id="login_bg"><img src="__APP__/images/uteachLogin.jpg"></div>
+ </form>
+ <div id="js_login_input" style="display:none" class="error-box"></div>
+</div>
+<div class="footer" id="footer_div" style="width: 100%;height:20px;bottom: 0px;position: absolute;z-index: 9999;display: none">
+    <span style="margin-left:16px;float: left;color: #ffffff;"><img src="__APP__/images/uteachBgc2.png"></span>
+    <span style="margin-right:16px;float: right;color: #ffffff;font-size: 17px">Copyright © 2014 BGCC inc. 保留所有权。 </span>
+</div>
+<script src="__APP__/login.js" type="text/javascript"></script>
+<script>
+
+function enterLogin(e) {
+    var key = window.event ? e.keyCode : e.which;
+    if (key == 13) {
+    	$('#ajax_login_form').submit();
+    }
+}
+
+$("#pass").keydown(function(e){
+    var key = window.event ? e.keyCode : e.which;
+    if(key==32){
+        return false;
+    }
+});
+
+</script>
+<script>
+$('#login_div').fadeIn(3000);
+
+$("#login_div").css("display","block");
+$("#name").focus();
+
+
+
+$('#footer_div').fadeIn(3000);
+
+$("#footer_div").css("display","block");
+
+
+
+$("#forget").click(function(e){
+alert("您点击了忘记密码！");
+});
+
+   $(function() {
+    $('input').placeholder();
+   });
+  </script>
+
+<script>
+    var widthlogin = (screen.width - 800)/2;
+    $('#uteachloginwith').css('margin-left',widthlogin);
+
+function mimaclick() {
+	
+	
+	var che = document.getElementById('mima');
+	if(che.checked) {
+		che.value = 1;
+    }else {
+    	che.value = 0;
+    }
+	
+	
+	
+}
+
+</script>
+
+
+</body>
+</html>

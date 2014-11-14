@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='' ?>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>云测评</title>
+ <link rel='stylesheet' id='header-style-css' href='__APP__/header.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css' href='__APP__/footer.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css' href='__APP__/houtai.css'
+	type='text/css' media='all' />
+	<link rel='stylesheet' id='header-style-css' href='__ROOT__/houtai.css'
+	type='text/css' media='all' />
+<script type="text/javascript" src="__APP__/jquery-1.9.0.min.js"></script>
+<script type='text/javascript' src='__APP__/jquery.simplemodal.js'></script>
+
+<script src="__APP__/jquery-ui.js"></script>
+<!--  
+	<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default">
+</script>-->
+<script type="text/javascript" src="__APP__/mathjax/MathJax.js?config=default"></script>
+<style type="text/css">
+li{
+	margin:10px 0 10px 0;
+}
+</style>
+</head>
+
+<body>
+ 	<include file="__THEME__/public_header" />
+  
+	<div id="body_center">
+		<div id="leftPart" style="width:30%;float:left; overflow:hidden;">
+		<h2>组合查询</h2>
+		<br/>
+			<p>选择教材:<br/>
+				<select id="section_book">
+					<option value="-1">--请选择教材--</option>
+					<volist name="sectionbook" id="vo_sec">						
+						<option value="{$vo_sec['sbi']}">{$vo_sec['sbt']}</option>	
+					</volist>	
+				</select>
+			</p>
+			<br/>
+			<p>选择章节:<br/>
+				<select id="section_id">
+					<option value="-1">--请选择章节--</option>
+<!-- 					<volist name="unitandcourse" id="vo_uc">
+					 	<volist name="vo_uc['coursename']" id="vo_cn">
+							<option value="{$vo_cn['csid']}">{$vo_uc['ust']}-{$vo_cn['cst']} </option>
+						</volist>				
+					</volist> -->		
+				</select>			
+			</p>
+			<br/>
+			<p>选择课时:<br/>
+				<select id="section_class_id">
+					<option value="-1">--请选择课时--</option>
+					<volist name="coursehour" id="vo_ch">
+						<option value="{$vo_ch['hsid']}">{$vo_ch['hst']}</option>
+					</volist>			
+				</select>			
+			</p>
+			<br/>
+			<input type="button" onclick="getQuestions();" value="提交" />
+		</div>
+		<div id="rightPart" style="width:69%; float:left;">
+			<h2>试题详情：</h2><br/>
+				<ul id="ques">
+					
+				</ul>
+		</div>
+	</div>
+	
+	<div id="footer">
+		<img src="__PUBLIC__/123456789.jpg">
+	</div>
+	<script>
+	$(document).ready(
+		function (){
+			/*section_book绑定change事件  */
+			$("#section_book").change(function (){
+				//alert($("#section_book option:selected").val());
+				if($("#section_book option:selected").val()==-1)
+				{
+					$("#section_id").empty();
+					$("#section_id").append('<option value="-1">--请选择章节-- </option>');
+					$("#section_class_id").empty();
+					$("#section_class_id").append('<option value="-1">--请选择课时-- </option>');
+					$("#ques li").remove();
+					//$("#ques").append('<li>请编辑试题。</li>');
+				}
+				$urlStr="{:U('houtai/TestQuestions/getUnit')}";
+				$.post($urlStr,{'sectionbookid':$("#section_book option:selected").val()}
+				,function (data){
+					$json=eval("("+data+")");//解析json对象
+					//alert($json.data);
+					if($json.data==''||$json.data==null)
+					{
+						$("#section_id").empty();
+						$("#section_id").append('<option value="-1">--请选择章节-- </option>');
+						$("#section_class_id").empty();
+						$("#section_class_id").append('<option value="-1">--请选择课时-- </option>');
+						return;
+					}
+					else
+					{
+					$length=($json.data.length==''||$json.data.length==null)?'0':$json.data.length;//单元数量
+					//alert($json.data[1].coursename[0].cst);//获取课程
+						if($length>0)
+						{
+							$("#section_id").empty();
+							$("#section_id").append('<option value="-1">--请选择章节-- </option>');
+							$("#section_class_id").empty();
+							$("#section_class_id").append('<option value="-1">--请选择课时-- </option>');
+							for($i=0;$i<$length;$i++)
+							{
+								 //alert($json.data[$i].coursename.length);
+								if($json.data[$i].coursename.length<=0)
+									return;
+								for($k=0;$k<$json.data[$i].coursename.length;$k++)
+								{
+									//alert("'"+$json.data[$i].ust+"'");
+									$("#section_id").append('<option value='+'"'+$json.data[$i].coursename[$k].csid+'"'+'>'+$json.data[$i].ust+'-'+$json.data[$i].coursename[$k].cst+'</option>');
+									//alert('<option value='+'"'+$json.data[$i].coursename[$k].csid+'"'+'>'+$json.data[$i].ust+'-'+$json.data[$i].coursename[$k].cst+'</option>');
+								}
+							} 
+						}
+					} 
+				}
+			);
+			});
+			/*section_id绑定change事件  */
+		$("#section_id").change(function(){
+			$urlStr1="{:U('houtai/TestQuestions/getCourseHour')}";
+			if($("#section_id option:selected").val()==-1)
+			{
+				$("#section_class_id").empty();
+				$("#section_class_id").append('<option value="-1">--请选择课时-- </option>');
+				$("#ques li").remove();
+				//$("#ques").append('<li>请编辑试题。</li>');
+			}
+			$.post($urlStr1,{'sectionbookid':$("#section_book option:selected").val(),'sectionid':$("#section_id option:selected").val()},
+				function(data){
+					$json1=eval("("+data+")");
+					//alert($json1.data[0].hst);
+					
+					 if($json1.data!=''&&$json.data!=null)
+					{
+						$length=($json1.data.length==''||$json1.data.length==null)?'0':$json1.data.length;
+						if($length>0)
+						{
+							$("#section_class_id").empty();
+							$("#section_class_id").append('<option value="-1">--请选择课时-- </option>');
+							for($i=0;$i<$length;$i++)
+							{
+								$("#section_class_id").append('<option value="'+$json1.data[$i].hsid+'">'+$json1.data[$i].hst+'</option>');
+							}
+							
+						}
+					}
+					 else
+					{
+						 $("#section_class_id").empty();
+						 $("#section_class_id").append('<option value="-1">--请选择课时-- </option>');
+					}
+				}		
+			);
+			});
+			/*section_class_id绑定change事件  */
+		
+		$("#section_class_id").change(function(){
+			$urlStr2="{:U('houtai/TestQuestions/getQuestions')}";
+			$.post($urlStr2,{'sectionbookid':$("#section_book option:selected").val(),'sectionid':$("#section_class_id option:selected").val()},
+				function (data){
+					
+					$json2=eval("("+data+")");
+					//alert($json2.data);
+					if($json2.data!=''&&$json2.data!=null)
+					{
+						$("#ques li").remove();
+						$length=($json2.data.length==''||$json2.data.length==null)? 0 :$json2.data.length;
+						if($length>0)
+						{
+							//$("#ques").append('<li style="margin:10px 0 10px 0;">8\(^{0}\)</li>');
+							//$("#ques").append('<li style="margin:10px 0 10px 0;">'+$json2.data[0].qi+'.'+$json2.data[0].qc+'</li>');	
+							//$("#ques li").clear();
+						 	for($i=0;$i<$length;$i++)
+							{
+								//alert($json2.data[$i].qc.indexOf('A.'));
+								//alert($json2.data[$i].qc.trim());
+								$afterTrimqc=$json2.data[$i].qc.trim();
+								//$preqc="";
+								/*
+							 	if($afterTrimqc.match("[img]")!==null)
+								{
+									alert('存在img');
+								} 
+								*/
+							 	$afterTrimqc=$afterTrimqc.replace(/\[img\]{1,}/g,'<img src="__ROOT__/images/');
+								$afterTrimqc=$afterTrimqc.replace(/\[\\\img\]{1,}/g,'" alt=" "/>');
+								if($afterTrimqc.indexOf('A.')!=-1)
+								{
+									$preqc=$afterTrimqc.split("A.")[0]+"<br/>A."+$afterTrimqc.split("A.")[1];
+									//alert($preqc);
+								}
+								else if($afterTrimqc.indexOf('A .')!=-1)
+								{
+									$preqc=$afterTrimqc.split("A .")[0]+"<br/>A."+$afterTrimqc.split("A .")[1];
+									//alert($preqc1);
+								}
+								else if($afterTrimqc.indexOf('A、')!=-1)
+								{
+									$preqc=$afterTrimqc.split("A、")[0]+"<br/>A."+$afterTrimqc.split("A、")[1];
+									//alert($preqc2);
+								}
+								else if($afterTrimqc.indexOf(' A.')!=-1)
+								{
+									$preqc=$afterTrimqc.split(" A.")[0]+"<br/>A."+$afterTrimqc.split(" A.")[1];
+									//alert($preqc3);
+								}
+								else
+								{
+									$preqc='';
+								}
+								
+								if($preqc!='')
+								//$("#ques").append('<li>'+$json2.data[$i].qi+'.'+$json2.data[$i].qc+'</li>');
+									$("#ques").append('<li style="margin:10px 0 10px 0;">'+$json2.data[$i].qi+'.'+$preqc+'</li>');
+								else
+									$("#ques").append('<li style="margin:10px 0 10px 0;">'+$json2.data[$i].qi+'.'+$afterTrimqc+'</li>');	
+								
+								//$("#ques").append('<li style="margin:10px 0 10px 0;">'+$json2.data[$i].qi+'.'+$afterTrimqc+'</li>');
+								MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+							} 
+						}
+						else
+						{
+							$("#ques li").remove();
+							$("#ques").append('<li>请编辑试题。</li>');
+						}
+					}
+					else
+					{
+						$("#ques li").remove();
+						//$("#ques").append('<li>请编辑试题。</li>');
+					}
+					
+				}		
+			);
+		});
+		}		
+	);
+	</script>
+</body>
+</html>

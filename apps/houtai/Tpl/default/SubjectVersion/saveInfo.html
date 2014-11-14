@@ -1,0 +1,33 @@
+<!-- $Id: start.htm 17216 2011-01-19 06:03:12Z liubo $ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<form method="post" action="{:U('houtai/SubjectVersion/saveSubjectVersionInfo',array('id'=>$data['id']))}">
+    <table cellspacing='1' cellpadding='3'>
+        <tr>
+            <th colspan="4" class="group-title">教材年级信息管理-->修改信息</th>
+        </tr>
+
+        <tr>
+            <td>科目类型:</td>
+            <td><input type="text" name='subject_type' size='20' value="{$data.subject_type}"></td>
+        </tr>
+        <tr>
+            <td>科目名称:</td>
+            <td><input type="text" name='subject_type_desc' size='20' value="{$data.subject_type_desc}"></td>
+        </tr>
+    </table>
+    <div style="height:40px; width:100%;padding-top:10px; text-align:center;">
+        <input type="submit" value="确定" style="margin-left:-80px;">
+        <a href="{:U('houtai/SubjectVersion/SubjectVersion')}" style="margin-left:60px;">返回</a>
+    </div>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+#header{width:1003px; height:59px; margin:0 auto;clear:both;background:#34495e;}
+#header #logo{width:147px; height:59px;float:left;background:url("images/logo.gif") no-repeat;}
+#nav{width:690px; height:59px;float:left;}
+#nav a{width:115px; height:59px; display:inline-block; float:left;background-repeat: no-repeat;background-position:0 top;cursor:pointer;text-indent:-20em;overflow:hidden;}
+#nav a:hover{width:115px; height:59px; display:inline-block; float:left;background-repeat: no-repeat;background-position:0 bottom;}
+#nav a.zuti{background-image:url(images/menu_1.gif);}
+#nav a.ceping{background-image:url(images/menu_2.gif);}
+#nav a.fenxi{background-image:url(images/menu_3.gif);}
+#nav a.jiazhang{background-image:url(images/menu_4.gif);}
+#nav a.xuesheng{background-image:url(images/menu_5.gif);}
+#nav a.kebiao{background-image:url(images/menu_6.gif);}
+#nav a.this{background-position:0 bottom;}
+
+#user_info{width:161px; height:59px;line-height:59px;text-align:center; float:right; font-size:16px; font-weight:400;color:#fff;background-image:url(images/top_userinfo.gif);cursor:pointer;}
+
+.liucheng{width:1003px; height:27px;margin:21px auto 26px; text-align:center;}
+.liucheng a{width:200px; height:27px;line-height:26px;margin:0px 2px; display:inline-block; background:#c3c3c3;}
+.liucheng a b{width:43px; height:27px;display:inline-block;background:url(images/lc_off.gif) 0 0; font-size:20px; font-weight:bolder;color:#fff;font-family:"Microsoft Sans Serif";float:left;}
+.liucheng a.this b{background:url(images/lc_1_on.gif) left top;}
+.liucheng a span{width:150px; height:27px;display:inline-block;color:#fff;float:right;}
+
+
+
+

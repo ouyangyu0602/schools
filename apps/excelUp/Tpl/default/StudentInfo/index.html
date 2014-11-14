@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>学生信息</title>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap.css"/>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap-theme.min.css"/>
+    <script src="__THEME__/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="__THEME__/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body style="overflow-y:auto;background-color: #ffffff">
+
+<div class="container-fluid" style="margin-top: 10px">
+    <div class="row">
+        <div id="lefthight" class="col-md-2" style="height:935px;background-color: #E2F2D9">
+            <div class="row" style="border-bottom: 1px solid #70BF41 "><!--左侧头部-->
+                <div class="col-md-12">
+                    <div class="row" style="">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="#" style="color: #000000;font-size: 21px">uTeach</a>
+                            </div>
+                            <ul class="nav nav-tabs" >
+                                <li role="presentation" class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:21px;color: #70BF41">
+                                        <b>学生信息</b>v
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{:U('excelUp/Index/index')}" style="font-size:21px;color: #E4983A">考试成绩</a></li>
+                                        <li class="divider"></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="leftNianJi" style="height:800px;overflow:auto;overflow-x: hidden">
+            <div class="row" style="padding-left:0px;background-color: #B5DE9D;border-bottom: 1px solid #70BF41 ">
+                <a href="#" data-school_id="{$schoolInfo['school_id']}" class="btn btn-lg container-fluid xuexiao" type="button" style="text-align: left;width:100%;font-size: 23px;color: #000000">
+                    全部学生</a>
+            </div>
+    <volist name="classTree" id="grade">
+            <div class="row " style="border-bottom: 1px solid #70BF41">
+                <a href="#" data-grade_id="{$grade['grade_id']}" onclick='$("#{$grade['grade_id']}").toggle("fast");var a = $(this).children(); var number = a.attr("number");a.attr("number",parseInt(number) +1 );if(number % 2 == 0) a.text("v");else a.text(">"); ' class="btn btn-lg pull-left container-fluid nianjistudent" type="button" style="text-align: left;width:100%;font-size: 23px;color: #000000">
+                    {$grade['title']}
+                    <span id=""  class="pull-right" number="0" style="color: #5AA94C">></span></a>
+
+            </div>
+
+            <div id="{$grade['grade_id']}" class="" style="display: none">
+                <volist name="grade['class']" id="class">
+                    <div class="row" style="">
+                        <div class="col-md-10 col-md-offset-2 " style="background-color: #B5DE9D;border-bottom: 1px solid #70BF41">
+                            <a href="#" data-class_id="{$class.class_id}" class="btn btn-lg pull-left container-fluid banjigroup" type="button" style="text-align: left;width:100%;font-size: 23px;color: #000000">
+                                {$class.class_name}</a>
+                        </div>
+                    </div>
+                </volist>
+            </div>
+    </volist>
+
+            </div>
+            <div class="row navbar-static-bottom" style="padding-bottom:0px;border-bottom: 1px solid #70BF41;border-top: 1px solid #70BF41">
+                <div class="col-md-3">
+                <div class="btn-group dropup">
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="color: #000000;font-size: 30px">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>
+                    <ul id="shezhi" class="dropdown-menu" role="menu" style="font-size: 18px">
+                        <li><a href="#" >全选</a></li>
+                        <li><a href="#" >删除</a></li>
+                        <li style="border-bottom: 1px solid #D2D4D3"><a href="#" >打印</a></li>
+                        <li><a href="{:U('excelUp/SchoolInfo/index')}" >导入信息</a></li>
+                        <li><a href="#" >导出信息</a></li>
+                        <li><a href="#" >下载导入模板</a></li>
+
+                    </ul>
+                </div>
+                </div>
+                <div class="col-md-3 col-md-offset-6">
+                    <div class="btn-group dropup">
+                        <a class="dropdown-toggle" data-toggle="dropdown" style="color: #53A859;font-size: 30px">
+                            <span class="glyphicon glyphicon-plus pull-right"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" style="font-size: 18px">
+                            <!--<li><a data-toggle="modal" data-target="#addStudentModal" href="#" >添加新学生</a></li>
+                            <li><a data-toggle="modal" data-target="#addClassModal" href="#" >创建班级</a></li>
+                            <li><a data-toggle="modal" data-target="#addGradeModal" href="#" >创建年级</a></li>-->
+                            <li><a  href="{:U('houtai/Index/index')}" >后台数据</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row " style="padding:0px;border-bottom: 1px solid #70BF41 ">
+                <div class="col-md-2 container-fluid" style="">
+                    <span class="glyphicon glyphicon-search" style="height:57px;font-size: 45px"></span>
+                </div>
+                <div class="col-md-10 container-fluid" style="padding-right: 0px;">
+               <input style="width:100%;height:57px;font-size: 23px;border: 1px solid #ECEEEF " type="text" class="input-lg"  placeholder="搜索所有学生">
+                </div>
+            </div>
+            <!--通讯录-->
+            <div class="row" style="">
+                <div id="studentList" class="container-fluid"  style="height: 832px;overflow:auto; border:1px solid #C8CBCB">
+                    {:W('StudentInfo', array('studentArray' => $result,'studentCount' => $studentCount))}
+                </div>
+            </div>
+            <div class="row" style="text-align:center;">
+                <span id="studentCount" style="width:100%;font-size: 23px;color: #000000">共{$studentCount}位学生</span>
+            </div>
+        </div>
+        <div class="col-md-7" style="background-color: #FFFFFF">
+            <div class="row" style="font-size:23px;"><!--头部结束-->
+                <nav class="navbar navbar-default" role="navigation" style="height:57px;border-bottom: 1px solid #70BF41">
+                    <div class="container-fluid">
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul id="userOperation" class="nav navbar-nav navbar-left" style="display: none">
+                                <li>
+                                    <a id="userEdit" href="#" style="color: #70BF41">编辑</a>
+                                    <a id="userCancel" href="#"  style="display:none;color: #70BF41">取消</a>
+                                </li>
+                            </ul>
+                            <ul  class="nav navbar-nav navbar-center">
+                                    <span class="pull-right" id="rightStudentCount" style="font-size: 23px;font-weight: bolder;color: #000000">共{$studentCount}位学生</span>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#" class="glyphicon glyphicon-time" style="color: #000000"></a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: #70BF41"><b>欧阳宇&nbsp;&nbsp;v</b></a>
+                                    <ul class="dropdown-menu" role="menu" style="font-size: 23px">
+                                        <li><a href="#" style="border-bottom: 1px solid #70BF41;color: #70BF41">修改密码</a></li>
+                                        <li><a href="#" style="border-bottom: 1px solid #70BF41;color: #70BF41">个人信息</a></li>
+                                        <li><a href="#" style="border-bottom: 1px solid #70BF41;color: #70BF41">退出</a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+
+            <div id="studentEdit" class="row" style="height:800px;overflow-x: hidden">
+                {:W('StudentList', array('studentArray' => $result,'studentCount' => $studentCount))}
+            </div><!--中间结束-->
+            <div>
+
+            </div>
+           </div>
+        </div>
+    </div>
+
+<include file="addInfoModal" />
+</body>
+<script language="JavaScript">
+    //点击编辑变成取消，点击取消变成编辑
+    $("#userEdit").click(function(){
+        $('#userCancel').show('fast');
+        $('#userEdit').hide();
+        $('#personalCenterCancel').show('fast');
+        $('#personalCenterEdit').hide();
+
+
+
+    });
+    $("#userCancel").click(function(){
+        //onclick="$('#userEdit').toggle('fast');$('#userCancel').hide();"
+        $('#userEdit').show('fast');
+        $('#userCancel').hide();
+        /*var a=document.getElementById("userCancel");
+        alert(a.innerText);
+        a.innerText = "取消";
+        a.id = "userEdit";*/
+        $('#personalCenterEdit').show('fast');
+        $('#personalCenterCancel').hide();
+    });
+
+
+    $('#leftNianJi a').click(function() {
+        $("#rightStudentCount").show('fast');
+        $('#userOperation').hide();
+        $('#leftNianJi div').css('background-color','');
+        $(this).parent().css('background-color','#B5DE9D');
+    });
+    $('#studentList a').click(function() {
+        $('#personalCenterEdit').show('fast');
+        $('#personalCenterCancel').hide();
+        $('#studentList a').parent().css('background-color','');
+        $(this).parent().css('background-color','#EAF4E7');
+    });
+
+    $('#shezhi a').mousemove(function(){
+        $('#shezhi a').parent().css('background-color','');
+        $(this).parent().css('background-color','#B5DE9D');
+    });
+    $('.xuexiao').click(function (e) {
+        $("#rightStudentCount").show('fast');
+        $('#userOperation').hide();
+        var $target = $(e.target);
+        var schoolID = $target.attr("data-school_id");
+        $.post("{:U('excelUp/StudentInfo/ajaxSchoolStudent')}", {'school_id': schoolID}, function (data) {
+            $('#studentList').html(data);
+
+        });
+        $.post("{:U('excelUp/StudentInfo/ajaxSchoolStudentList')}", {'school_id': schoolID}, function (data) {
+            $('#studentEdit').html(data);
+
+        });
+
+
+        //alert($target.data('school_id'));
+    });
+
+    $('.nianjistudent').click(function (e) {
+        $("#rightStudentCount").show('fast');
+        $('#userOperation').hide();
+        var $target = $(e.target);
+        var gradeID = $target.attr("data-grade_id");
+        $.post("{:U('excelUp/StudentInfo/ajaxGradeStudent')}", {'grade_id': gradeID}, function (data) {
+            //$('#studentList').html(data);
+            $('#studentList').html(data);
+        });
+        $.post("{:U('excelUp/StudentInfo/ajaxGradeStudentList')}", {'grade_id': gradeID}, function (data) {
+            //$('#studentList').html(data);
+            $('#studentEdit').html(data);
+        });
+
+    });
+    $('.banjigroup').click(function (e) {
+        $("#rightStudentCount").show('fast');
+        $('#userOperation').hide();
+        var $target = $(e.target);
+        var classID = $target.attr("data-class_id")
+        $.post("{:U('excelUp/StudentInfo/ajaxClassStudent')}", {'class_id': classID}, function (data) {
+            $('#studentList').html(data);
+        });
+        $.post("{:U('excelUp/StudentInfo/ajaxClassStudentList')}", {'class_id': classID}, function (data) {
+            $('#studentEdit').html(data);
+        });
+       //alert($target.data('class_id'));
+    });
+</script>
+</html>
+

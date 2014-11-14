@@ -1,0 +1,134 @@
+<div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header row">
+                <div class="modal-header-row row" style="color: #ffffff" >
+                    <div class=" col-sm-3">
+                        <span class="title ">编号:</span>
+                        <span class="content ">{$view['id']}</span>
+                    </div>
+                    <div class=" col-sm-3">
+                        <span class="title">题型:</span>
+                        <span class="content">{$view['type_name']}</span>
+                    </div>
+                    <div class=" col-sm-3">
+                        <span class="title">难度:</span>
+                        <span class="content">{$view['difficult_name']}</span>
+                    </div>
+                    <div class=" col-sm-3">
+                        <span class="title">上传人:</span>
+                        <span class="content">{$view['create_name']}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding: 0px">
+                <div class="container-fluid" style="margin-right:20px;margin-left:20px;text-align:center;border-bottom: 1px solid #005BE0;">
+                    <div class="col-sm-12" style="margin-bottom: 10px;margin-top: 10px">
+                        <span class="title" style="" >来源:</span>
+                        <span class="content" style="color: #005BE0" >{$view['where_name']}</span>
+                    </div>
+                </div>
+
+                <div class="container-fluid" style="margin-top: 20px;margin-right:20px;margin-left:20px;border-bottom: 1px solid #C8CBCB;">
+                    <div class="col-sm-12" style="margin-bottom: 10px;padding: 0px">
+                            <span class="content">
+                                {$view['question_content']}
+                            </span>
+
+                    </div>
+
+                </div>
+                <!--<div class="row" style="margin: 30px;border-bottom: 1px solid #C8CBCB;">
+                    <span class="content">A.37</span>
+                    <span class="content">B.27</span>
+                    <span class="content">C.97</span>
+                    <span class="content">D.47</span>
+                </div>-->
+                <div class="container-fluid">
+                    <div class="row" style="margin: 20px;">
+                        <span class="title">答案:</span>
+                        <span class="content">{$view['answer']}</span>
+                    </div>
+                    <div class="row" style="margin: 20px;">
+                        <span class="title">统计:</span>
+                        <span class="content">本题共被作答{$view['use_count']}次,正确率为{$view['question_value']}%,易错选项为c,共被下载{$view['download_count']}次</span>
+                    </div>
+                    <div class="row" style="margin: 20px;">
+                        <span class="title">使用:</span>
+                        <!--<span class="content">2012年七年级上学期期中考试</span>
+                        <span class="content">2013年七年级上学期期中考试</span>-->
+                    </div>
+                    <div class="row" style="margin: 20px;">
+                        <span class="title">解析:</span>
+                        <span class="content">{$view['answer_text']}</span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="{:U('question/QuestionEdit/index',array('questionID'=>$view['id']))}" class="btn " style="font-size: 21px">修改</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row" style="text-align: center;" >
+                    <span class="title">编号:</span>
+                    <span class="content">100000001</span>
+                    <span class="title">题型:</span>
+                    <span class="content">选择题</span>
+                    <span class="title">难度:</span>
+                    <span class="content">一般</span>
+                    <span class="title">上传人:</span>
+                    <span class="content">欧阳宇</span>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-top: 0px">
+                <div class="row" style="text-align:center;border-bottom: 1px solid #C8CBCB;">
+                    <span class="title" >来源:</span>
+                    <span class="content" >校内七年级第一学期期末练习</span>
+                </div>
+                <div class="row" style="margin: 20px;">
+                    <span class="title">抽取某班6名同学的体育中考成绩统计如下：40。40，37，93，43，2，5，则每组数据的中位数抽取某班6名同学的体育中考成绩统计如下：40</span>
+
+                </div>
+                <div class="row" style="margin: 30px;border-bottom: 1px solid #C8CBCB;">
+                    <span class="content">A.37</span>
+                    <span class="content">B.27</span>
+                    <span class="content">C.97</span>
+                    <span class="content">D.47</span>
+                </div>
+
+                <div class="row" style="margin: 20px;">
+                    <span class="title">统计:</span>
+                    <span class="content">本题共被作答3556次，正确率为93.13%，易错选项为c</span>
+                </div>
+                <div class="row" style="margin: 20px;">
+                    <span class="title">使用:</span>
+                    <span class="content">2012年七年级上学期期中考试</span>
+                    <span class="content">2013年七年级上学期期中考试</span>
+                </div>
+                <div class="row" style="margin: 20px;">
+                    <span class="title">解析:</span>
+                    <span class="content"></span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default">修改</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->

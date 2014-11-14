@@ -1,0 +1,102 @@
+<!--增加学生modal-->
+<div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="addStudentModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addGradeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-right: 0px;">
+    <div class="modal-dialog container-fluid">
+        <div class="modal-content " style="width: 700px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h1 class="modal-title" id="addGradeModalLabel">添加学校年级信息</h1>
+                <h3 class="modal-title" >{$schoolInfo['title']}</h3>
+            </div>
+
+            <form method="post" enctype="multipart/form-data" action="{:U('excelUp/UDLoad/addGradeText')}">
+                <input type="text" class="form-control " name="gradeSchool" style="display: none" value="{$schoolInfo['school_id']|default='isNull'}">
+            <div class="modal-body">
+                <div class="row" style="margin-top: 30px">
+                    <div class="col-md-3"><span class="pull-right" style="font-size: 23px;font-weight: bolder">名称</span></div>
+                    <div class="col-md-7 ">
+                        <input type="text" style="font-size: 23px;" name="gradeTitle" class="form-control " placeholder="如，初中一年级">
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 30px">
+                    <div class="col-md-3"><span class="pull-right" style="font-size: 23px;font-weight: bolder">简称</span></div>
+                    <div class="col-md-7">
+                        <input type="text" style="font-size: 23px;" name="gradeShortTitle" class="form-control " placeholder="如，Y1、Y2">
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 30px">
+                    <div class="col-md-3"><span class="pull-right" style="font-size: 23px;font-weight: bolder">排序</span></div>
+                    <div class="col-md-7">
+                        <input type="text" style="font-size: 23px;" name="gradeSort" class="form-control " placeholder="如，1、2...">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary">完成</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="addClassModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <script language="JavaScript">
+            $(".addGrade").click(function(){
+                //alert($(this).prev().children().length);
+                if($(this).prev().children().length>4){
+                    alert("半天最多能排4节课");
+                }else{
+                    if ($(this).prev().attr("id")=="mor_course")
+                    {
+                        $(getddInputhtml($(this).prev().children().length)).appendTo($(this).prev());
+                    }
+                    else
+                    {
+                        $(getddInputhtml(($(this).prev().children().length+5))).appendTo($(this).prev());
+                    }
+                }
+            });
+        </script>
+<style type="text/css">
+    .modal.modal-body {
+
+        max-height: 800px;
+        width: 200px;
+    }
+    .modal {
+        margin: 90px 0px 0px 0px; /* PLAY THE WITH THE VALUES TO SEE GET THE DESIRED EFFECT */
+    }
+</style>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--导入基本头部信息-->
+    <include file="__THEME__/question_"/>
+</head>
+<style>
+    .btn-group a{
+        font-size: 15px;
+    }
+    .btn-group span{
+        font-size: 15px;
+        font-weight: bolder;
+    }
+    .btn-group-col-md-1{
+        margin-top: 4px;
+    }
+
+    .btn-group-col-md-1 > #questionTypeList{
+        min-width: 70px;
+    }
+    #questionTypeList > li{
+        max-width: 70px;
+        padding: 0px;
+    }
+    #questionTypeList > li > a{
+
+        padding: 0px;
+        max-width: 70px;
+        margin: 0px;
+    }
+
+
+
+    .btn-group-col-md-1 > #questionDifficultList{
+        min-width: 60px;
+    }
+    #questionDifficultList > li{
+        max-width: 60px;
+        padding: 0px;
+    }
+    #questionDifficultList > li > a{
+
+        padding: 0px;
+        max-width: 60px;
+        margin: 0px;
+    }
+
+
+
+    .btn-group-col-md-1 > #questionTeacherList{
+        min-width: 70px;
+    }
+    #questionTeacherList > li{
+        max-width: 70px;
+        padding: 0px;
+    }
+    #questionTeacherList > li > a{
+
+        padding: 0px;
+        max-width: 70px;
+        margin: 0px;
+    }
+
+    .btn-group-col-md-1 > #questionWhereList{
+        min-width: 70px;
+    }
+    #questionWhereList > li{
+        min-width: 70px;
+        padding: 0px;
+    }
+    #questionWhereList > li > a{
+
+        padding: 0px;
+        min-width: 70px;
+        margin: 0px;
+    }
+
+
+
+</style>
+
+<body class="table-responsive" style="border: 1px solid #C8CBCB;overflow: hidden">
+<div class="row table" style="margin: 0;padding:0px">
+<div class="container-fluid container-fluid-questionRecord">
+<include file="__THEME__/question_header"/>
+<!-- 导航条结束   -->
+
+
+<!-- 说明结束 -->
+
+
+<!-- 中间部分开始-->
+
+<div class="row" >
+<div class="col-sm-3" style="border-right: 1px solid #C8CBCB;background-color: #ebecee;">
+    {:W('Knowledge',array('sort_order' => $sort_order,'badge'=>$badge,'knowledgeListArray' => $knowledgeListArray,'gradeList' =>$gradeList))}
+</div>
+
+<div class="col-sm-9 col-sm-offset-0 rightWidthMax" style="">
+
+    <div class="row container-fluid mouseOverLi" style="border-bottom: 1px solid #C8CBCB">
+        <div class="col-md-1 " style="height: 46px">
+            <div  class="btn-group btn-group-col-md-1" style="">
+                <span id="questionType" class="btn dropdown-toggle" data-toggle="dropdown">题型</span>
+                <ul id="questionTypeList" class="dropdown-menu" role="menu" style="text-align: center;width: 20px" >
+                    <volist name="questionType" id="type">
+                        <li class="nihaobuyaohao"><a data-type_name="{$type['type_name']}" data-type_id="{$type['id']}" href="#">{$type['type_name']}</a></li>
+
+                    </volist>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-1" style="margin-left: 20px;">
+            <div class="btn-group btn-group-col-md-1" style="width:100%;text-align: center">
+                <span id="questionDifficult" class="btn dropdown-toggle" data-toggle="dropdown">难度</span>
+                <ul id="questionDifficultList" class="dropdown-menu" role="menu" style="text-align: center" >
+                    <volist name="questionDifficult" id="difficult">
+                        <li><a data-difficult_name="{$difficult['difficult_name']}" data-difficult_id="{$difficult['id']}" href="#">{$difficult['difficult_name']}</a></li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-1" style="margin-left: 20px;">
+            <div class="btn-group btn-group-col-md-1" style="width:100%;text-align: center">
+                            <span id="questionTeacher" class="btn dropdown-toggle" data-toggle="dropdown" style="">
+                                出题人
+                            </span>
+                <?php  if(!empty($questionTeacher)){ ?>
+                <ul id="questionTeacherList" class="dropdown-menu" role="menu" style="text-align: center;" >
+                    <volist name="questionTeacher" id="teacher">
+                        <li><a data-teacher_name="{$teacher['uname']}" data-question_teacher_id="{$teacher['id']}" data-teacher_id="{$teacher['login']}" href="#">{$teacher['uname']}</a></li>
+                    </volist>
+
+                </ul>
+                <?php  } ?>
+            </div>
+        </div>
+        <div class="col-md-2" style="margin-left: 30px;">
+            <div class="btn-group btn-group-col-md-1" style="width:100%;text-align: center">
+                            <span id="questionWhere" class="btn dropdown-toggle" data-toggle="dropdown" style="">
+                                来源
+                            </span>
+                <?php  if(!empty($questionWhere)){ ?>
+
+                <ul id="questionWhereList" class="dropdown-menu" role="menu" style="text-align: center;" >
+                    <volist name="questionWhere" id="where">
+                        <?php if($where['where_id'] < 8) {?>
+                        <li><a data-where_name="{$where['where_name']}" data-where_id="{$where['where_id']}" href="#">{$where['where_name']}</a></li>
+                        <?php }?>
+                    </volist>
+
+                </ul>
+
+                <?php  } ?>
+            </div>
+        </div>
+
+
+        <div class="col-md-2 pull-right" style="text-align: center;margin-top: 6px">
+            <div class="btn-group btn-group-col-md-1 pull-right" style="font-size: 17px;color: #0077e5">
+                共<span id="questionCount" style="">73</span>道
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row questionList" style="overflow-y: auto;overflow-x: hidden">
+        <div class="container-fluid" id="questionListView" style="">
+            {:W('QuestionListView',array('questionListArray'=>$questionListArray))}
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<form method="post" id="questionViewForm">
+
+<input id="gradeListIDView" name="gradeListIDView" value="{$grade_list_id}" type="hidden">
+<input value="" name="knowledgeLevel1ID" id="knowledgeLevel1ID" type="hidden">
+<input value="" name="knowledgeLevel2ID" id="knowledgeLevel2ID" type="hidden">
+<input value="" id="knowledgeLevel3ID" name="knowledgeLevel3ID" type="hidden">
+    <!--类型查询-->
+<input value="" id="questionTypeView" name="questionTypeIDView" type="hidden">
+    <!--难度查询-->
+<input value="" id="questionDifficultView" name="questionDifficultIDView" type="hidden">
+    <!--出题人查询-->
+<input value="" id="questionTeacherView" name="questionTeacherLoginView" type="hidden">
+
+    <!--来源查询-->
+<input value="" id="whereView" name="whereIDView" type="hidden">
+
+
+</form>
+
+
+
+<?php
+            if(isset($questionClick)){
+        ?>
+
+<script>
+    $("#{$questionClick['knowledge_level1']}").click();
+    $("#{$questionClick['knowledge_level2']}").click();
+    $("#{$questionClick['knowledge_level3']}").click();
+</script>
+
+<?php
+         }
+        ?>
+
+<!--尾部开始-->
+<script>
+    var height = screen.height-$(".knowledgehEADEsTYLE").height()-$(".mouseOverLi").height();
+
+    //var width = screen.width - 265;
+
+    /*$(".rightWidthMax").css('min-width',width);
+    $(".headerWidth").css('min-width',width);*/
+    /*$(".container-fluid-questionRecord").css("height",screen.height);
+    $(".knowledgeList").css("height",height);
+    $(".questionList").css("height",height);*/
+    $(".knowledgeList").css("height",height-60);
+    $(".questionList").css("height",height-60);
+    $('.questionMouseOver').mouseover(function(){
+        $('.questionMouseOver').css('border','1px solid #C8CBCB');
+        $(this).css('border','1px solid #0C5FDF');
+    }).mouseout(function(){
+        $('.questionMouseOver').css('border','1px solid #C8CBCB');
+    });
+
+    $('.downloadChange').mouseover(function(){
+        $('.downloadChange img').attr('src',"__APP__/images/download.jpg");
+
+        $(this).children('img').attr('src',"__APP__/images/download1.jpg");
+    }).mouseout(function(){
+        $('.downloadChange img').attr('src',"__APP__/images/download.jpg");
+    });
+    $('.deleteChange').mouseover(function(){
+        $('.deleteChange img').attr('src',"__APP__/images/delete.jpg");
+
+        $(this).children('img').attr('src',"__APP__/images/delete1.jpg");
+    }).mouseout(function(){
+        $('.deleteChange img').attr('src',"__APP__/images/delete.jpg");
+
+    });
+
+
+
+
+
+
+    $("#questionTypeList a").click(function(){
+
+        $("#questionType").text($(this).text());
+        $("#questionTypeView").val($(this).attr("data-type_id"));
+        viewQuestionList();
+    });
+    $("#questionDifficultList a").click(function(){
+
+        $("#questionDifficult").text($(this).text());
+
+        $("#questionDifficultView").val($(this).attr("data-difficult_id"));
+        viewQuestionList();
+    });
+    $("#questionTeacherList a").click(function(){
+
+        $("#questionTeacher").text($(this).text());
+        $("#questionTeacherView").val($(this).attr("data-teacher_id"));
+        viewQuestionList();
+
+    });
+    $("#questionWhereList a").click(function(){
+
+        $("#questionWhere").text($(this).text());
+        $("#whereView").val($(this).attr("data-where_id"));
+        viewQuestionList();
+    });
+
+
+    function viewQuestionList(){
+        var formData = $('#questionViewForm').serialize();
+        $.ajax({
+            type : "POST",
+            url  : "{:U('question/QuestionEdit/ajaxQuestionList')}",
+            cache : false,
+            data : formData,
+            success : onSuccess,
+            error : onError
+        });
+        return false;
+
+    }
+
+    function onSuccess(data,status){
+        $('#questionListView').html(data);
+        //alert(data);
+    }
+    function onError(data,status){
+        //进行错误处理
+        //alert(data);
+    }
+
+
+
+
+    $('.dropdown-menu a').mousemove(function(){
+        //alert("2222");
+        $('.dropdown-menu a').css('color','#000000');
+
+
+        $(this).css('color','#0077e5');
+
+    });
+
+</script>
+
+</body>
+
+</html>
+
+

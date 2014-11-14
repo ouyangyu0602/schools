@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>UbbCode</title>
+<script type="text/javascript" src="__APP__/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="__APP__/ckeditor/ckeditor.js"></script>
+
+</head>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	 CKEDITOR.replace( 'editor1',{
+			toolbar: [
+					//[ 'Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ]
+					['EqnEditor','-']
+			 ]
+
+		
+	  });
+	  $("#reading").click(function(){
+		  $('msg').empty();
+	  });
+	  $("#sub").click(function(){
+		  var question_id=$("#qid").val();
+		  var question_content_text=$("#con").val();
+		  $.post("__ROOT__/index.php?app=excelup&mod=Index&act=updataText",{id:question_id,content:question_content_text},function(data){
+			  $("#msg").html(data);
+		  });
+	  });
+});
+	function inserttag(topen,tclose){
+		//编辑对象
+		var themess = document.getElementById('con');
+		themess.focus();
+		//如果是否ie浏览器
+		if (document.selection) {   
+			//获取选区文字
+		   var theSelection = document.selection.createRange().text;
+			
+		   //alert(theSelection);
+		   if(theSelection){
+			   //替换
+			   document.selection.createRange().text = theSelection = topen+theSelection+tclose;
+		    }else{
+				document.selection.createRange().text = topen+tclose;
+		    }
+		   theSelection='';
+	
+		}else{
+			//其他浏览器
+		   var scrollPos = themess.scrollTop;
+		   var selLength = themess.textLength;
+		   var selStart = themess.selectionStart;//选区起始点索引，未选择为0
+		   var selEnd = themess.selectionEnd;//选区终点点索引
+		   if (selEnd <= 2)
+		   selEnd = selLength;
+	
+		   var s1 = (themess.value).substring(0,selStart);//截取起始点前部分字符
+		   var s2 = (themess.value).substring(selStart, selEnd)//截取选择部分字符
+		   var s3 = (themess.value).substring(selEnd, selLength);//截取终点后部分字符
+	
+		   themess.value = s1 + topen + s2 + tclose + s3;//替换
+	
+		   themess.focus();
+		   themess.selectionStart = newStart;
+		   themess.selectionEnd = newStart;
+		   themess.scrollTop = scrollPos;
+		   return;
+		}
+	}
+	
+	
+</script>
+
+<body>
+
+<h1>UBB CODE</h1>
+
+<br>
+<div>
+	<div style="float: left;">
+		<form action="__ROOT__/index.php?app=excelup&mod=Index&act=ubbCode" method="post">
+	  	<label>题&nbsp;&nbsp;&nbsp;&nbsp;号：
+		  	<select name="question_index" id="question_index">
+			  	<volist name="index" id="data">
+			  	   <if condition="$data== $qindex"> 
+			  	  		<option value="{$data}" selected="selected">第{$data}题</option>
+			  	   <else />
+			  	    	<option value="{$data}">第{$data}题</option>
+			  	   </if>
+			  	 </volist>
+		  	</select></label><br>
+	  	<label>教&nbsp;&nbsp;&nbsp;&nbsp;材：
+	  		<select name="section_book_id" id="section_book_id">
+	  			<volist name="blist" id="data">
+	  				<if condition="$data.section_book_id == $sbook_id"> 
+	  					<option value="{$data.section_book_id}" selected="selected">{$data.section_book_title}</option>
+					<else /> 
+						<option value="{$data.section_book_id}">{$data.section_book_title}</option>
+					</if>
+	  		    </volist>
+	  		</select>
+	  	</label><br />
+	  	<label>教程目录：
+		  	<select name="section_id" id="section_id">
+		  		<volist name="qlist" id="data">
+		  		    <if condition="$data.section_id == $sid">
+		  	  		 <option value="{$data.section_id}" selected="selected">{$data.section_id}</option>
+		  	  		<else />
+		  	  		 <option value="{$data.section_id}">{$data.section_id}</option>
+		  	  		</if>
+		  	  	</volist>
+		  	</select>
+	  	</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" id="reading" value="载入数据…">
+	</form>
+	  
+	 <hr />
+	  <a href="javascript:void(0);" onclick='inserttag("[strong]","[/strong]");'>【加粗】</a>
+	  <a href="javascript:void(0);" onclick='inserttag("[u]","[/u]");'>【下划线】</a>
+	   <a href="javascript:void(0);" onclick='inserttag("[sub]","[/sub]");'>【下标】</a>
+	  <a href="javascript:void(0);" onclick='inserttag("[sup]","[/sup]");'>【上标】</a>
+	 <br />
+	  <input type="hidden" id='qid' name='qid' value="{$id}">
+	  <textarea name="message" id="con" cols="80%" rows="10">{$value}</textarea>
+	  <br/>
+	  <input type="button" id="sub" id="updata" value="提交数据"/>  <span id='msg' style="color:red;"></span>
+	
+	</div>
+	  
+	<div style="width: 300px; float: left;">
+	  <textarea  id ="editor1" ></textarea>
+	</div>
+</div>
+
+</body>
+</html>

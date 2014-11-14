@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--导入基本头部信息-->
+    <include file="__THEME__/question_"/>
+</head>
+<style>
+
+    .checkboxStyle{
+        text-align:center;
+        margin-top: 13px;
+        margin-bottom: 14px;
+        font-size: 13px;
+    }
+    .checkboxStyle span{
+        margin-right: 8px;
+    }
+
+</style>
+<style>
+    .title{
+        font-size: 13px;
+        margin-left: 5px;
+        color: #005BE0
+    }
+    .content{
+        font-size: 13px;
+
+        margin-right: 20px;
+    }
+    .modal-header{
+        padding: 0px;
+        background-color: #0C5FDF;
+        margin: 0px;
+    }
+    .modal-content{
+        border: 0px;
+        border-radius: 0px;
+    }
+    .modal-header-row{
+        margin-top: 10px;
+        margin-bottom:10px;
+
+    }
+    .modal-header-row span{
+        color: #ffffff;
+    }
+    .modal-header-row div{
+        text-align: center;
+    }
+
+
+    /*#cke_1_top{
+        display: none;
+    }
+    #cke_1_bottom{
+        display: none;
+    }
+    #cke_2_top{
+        display: none;
+    }
+    #cke_2_bottom{
+        display: none;
+    }
+    #cke_3_top{
+        display: none;
+    }
+    #cke_3_bottom{
+        display: none;
+    }*/
+
+
+</style>
+<body class="table-responsive" style="overflow: hidden;border: 1px solid #C8CBCB;">
+<div class="row table" style="margin: 0;padding:0px">
+    <div class="container-fluid container-fluid-index">
+        <include file="__THEME__/question_header"/>
+        <!-- 导航条结束   -->
+
+
+        <!-- 说明结束 -->
+
+
+        <!-- 中间部分开始-->
+
+        <div class="row" >
+            <div class="col-md-3" style="border-right: 1px solid #C8CBCB;background-color: #ebecee;">
+                {:W('Knowledge',array('sort_order' => $sort_order,'badge'=>$badge,'knowledgeListArray' => $knowledgeListArray,'gradeList' =>$gradeList))}
+            </div>
+
+            <div class="col-md-9">
+                <div class="row" style="border-bottom: 1px solid #C8CBCB;height: 47px">
+                    <div class="row container-fluid" >
+                        <div class="col-sm-5 container-fluid" style="padding:0px;border-right: 1px solid #C8CBCB;">
+                            <div class="row checkboxStyle " id="selectTypeCheckbox">
+                                <span style="margin-right: 10px">题型:</span>
+                                <volist name="questionType" id="type">
+
+                                    <span class="selectTypeCheckbox" id="clickTypeID{$type['id']}">{$type['type_name']}&nbsp;&nbsp;&nbsp;<input id="cickTypeID{$type['id']}" type="checkbox" data-type_name="{$type['type_name']}" value="{$type['id']}" ></span>
+
+                                </volist>
+                            </div>
+
+                            <!-- /input-group -->
+                        </div>
+
+                        <div class="col-sm-4 container-fluid" style="padding:0px;border-right: 1px solid #C8CBCB;">
+                            <div class="row checkboxStyle " id="selectDifficultCheckbox">
+                                <span style="margin-right: 10px">难度:</span>
+                                <volist name="questionDifficult" id="difficult">
+
+                                        <span class="selectDifficultCheckbox" id="clickDifficult{$difficult['id']}">{$difficult['difficult_name']}&nbsp;&nbsp;&nbsp;<input id="lickDifficult{$difficult['id']}" type="checkbox" data-difficult_name="{$difficult['difficult_name']}" value="{$difficult['id']}"></span>
+
+
+
+                                </volist>
+                            </div><!-- /input-group -->
+                        </div>
+                        <div class="col-sm-3" style="">
+                            <div class="row checkboxStyle" style="margin: 5px">
+                                <span style="margin-right: 0px;width: 100%">
+                                    <input type="text" id="where_name" class="form-control" placeholder="来源" style="font-size: 13px;height: 26px;margin-top: 5px;margin-bottom: 2px;">
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                    <form method="post" action="{:U('question/QuestionEdit/index')}" >
+                        <include file="__THEME__/selectQuestion"/>
+
+                        <!--<include file="__THEME__/blanksQuestion"/>
+                        <include file="__THEME__/AnswerQuestion"/>-->
+
+                        <input value="{$questionClick['id']}" id="isSubmitForm" name="isSubmitForm" type="hidden">
+                        <input type="submit" id="questionImportForm" style="display: none" value="8888">
+                    </form>
+
+
+
+                <input value="" id="isAnswerClick" name="isAnswerClick" type="hidden">
+                <div class="modal" id="questionView" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header row">
+                                <div class="modal-header-row " style="color: #ffffff;margin-bottom: 8px" >
+                                    <div class="row">
+                                        <div class=" col-sm-3">
+                                            <span class="title ">编号:</span>
+                                            <span class="content ">{$questionClick['id']}</span>
+                                        </div>
+                                        <div class=" col-sm-3">
+                                            <span class="title">题型:</span>
+                                            <span id="modalQuestionTypeName" class="content">{$questionClick['type_name']}</span>
+                                        </div>
+                                        <div class=" col-sm-3">
+                                            <span class="title">难度:</span>
+                                            <span id="modalQuestionDifficultName" class="content">{$questionClick['difficult_name']}</span>
+                                        </div>
+                                        <div class=" col-sm-3">
+                                            <span class="title">上传人:</span>
+                                            <span id="modalQuestionTeacherName" class="content">{$questionClick['create_name']|default=$GLOBALS['ts']['user']['uname']}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding-top: 10px">
+                                        <div class="container-fluid" style="margin-right:15px;margin-left:15px;text-align:center;border-top: 1px solid #bbbbbb;">
+
+                                        <div class="col-sm-12" style="margin-bottom: 5px;margin-top: 10px">
+                                            <span class="title" style="" >来源:</span>
+                                            <span id="modal_where_name_text" class="content" style="" >{$questionClick['where_name']}</span>
+                                        </div>
+                                            </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-body" style="padding: 0px">
+
+
+                                <div class="container-fluid" style="margin-top: 20px;margin-right:20px;margin-left:20px;border-bottom: 1px solid #C8CBCB;">
+                                    <div class="col-sm-12" style="margin-bottom: 10px;padding: 0px">
+                            <span class="content" id="modalQuestionContent">
+                                {$questionClick['question_content']}
+                            </span>
+
+                                    </div>
+
+                                </div>
+                                <!--<div class="row" style="margin: 30px;border-bottom: 1px solid #C8CBCB;">
+                                    <span class="content">A.37</span>
+                                    <span class="content">B.27</span>
+                                    <span class="content">C.97</span>
+                                    <span class="content">D.47</span>
+                                </div>-->
+                                <div class="container-fluid">
+                                    <div class="row" style="margin: 20px;">
+                                        <span class="title">答案:</span>
+                                        <span class="content" id="modalQuestionAnswer">{$questionClick['answer']}</span>
+                                    </div>
+
+
+                                    <div class="row" style="margin: 20px;">
+                                        <span class="title">解析:</span>
+                                        <span class="content" id="modalQuestionAnswerText">{$questionClick['answer_text']}</span>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer" style="padding-top: 0px;padding-bottom: 0px">
+                                <a href="#" id="questionSaveDismiss"  data-dismiss="modal" class="btn " style="font-size: 19px;margin-right: 60px">取消</a>
+                                <a href="#" onclick="questionSave(event)" data-dismiss="modal" class="btn " style="font-size: 19px">保存</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!--尾部开始-->
+<script>
+    var height = screen.height-$(".knowledgehEADEsTYLE").height()-$(".gradeListDroupDown").height();
+
+
+    $(".knowledgeList").css("height",height-60);
+    $(".selectQuestion").css("height",height-60);
+
+
+
+    //var width = screen.width - 265;
+
+    /*$(".rightWidthMax").css('min-width',width);
+    $(".headerWidth").css('min-width',width);*/
+
+    $(".selectDifficultCheckbox").click(
+            function (){
+                $("#selectDifficultCheckbox :checked").prop('checked',false);
+                    $(this).children().prop('checked',true);
+                $(".selectDifficultCheckbox").css("color","#000000");
+                $(".selectDifficultCheckbox").css("font-weight","");
+                $(this).css("font-weight","bolder");
+                $(this).css("color","#0C5EDD");
+                $("#questionDifficult").val($(this).children().val());
+                $("#questionDifficultName").val($(this).children().attr("data-difficult_name"));
+                $("#modalQuestionDifficultName").text($(this).children().attr("data-difficult_name"));
+            }
+    );
+
+    $(".selectDifficultCheckbox").mouseover(function(){
+        $(this).css('cursor','default');
+    });
+    $(".selectTypeCheckbox").click(
+            function (){
+                $("#selectTypeCheckbox :checked").prop('checked',false);
+
+                    $(this).children().prop('checked',true);
+
+
+                $(".selectTypeCheckbox").css("color","#000000");
+                $(".selectTypeCheckbox").css("font-weight","");
+                $(this).css("font-weight","bolder");
+                $(this).css("color","#0C5EDD");
+                $("#questionType").val($(this).children().val());
+                $("#questionTypeName").val($(this).children().attr("data-type_name"));
+                $("#modalQuestionTypeName").text($(this).children().attr("data-type_name"));
+
+
+                if($(this).children().val() == "1") {
+                    //$("#centerAnswerEdit").html($("#PhotoLabel"));
+                    $("#PhotoLabel").show("fast");
+                    //$("#blanksRightAnswer").hide();
+                    $("#blanksRightAnswer").css('display','none');
+
+                } else {
+                    //$("#blanksRightAnswer").show("fast");
+                    $("#blanksRightAnswer").css('display','block');
+                    /*$.post("{:U('question/QuestionEdit/ajaxEditMathAnswer')}", {'answer': "{$questionClick['answer']}"}, function (data) {
+                        $('#answerBlanksWidget').html(data);
+
+                    });*/
+
+                    $("#PhotoLabel").hide();
+                    //如果已经点击了选择题，又选择了正确答案的时候，应该去除选项
+                    if($("#isAnswerClick").val() != ""){
+                        $("#PhotoLabel :checked").prop('checked',false);
+
+                    }
+                }
+
+
+            }
+    );
+    $(".selectTypeCheckbox").mouseover(function(){
+        $(this).css('cursor','default');
+    });
+
+    $("#where_name").blur(function(){
+        $("#where_name_text").val($(this).val());
+        $("#modal_where_name_text").text($(this).val());
+
+    });
+    var arr=["B","C","D","E","F","G","H","I"];
+    function checkboxAnswer(event){
+        var $tar = $(event.target);
+        $("#PhotoLabel :checked").prop('checked',false);
+        $tar.prop('checked',true);
+
+
+
+
+
+    }
+    $('#addAnswer').click(function(){
+
+        var spanObj = document.createElement('span');
+
+        var parentEle = document.getElementById('PhotoLabel');
+        var childEles = parentEle.children;
+        spanObj.innerHTML = '<input name="selectTypeAnswer" type="checkbox" onclick="checkboxAnswer(event)" style="margin-left: 20px" value="'+arr[childEles.length-2]+'">'+arr[childEles.length-2];
+
+        if(childEles.length < arr.length+2) {
+            //document.getElementById("PhotoLabel").appendChild(spanObj);
+            $('#addAnswer').before(spanObj);
+        }
+
+    });
+
+    $("#PhotoLabel :checkbox").click(
+            function (){
+                $("#PhotoLabel :checked").prop('checked',false);
+                $(this).prop('checked',true);
+                $("#isAnswerClick").val($(this).val());
+            }
+    );
+
+    function questionSave(event){
+        if($("#knowledgeLevel1ID").val() == "") {
+            alert("请至少选择一个知识点！");
+            return false;
+        }
+
+        if($("#questionType").val() == "") {
+            alert("请选择题目类型！");
+            return false;
+        }
+        if($("#questionDifficult").val() == "") {
+            alert("请选择难度！");
+            return false;
+        }
+        if($("#where_name").val() == "") {
+            alert("请输入题目来源！");
+            return false;
+        }
+
+        if($("#questionType").val() == "1" && $("#isAnswerClick").val() == ""){
+            alert("请选择正确答案！");
+            return false;
+
+        }
+
+        /*$('#questionImportForm').submit();*/
+        $('#questionImportForm').trigger("click");
+        /*var formData = $('#questionImportForm').serialize();
+
+        //.serialize() 方法创建以标准 URL 编码表示的文本字符串
+        $.ajax({
+            type : "POST",
+            url  : "{:U('question/QuestionEdit/ajaxImportQuestion')}",
+            cache : false,
+            data : formData,
+            success : onSuccess,
+            error : onError
+        });
+        return false;*/
+
+
+
+    }
+
+    function onSuccess(data,status){
+        $("#where_name").val("");
+        $("#PhotoLabel :checked").prop('checked',false);
+
+        $("#selectTypeAnswer").val("");
+        alert(data);
+    }
+    function onError(data,status){
+        //进行错误处理
+        alert(data);
+    }
+
+
+
+   $(".fade").unbind("click");
+
+    $('.dropdown-menu a').mousemove(function(){
+        //alert("2222");
+        $('.dropdown-menu a').css('color','#000000');
+
+
+        $(this).css('color','#0077e5');
+
+    });
+
+    $("#questionSaveDismiss").click(function(){
+        $(this).dblclick();
+    });
+
+</script>
+<?php
+            if(isset($questionClick)){
+        ?>
+
+<script>
+    $("#{$questionClick['knowledge_level1']}").trigger("click");
+    $("#{$questionClick['knowledge_level2']}").trigger("click");
+    $("#{$questionClick['knowledge_level3']}").trigger("click");
+    $("#clickTypeID{$questionClick['question_type']}").trigger("click");
+    $("#clickDifficult{$questionClick['difficult_id']}").trigger("click");
+    $("#where_name").val("{$questionClick['where_name']}");
+    $("#where_name_text").val("{$questionClick['where_name']}");
+    $("#selectTypeAnswer").val("{$questionClick['answer']}");
+    $("#clickTypeID{$questionClick['question_type']}").prop('checked',true);
+    $("#clickDifficult{$questionClick['difficult_id']}").prop('checked',true);
+
+</script>
+
+<?php
+         }
+
+
+        ?>
+
+
+</body>
+
+</html>

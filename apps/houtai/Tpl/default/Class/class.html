@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>云测评</title>
+<link rel='stylesheet' id='header-style-css' href='__APP__/header.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css' href='__APP__/footer.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css' href='__APP__/houtai.css'
+	type='text/css' media='all' />
+<script type="text/javascript" src="__APP__/jquery-1.9.0.min.js"></script>
+<script type='text/javascript' src='__APP__/jquery.simplemodal.js'></script>
+<script src="__APP__/jquery-ui.js"></script>
+</head>
+
+<body>
+	<include file="__THEME__/public_header" />
+
+	<div id="body_center">
+		<!--添加纪录开始  -->
+		<div id="add">
+			<h2 class="titleh2">新增班级</h2>
+			<dl>
+				<dd>
+                     <span>
+						学校:
+						<!-- <INPUT type="text" /> -->
+						<SELECT id="schoolid">
+                            <volist name="schoolMsg" id="svo">
+                                <OPTION  value="{$svo.schoolid}" >{$svo.title}</OPTION>
+                            </volist>
+                        </SELECT>
+					</span>
+					<span>
+						班级名称:
+						<INPUT id="classname" type="text"/>
+					</span>
+					<span>
+						班级ID:
+						<INPUT id="classid" type="text" />
+					</span>
+					<span>
+						学校ID:
+					<input id="schid" type="text"/>
+					</span>
+					<span>
+						年级ID:
+						<INPUT id="gradeid" type="text" />
+					</span>
+                    <span>
+						学期ID:
+						<INPUT id="periodid" type="text" style="width: 30px"/>
+					</span>
+					<input type="button" id="submitGradeMsg" value="  新&nbsp;增  ">
+				</dd>
+			</dl>
+		</div>
+		<!--添加纪录结束  -->
+		<!--列表开始  -->
+		<div id="list">
+			<h2 class="titleh2">班级列表</h2>
+			<dl>
+				<dt>
+					<span class="w1">
+						班级ID
+						<br />
+						(class_id)
+					</span>
+					<span class="w2">
+						班级名称
+						<br />
+						(class_name)
+					</span>
+					<span class="w3">
+						学校ID
+						<br />
+						(school_id)
+					</span>
+					<span class="w4">
+						年级ID
+						<br />
+						(grade_id)
+					</span>
+					<span class="w5">
+						学年学期ID
+						<br />
+						(school_period_id)
+					</span>
+					
+					<span class="w6">
+						选中
+						<br />
+						<INPUT id="mulSel" type="checkbox" />
+						<!-- <a href="javascript:;" onclick="">全选</a> -->
+					</span>
+					<span class="w7">
+						删除
+						<br />
+						<INPUT id="mulDel" type="BUTTON" value="删除选中" />
+					</span>
+					<span class="w8">修改</span>
+				</dt>
+				<volist name="class" id="vo">
+					<dd>
+						<span class="w1">{$vo.class_id}</span>
+						<span class="w2">{$vo.class_name}</span>
+						<span class="w3">{$vo.school_id}</span>
+						<span class="w4">{$vo.grade_id}</span>
+						<span class="w5">{$vo.school_period_id}</span>
+						<span class="w6">
+							<input type="checkbox" value="{$vo['id']}" />
+						</span>
+						<span class="w7">
+							<a href="javascript:void(0);" onclick="del('{$vo['id']}')">删除</a>
+						</span>
+						<span class="w8">
+							<a href="{:U('houtai/Class/selectSaveClassInfo',array('id'=>$vo['id']))}" >修改</a>
+							<!-- <a href="javascript:void(0);" onclick="modify('{$vo['grade_id']}')">修改</a> -->
+							
+						</span>
+					</dd>
+				</volist>
+<!-- 				<dd>
+					<span class="w1">11</span>
+					<span class="w2">11</span>
+					<span class="w3">11</span>
+					<span class="w4">11</span>
+					<span class="w5">11</span>
+					<span class="w6">11</span>
+					<span class="w7">
+						<input type="checkbox" />
+					</span>
+					<span class="w8">
+						<a href="javascript:void(0);">删除</a>
+					</span>
+					<span class="w9">
+						<a href="javascript:void(0);">修改</a>
+					</span>
+				</dd> -->
+			</dl>
+		</div>
+		<!--列表结束  -->
+		<div class="pager">
+			{$page}
+		</div>
+        <a href="{:U('houtai/Index/index')}">返回</a>
+	</div>
+	<div id="footer">
+		<img src="__PUBLIC__/123456789.jpg">
+	</div>
+	<script>
+	jQuery(function($) {
+		$("dd :checkbox").click(
+			function (){
+				$chkNum=$("dd :checkbox");
+				//$chkedNum=$("dd :checked");
+				$countChecked=0;
+				for($i=0;$i<$chkNum.length;$i++)
+				{
+					if($chkNum[$i].checked==true)
+					//$strId+=$list[$i].value+",";
+						$countChecked++;
+				}
+				//if($chkNum.length==$chkedNum.length)
+				if($chkNum.length==$countChecked){
+					$("dt :checkbox").prop('checked',true);				
+				}
+				else{
+					$("dt :checkbox").prop('checked',false);
+				}
+			}
+		);		
+		//checkbox点击事件
+		$("#mulSel").click(
+			function (){				
+				$check=$(this).prop('checked');
+				if($check)
+				$("dd :checkbox").prop('checked',true);
+				else
+				$("dd :checked").prop('checked',false);
+			}
+		);
+		//多个删除按钮点击事件
+		$("#mulDel").click(
+			function (){
+				$list=$("dd :checkbox");
+				$strId="";
+				for($i=0;$i<$list.length;$i++)
+				{
+					if($list[$i].checked==true)
+					$strId+=$list[$i].value+",";
+				}
+//				$strIdAfterSplit=$strId.substr(0,$strId.length-1);
+				$strIdAfterSplit=$strId.substr(0,$strId.length-1);
+				if($strIdAfterSplit==null||$strIdAfterSplit=="")
+				{
+					alert('未选择删除的记录！');
+				}
+				else
+				{
+					//alert($strIdAfterSplit);
+					 $urlStr="{:U('houtai/Class/mulDeleteClassInfo',array('ids'=>'"+$strIdAfterSplit+"'))}";
+					$.ajax({
+						type:'post',
+						 url:$urlStr,
+						 cache:false,
+						 //async:false,
+						 dataType:'json',
+						 timeout:30000,
+						 error:function(data){
+							 alert(data['info']);
+							 }, 
+						 success:function(da){
+							 alert(da['info']);
+						 }	
+					});
+				}													
+			}		
+		);
+		$("#classname").blur(
+
+			function (){
+				$selectSchoolId=$("#schoolid option:selected").val();//获取被选择的学校id
+				$seed=$(this).val();//获取当前班级的value
+                $subSeed = $seed.substring(0,3);
+				switch($subSeed)
+				{
+					case "一年级":
+					setValue($selectSchoolId,1,true);
+					break;
+					case "二年级":
+					setValue($selectSchoolId,2,true);
+					break;
+					case "三年级":
+					setValue($selectSchoolId,3,true);
+					break;
+					case "四年级":
+					setValue($selectSchoolId,4,true);
+					break;
+					case "五年级":
+					setValue($selectSchoolId,5,true);
+					break;
+					case "六年级":
+					setValue($selectSchoolId,6,false);
+					break;
+					case "七年级":
+					setValue($selectSchoolId,7,true);
+					break;
+					case "八年级":
+					setValue($selectSchoolId,8,true);
+					break;
+					case "九年级":
+					setValue($selectSchoolId,9,false);
+					break;
+
+				}
+			}
+		);
+        $("#classname").blur(
+                function (){
+//                    $selectSchoolId=$("#schoolid option:selected").val();//获取被选择的学校id
+                    $gradeid = $("#gradeid").val();
+                    $seed=$(this).val();//获取当前班级的value
+                    $subseed = $seed.substring(3,5);
+                    switch($subseed)
+                    {
+                        case "一班":
+                            setClassValue($gradeid,1,true);
+                            break;
+                        case "二班":
+                            setClassValue($gradeid,2,true);
+                            break;
+                        case "三班":
+                            setClassValue($gradeid,3,true);
+                            break;
+                        case "四班":
+                            setClassValue($gradeid,4,true);
+                            break;
+                        case "五班":
+                            setClassValue($gradeid,5,true);
+                            break;
+                        case "六班":
+                            setClassValue($gradeid,6,false);
+                            break;
+                        case "七班":
+                            setClassValue($gradeid,7,true);
+                            break;
+                        case "八班":
+                            setClassValue($gradeid,8,true);
+                            break;
+                        case "九班":
+                            setClassValue($gradeid,9,false);
+                            break;
+                        case "十班":
+                            setClassValue($gradeid,9,false);
+                            break;
+                    }
+
+                }
+        );
+		$("#submitGradeMsg").click(
+			function(){
+				$urlStr="{:U('houtai/Class/addClassInfo')}";
+				  $.ajax({
+					 type:'post',
+					 url:$urlStr,
+					 data:{'class_id':$('#classid').val(),'class_name':$('#classname').val(),'school_id':$('#schid').val(),'grade_id':$('#gradeid').val(),'school_period_id':$('#periodid').val()},
+					 cache:false,
+					 async:false,
+					 dataType:'json',
+					 timeout:30000,
+					 error:function(da){
+						 //document.write(da.responseText);
+						 alert(da['data']);				 
+					 },success:function(data1){			 
+						 alert(data1['data']);
+						 //document.write(data1['data']);
+					 }
+				 });	
+				//alert("添加成功！");
+			}		
+		);
+		
+	});
+    //设置下一个学校/年级id文本框中的值。
+    function setValue(scid,grade,hasnextgrade)
+    {
+        if(hasnextgrade)
+        {
+            $("#schid").val(scid);
+            $("#gradeid").val(scid+"00"+grade);
+//            $nextGradeObj=document.getElementById('nextgradeid');
+//            $gradeIdObj=document.getElementById('gradeid');
+//            $nextGradeObj.value=""+scid+"00"+(grade+1);
+//            $gradeIdObj.value=""+scid+"00"+grade;
+        }
+        else
+        {
+            $("#schid").val(scid);
+            $("#gradeid").val(scid+"00"+grade);
+        }
+    }
+    //设置班级id文本框中的值
+    function setClassValue(grade,clas,hasclass){
+        if(hasclass){
+            $("#classid").val(grade+"00"+clas);
+        }
+        else
+        {
+            $("#classid").val(grade+"00"+clas);
+        }
+    }
+
+	//删除---
+	function del(id)
+	{
+		if(!confirm('确认要删除该条数据吗？')) return;
+		 $urlStr="{:U('houtai/Class/delClassInfo',array('id'=>'"+id+"'))}";
+		 //alert($urlStr);
+		 $.ajax({
+			 type:'post',
+			 url:$urlStr,
+			 cache:false,
+			 async:false,
+			 dataType:'json',
+			 timeout:30000,
+			 success:function(da){
+				 alert(da['info']);
+			 },error:function(data){
+				 alert(data['info']);
+			 }
+		 });			
+	}
+	//修改
+	function modify(id)
+	{
+		//alert(id);
+		$url="{:U('houtai/grade/modifyGrade')}";
+		//alert($url);
+		   $.post($url,{'id':id}, function(da){			   
+			   document.write(da); 
+		   	}); 
+	}
+	</script>
+</body>
+</html>

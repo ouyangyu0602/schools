@@ -1,0 +1,166 @@
+
+<ul id="timu_ul" style="font-size: 30px; line-height: 200%; padding: 3% 10% 3% 20%">
+	<volist name="exam_list" id="exam_list_id" key="{k}"> 
+		<li id="Q{$k}" style="display: none; padding-bottom: 4%;">
+		<p>
+			<b>{$k}</b>
+			{$exam_list_id['question_content_text']}
+		</p>
+	</li>
+	</volist>
+</ul>
+<span id="dcTimer"></span>
+<center>
+<input type="button" value="开始测试" onclick="timedCount()">
+</center>
+
+
+<script type="text/javascript">
+var c=1;//当前的显示的div
+var tNum=hiddenDiv();//试题总数
+var t;//计时器
+var surplus=1*20;//倒计时
+var ctrl=tNum;//剩余题目
+
+function timedCount()
+{	
+	if(c==1)
+	{
+		disDiv(c);//执行切换div的操作"反转到下一个div";
+		c++;
+		ctrl--;
+	}
+	if(ctrl>0)
+	{
+		//"继续循环";
+		surplus--;
+		if(surplus>0)
+		{
+			//"显示倒计时剩余时间";
+			
+			var s1 = surplus%60;
+			//alert(s1);
+			//msg = "距离结束还有 "+minutes+" 分 "+seconds+" 秒"; 
+			msg = "距离结束还有 "+s1+" 秒"; 
+			//document.all["timer"].innerHTML=msg; 
+			document.getElementById('dcTimer').innerHTML=msg; 
+		}
+		else if(surplus==0)
+		{
+			hiddenDiv();//试题总数
+			document.getElementById('dcTimer').innerHTML="距离结束还有0秒"; 
+			disDiv(c);//执行切换div的操作"反转到下一个div";
+			c=c+1;//显示下一道题目
+			ctrl--;//剩余题目
+			surplus=1*20;//"重置surplus到初始值";
+		}
+	}
+	else
+	{		
+		document.getElementById('dcTimer').innerHTML=""; //清除倒计时提示框中的提示
+		clearTimeout(t);//清除计时器"清除定时器，终止循环";
+		//alert('测试结束！');
+	}
+	//document.getElementById('txt').value=c;
+	t=setTimeout("timedCount()",1000);//1秒执行一次
+
+}
+
+function disDiv(ci)//展示div
+{
+	if(ci==1)
+	{
+		document.getElementById('Q1').style.display='block';
+	}
+	else
+	{
+		if(document.getElementById("Q"+(ci-1))){
+			document.getElementById("Q"+(ci-1)).style.display='block';	
+			document.getElementById("Q"+(ci-1)).style.fontSize='10px';
+			document.getElementById("Q"+(ci-1)).height='50px';
+			document.getElementById("Q"+(ci-1)).style.lineHeight="50%";
+		}
+		else 
+		{
+			clearTimeout(t);
+		}
+		if(document.getElementById("Q"+ci))
+		{
+			document.getElementById("Q"+ci).style.display='block';			
+		}else
+		{
+			clearTimeout(t);
+		}
+		
+	}
+}
+
+function hiddenDiv()//隐藏div
+{
+	var num=0; 
+	//var objDiv = document.getElementById(obj);
+	var objDiv1 = document.getElementById("Q1");
+	var objDiv2 = document.getElementById("Q2");
+	var objDiv3 = document.getElementById("Q3");
+	var objDiv4 = document.getElementById("Q4");
+	var objDiv5 = document.getElementById("Q5");
+	var objDiv6 = document.getElementById("Q6");
+	var objDiv7 = document.getElementById("Q7");
+	var objDiv8 = document.getElementById("Q8");
+	var objDiv9 = document.getElementById("Q9");
+	var objDiv10 = document.getElementById("Q10");
+	if (objDiv1) {
+		objDiv1.style.display = "none";
+		num++;
+	}
+
+	if (objDiv2) {
+		objDiv2.style.display = "none";
+		num++;
+	}
+
+	if (objDiv3) {
+		objDiv3.style.display = "none";
+		num++;
+	}
+
+	if (objDiv4) {
+		objDiv4.style.display = "none";
+		num++;
+	}
+
+	if (objDiv5) {
+		objDiv5.style.display = "none";
+		num++;
+	}
+
+	if (objDiv6) {
+		objDiv6.style.display = "none";
+		num++;
+	}
+
+	if (objDiv7) {
+		objDiv7.style.display = "none";
+		num++;
+	}
+
+	if (objDiv8) {
+		objDiv8.style.display = "none";
+		num++;
+	}
+
+	if (objDiv9) {
+		objDiv9.style.display = "none";
+		num++;
+	}
+
+	if (objDiv10)//检测元素是否存在
+	{
+		objDiv10.style.display = "none";
+		num++;
+	}
+	//objDiv.style.display = "block";//展示点击当前的题目
+	//th.setAttribute('class', 'current1');
+	return num;
+}
+</script>

@@ -1,0 +1,60 @@
+CKEditor本地图片自动上传插件  使用说明
+
+---------------------------------------------------
+
+开发者：蝙蝠软件
+版本：V1.0
+E-MAIL：webmaster@reremouse.com
+网址：http://www.reremouse.com
+
+---------------------------------------------------
+
+本插件使用JAVA技术开发，需要配合JavaScript使用，可以将网页中含有的本地图片（src为'file:///'）自动上传到服务器并修改img标签的src属性为新的图片地址。典型应用场景如：配合ckEditor使用，使从WORD粘贴过来的内容中包含的本地图片自动上传到服务器。
+
+---------------------------------------------------
+
+依赖环境：JDK1.7+、jQuery、ckEditor4.2、浏览器不限
+
+---------------------------------------------------
+
+一般使用说明
+
+JavaScript API:
+
+类：
+WordImageUploader(s_url, app_name)
+s_url：图片上传的服务器页面地址，为动态页面，如servlet、PHP等；
+app_name：当前应用的名称
+
+在使用本插件前必须首先创建本类的对象，一个页面中最好只存在一个本对象，本类的创建方法如：
+var uploader = new WordImageUploader(sUrl,appName);
+
+该类的方法有：
+uploadWordImagesFromCKEditor(editorInstance, pre_id)
+本方法用于将CKEditor中的从WORD粘贴过来的文本中的所有本地图片自动上传到服务器，参数意义如下：
+editorInstance：CKEditor的实例；
+pre_id：图片上传到服务器后的名称的前辍，方便日后清理等维护工作，如不需要，设为''；
+
+uploadLocalFile(localUrl, name)
+本方法用于将单独本地图片上传到服务器，参数意义如下：
+localUrl：图片的本地URL，一般形式为：file:///xxx
+name：图片的名称
+
+
+使用步骤：
+
+1、引入jQuery类库；
+2、引入js文件夹下的wordimage_uploader.js；
+3、创建WordImageUploader对象；
+4、ckEditor内容改变时调用uploadWordImagesFromCKEditor方法。
+
+插件安装完成后应在网页状态档位置显示“监控台：欢迎使用“本地图片自动上传插件”。
+
+---------------------------------------------------
+
+本插件支持所有动态网站技术，DEMO所用技术为jsp，服务器端接受上传文件的动态页面为一Servelt：WordImageUploader.java，此文件已经在DEMO中给出，其它动态网站技术请参照此文件自行实现。
+
+---------------------------------------------------
+
+其它使用详情请参见DEMO源码。
+

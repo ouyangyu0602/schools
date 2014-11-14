@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>云测评</title>
+<link rel='stylesheet' id='header-style-css' href='__APP__/header.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css' href='__APP__/footer.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css' href='__APP__/houtai.css'
+	type='text/css' media='all' />
+<script type="text/javascript" src="__APP__/jquery-1.9.0.min.js"></script>
+<script type='text/javascript' src='__APP__/jquery.simplemodal.js'></script>
+<script src="__APP__/jquery-ui.js"></script>
+</head>
+
+<body>
+	<include file="__THEME__/public_header" />
+
+	<div id="body_center">
+		<!--添加纪录开始  -->
+		<div id="add">
+			<h2 class="titleh2">新增教师相关数据</h2>
+			<dl>
+				<dd>
+                     <span>
+						学校ID:
+						<!-- <INPUT type="text" /> -->
+						<SELECT id="schoolid">
+                            <option>请选择学校</option>
+                            <volist name="schoolMsg" id="svo">
+                                <OPTION  value="{$svo.schoolid}" >{$svo.title}</OPTION>
+                            </volist>
+                        </SELECT>
+					</span>
+					<span>
+						教师ID:
+						<INPUT id="teacherid" type="text"/>
+					</span>
+					<span>
+						学科类型:
+						<INPUT id="subject" type="text" style="width: 40px"/>
+					</span>
+					<span>
+						班级ID:
+                        <select id="classname">
+                            <option>请选择班级</option>
+                        </select>
+					</span>
+					<span>
+						学校ID:
+						<INPUT id="schid" type="text" />
+					</span>
+                    <span>
+						学期ID:
+						<INPUT id="periodid" type="text" style="width: 40px"/>
+					</span>
+					<input type="button" id="submitGradeMsg" value="  新&nbsp;增  ">
+				</dd>
+			</dl>
+		</div>
+		<!--添加纪录结束  -->
+		<!--列表开始  -->
+		<div id="list">
+			<h2 class="titleh2">教师列表</h2>
+			<dl>
+				<dt>
+					<span class="w1">
+						ID
+						<br />
+						(id)
+					</span>
+					<span class="w2">
+						教师ID
+						<br />
+						(login)
+					</span>
+					<span class="w3">
+						学科类型
+						<br />
+						(subject_type)
+					</span>
+					<span class="w4">
+						班级ID
+						<br />
+						(class_id)
+					</span>
+					<span class="w5">
+						学校ID
+						<br />
+						(school_id)
+					</span>
+					<span class="w6">
+						学期ID
+						<br />
+						(school_period_id)
+					</span>
+					<span class="w7">
+						选中
+						<br />
+						<INPUT id="mulSel" type="checkbox" />
+						<!-- <a href="javascript:;" onclick="">全选</a> -->
+					</span>
+					<span class="w8">
+						删除
+						<br />
+						<INPUT id="mulDel" type="BUTTON" value="删除选中" />
+					</span>
+					<span class="w9">修改</span>
+				</dt>
+				<volist name="teacher" id="vo">
+					<dd>
+						<span class="w1">{$vo.id}</span>
+						<span class="w2">{$vo.login}</span>
+						<span class="w3">{$vo.subject_type}</span>
+						<span class="w4">{$vo.class_id}</span>
+						<span class="w5">{$vo.school_id}</span>
+						<span class="w6">{$vo.school_period_id}</span>
+						<span class="w7">
+							<input type="checkbox" value="{$vo['id']}" />
+						</span>
+						<span class="w8">
+							<a href="javascript:void(0);" onclick="del('{$vo['id']}')">删除</a>
+						</span>
+						<span class="w9">
+							<a href="{:U('houtai/Teacher/selectSaveTeacherInfo',array('id'=>$vo['id']))}" >修改</a>
+							<!-- <a href="javascript:void(0);" onclick="modify('{$vo['grade_id']}')">修改</a> -->
+						</span>
+					</dd>
+				</volist>
+<!-- 				<dd>
+					<span class="w1">11</span>
+					<span class="w2">11</span>
+					<span class="w3">11</span>
+					<span class="w4">11</span>
+					<span class="w5">11</span>
+					<span class="w6">11</span>
+					<span class="w7">
+						<input type="checkbox" />
+					</span>
+					<span class="w8">
+						<a href="javascript:void(0);">删除</a>
+					</span>
+					<span class="w9">
+						<a href="javascript:void(0);">修改</a>
+					</span>
+				</dd> -->
+			</dl>
+		</div>
+		<!--列表结束  -->
+		<div class="pager">
+			{$page}
+		</div>
+        <a href="{:U('houtai/Index/index')}">返回</a>
+	</div>
+	<div id="footer">
+		<img src="__PUBLIC__/123456789.jpg">
+	</div>
+	<script>
+	jQuery(function($) {
+		$("dd :checkbox").click(
+			function (){
+				$chkNum=$("dd :checkbox");
+				//$chkedNum=$("dd :checked");
+				$countChecked=0;
+				for($i=0;$i<$chkNum.length;$i++)
+				{
+					if($chkNum[$i].checked==true)
+					//$strId+=$list[$i].value+",";
+						$countChecked++;
+				}
+				//if($chkNum.length==$chkedNum.length)
+				if($chkNum.length==$countChecked){
+					$("dt :checkbox").prop('checked',true);				
+				}
+				else{
+					$("dt :checkbox").prop('checked',false);
+				}
+			}
+		);		
+		//checkbox点击事件
+		$("#mulSel").click(
+			function (){
+				$check=$(this).prop('checked');
+				if($check)
+				$("dd :checkbox").prop('checked',true);
+				else
+				$("dd :checked").prop('checked',false);
+			}
+		);
+		//多个删除按钮点击事件
+		$("#mulDel").click(
+			function (){
+				$list=$("dd :checkbox");
+				$strId="";
+				for($i=0;$i<$list.length;$i++)
+				{
+					if($list[$i].checked==true)
+					$strId+=$list[$i].value+",";
+				}
+				$strIdAfterSplit=$strId.substr(0,$strId.length-1);
+				if($strIdAfterSplit==null||$strIdAfterSplit=="")
+				{
+					alert('未选择删除的记录！');
+				}
+				else
+				{
+					//alert($strIdAfterSplit);
+					 $urlStr="{:U('houtai/Teacher/mulDeleteTeacherInfo',array('ids'=>'"+$strIdAfterSplit+"'))}";
+					$.ajax({
+						type:'post',
+						 url:$urlStr,
+						 cache:false,
+						 //async:false,
+						 dataType:'json',
+						 timeout:30000,
+						 error:function(data){
+							 alert(data['info']);
+							 },
+						 success:function(da){
+							 alert(da['info']);
+                             $("dt:checkbox").prop('checked',false);
+                             location.reload([true]);
+						 }	
+					});
+				}													
+			}		
+		);
+        //设置学校id
+		$("#schoolid").change(
+			function (){
+				$selectSchoolId=$("#schoolid option:selected").val();//获取被选择的学校id
+                $("#schid").val($selectSchoolId);
+//                $subSeed = $seed.substring(0,3);
+			}
+		);
+		$("#submitGradeMsg").click(
+			function(){
+				$urlStr="{:U('houtai/Teacher/addTeacherInfo')}";
+				  $.ajax({
+					 type:'post',
+					 url:$urlStr,
+					 data:{'teacher_id':$('#teacherid').val(),'subject_type':$('#subject').val(),'class_id':$('#classname option:selected').val(),'school_id':$('#schid').val(),'school_period_id':$("#periodid").val()},
+					 cache:false,
+					 async:false,
+					 dataType:'json',
+					 timeout:30000,
+					 error:function(da){
+						 alert(da['data']);
+					 },success:function(data1){
+						 alert(data1['data']);
+                          location.reload([true]);
+					 }
+				 });	
+				//alert("添加成功！");
+			}		
+		);
+	});
+	//删除---
+	function del(id)
+	{
+		if(!confirm('确认要删除该条数据吗？')) return;
+		 $urlStr="{:U('houtai/Teacher/delTeacherInfo',array('id'=>'"+id+"'))}";
+		 //alert($urlStr);
+		 $.ajax({
+			 type:'post',
+			 url:$urlStr,
+			 cache:false,
+			 async:false,
+			 dataType:'json',
+			 timeout:30000,
+			 success:function(da){
+				 alert(da['info']);
+                 $("dt :checkbox").prop('checked',false);
+                 location.reload([true]);
+			 },error:function(data){
+				 alert(data['info']);
+			 }
+		 });
+	}
+    //获取老师班级
+        $("#teacherid").blur(
+                function (){
+                    $url = "{:U('houtai/Teacher/selectClassByTeacher')}";
+                    $.post($url,{'teacherid':$("#teacherid").val()},function(data){
+                        $("#subject").val(data['data'][0]['subject_type']);
+                        $("#classname").empty();
+                        for(var i= 0;i<data['data'].length;i++){
+                            $("#classname").append("<option value="+data['data'][i]['class_id']+">"+data['data'][i]['class_name']+"</option>");
+                        }
+                    },'json');
+                }
+        );
+	</script>
+</body>
+</html>

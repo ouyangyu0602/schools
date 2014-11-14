@@ -1,0 +1,122 @@
+<div class="row questionContent" style="display: none">
+    <div class="row" style="margin-top: 30px" >
+        <div class="col-sm-8 col-sm-offset-2" >
+            {:W('Editor',array('width'=>800,'height'=>'15','contentName'=>'question_content','value'=>'编辑题目'))}
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-top: 30px" >
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="row">
+                <div class="" id="PhotoLabel">
+                    <span style="margin-left: 10px">选择正确答案：</span>
+                    <span style="margin-left: 20px"><input onclick="checkboxAnswer(event)" type="checkbox" value="A">A</span>
+                    <span style="margin-left: 20px"><input onclick="checkboxAnswer(event)" type="checkbox" value="B">B</span>
+                    <span style="margin-left: 20px"><input onclick="checkboxAnswer(event)" type="checkbox" value="C">C</span>
+                    <span style="margin-left: 20px"><input onclick="checkboxAnswer(event)" type="checkbox" value="D">D</span>
+
+                    <span id="addAnswer" class="glyphicon glyphicon-plus" style="margin-left: 20px;font-size: 15px"></span>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-sm-8 col-sm-offset-2" >
+
+            {:W('Editor',array('width'=>800,'height'=>'10','contentName'=>'answer_text','value'=>'解析'))}
+        </div>
+    </div>
+    <input id="grade_list_id" name="grade_list_id" value="{$grade_list_id}" type="hidden">
+    <input value="" name="knowledgeLevel1ID" id="knowledgeLevel1ID" type="hidden">
+    <input value="" name="knowledgeLevel2ID" id="knowledgeLevel2ID" type="hidden">
+    <input value="" id="knowledgeLevel3ID" name="knowledgeLevel3ID" type="hidden">
+    <input value="" id="questionType" name="questionType" type="hidden">
+    <input value="" id="questionTypeName" name="questionTypeName" type="hidden">
+    <input value="" id="questionDifficult" name="questionDifficult" type="hidden">
+    <input value="" id="questionDifficultName" name="questionDifficultName" type="hidden">
+    <input value="" id="where_name_text" name="where_name_text" type="hidden">
+    <input id="selectTypeAnswer" value=""  name="selectTypeAnswer" type="hidden">
+
+    <div class="row" style="height: 60px;margin-left:0px;position: absolute;bottom: 0px;width: 100%">
+        <div class="container-fluid" style="border-top: 2px solid #C8CBCB;margin-left: 0px">
+            <div class="col-sm-3 col-sm-offset-6">
+                <a href="#" class="btn" onclick="questionSave(event)" style="font-weight: bolder;font-size: 21px">保存</a>
+            </div>
+            <div class="col-sm-3">
+                <a id="questionViewSelect" href="#" class="btn" data-toggle="modal" data-target=".bs-example-modal-lg" style="font-weight: bolder;font-size: 21px">
+                    预览</a>
+            </div>
+        </div>
+        <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row" style="text-align: center;" >
+                            <span class="title">编号:</span>
+                            <span class="content">100000001</span>
+                            <span class="title">题型:</span>
+                            <span class="content">选择题</span>
+                            <span class="title">难度:</span>
+                            <span class="content">一般</span>
+                            <span class="title">上传人:</span>
+                            <span class="content">欧阳宇</span>
+                        </div>
+                    </div>
+                    <div class="modal-body" style="padding-top: 0px">
+                        <div class="row" style="text-align:center;border-bottom: 1px solid #C8CBCB;">
+                            <span class="title" >来源:</span>
+                            <span class="content" >校内七年级第一学期期末练习</span>
+                        </div>
+                        <div class="row" style="margin: 20px;">
+                            <span class="title">抽取某班6名同学的体育中考成绩统计如下：40。40，37，93，43，2，5，则每组数据的中位数抽取某班6名同学的体育中考成绩统计如下：40</span>
+
+                        </div>
+                        <div class="row" style="margin: 30px;border-bottom: 1px solid #C8CBCB;">
+                            <span class="content">A.37</span>
+                            <span class="content">B.27</span>
+                            <span class="content">C.97</span>
+                            <span class="content">D.47</span>
+                        </div>
+
+                        <div class="row" style="margin: 20px;">
+                            <span class="title">统计:</span>
+                            <span class="content">本题共被作答3556次，正确率为93.13%，易错选项为c</span>
+                        </div>
+                        <div class="row" style="margin: 20px;">
+                            <span class="title">使用:</span>
+                            <span class="content">2012年七年级上学期期中考试</span>
+                            <span class="content">2013年七年级上学期期中考试</span>
+                        </div>
+                        <div class="row" style="margin: 20px;">
+                            <span class="title">解析:</span>
+                            <span class="content"></span>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default">修改</button>
+                        <button type="button" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .title{
+                font-size: 21px;
+                font-weight: bolder;
+                margin-left: 5px;
+            }
+            .content{
+                font-size: 21px;
+
+                margin-right: 20px;
+            }
+
+        </style>
+
+    </div>
+</div>

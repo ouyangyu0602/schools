@@ -1,0 +1,150 @@
+<style>
+
+    .btn-group.open .dropdown-toggle{
+        box-shadow: inset 0 0px 0px #ffffff;
+    }
+
+    .btn,.btn-lg, .btn-group-lg > .btn{
+        border-radius: 0px;
+        box-shadow: 0px;
+    }
+
+    .dropdownHearder > #droupdownLeft{
+        min-width: 70px;
+        margin-left: 40px;
+    }
+    #droupdownLeft > li{
+        min-width: 70px;
+        padding: 0px;
+    }
+    #droupdownLeft > li > a{
+
+        padding: 0px;
+        min-width: 70px;
+        margin: 0px;
+    }
+    .dropdownHearder > #userInfoDroup{
+        min-width: 70px;
+      margin-right: 20px;
+    }
+    #userInfoDroup > li{
+        min-width: 70px;
+        padding: 0px;
+    }
+    #userInfoDroup > li > a{
+
+        padding: 0px;
+        min-width: 70px;
+        margin: 0px;
+    }
+
+
+</style>
+<div class="row knowledgehEADEsTYLE" style="border-bottom: 1px solid #0C5FDF;height: 46px">
+
+    <nav class="navbar navbar-static-top" role="navigation" style="margin: 0px;height: 46px">
+        <div class="row container-fluid" style="height: 46px">
+            <div class="col-sm-3" style="border-right: 1px solid #C8CBCB;height: 46px;padding: 0px;">
+                <div class="navbar-header" style="height: 46px">
+                    <ul class="nav navbar-nav" style="height: 44px">
+                        <li class="dropdown dropdownHearder" style="padding: 0px">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="background-color: #ffffff;height: 42px">
+                                <span style="font-size: 19px;color: #000000">uTeach</span>
+                                <span style="font-size: 19px;margin-left: 5px;color: #0077e5">题库</span>
+                                <!--<span style="font-size: 21px;margin-left: 5px;color: #8fc9FF">v</span>-->
+                            </a>
+                            <!--<span class="dropdown-arrow"></span>
+                            <ul class="dropdown-menu" id="droupdownLeft" role="menu" style="margin-top:5px !important;text-align: center;">
+
+                                <li><a href="{:U('excelUp/Index/index')}">体测</a></li>
+                                <li><a href="{:U('houtai/Index/index')}">设置</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{:U('public/Index/Index')}">首页</a></li>
+                            </ul>-->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="col-sm-9" style="height: 46px;">
+
+                <div class="navbar-collapse" id="bs-example-navbar-collapse-1" style="height: 46px">
+                    <div class="col-sm-4">
+                        <ul class="nav navbar-nav" style="margin-left: 10px;padding: 0px;height: 45px" >
+                            <li style="margin-right: 20px;padding: 0px;" >
+                                <a href="{:U('question/QuestionEdit/index')}" style="background-color: #ffffff;height: 42px">
+                                    <?php if($badge == '1') { ?>
+                                    <img src="__APP__/images/edit.jpg">
+                                    <span class=""  style="font-size: 15px;color: #c1c1c1">编题</span>
+                                    <?php } else { ?>
+                                    <img src="__APP__/images/edit1.jpg" style="">
+                                    <span class=""  style="font-size: 15px;margin-top: 1px;color: #0077e5;font-weight: bolder">编题</span>
+                                    <?php } ?>
+                                </a>
+                            </li>
+                            <li style="margin-left: 0px;padding: 0px;">
+                                <a href="{:U('question/QuestionEdit/questionRecord')}" style="background-color: #ffffff;height: 42px">
+                                    <?php if($badge == '1') { ?>
+
+                                    <img src="__APP__/images/question1.jpg">
+                                    <span style="font-size: 15px;color: #0077e5;font-weight: bolder">题库</span>
+                                    <?php } else { ?>
+
+                                    <img src="__APP__/images/question.jpg">
+                                    <span style="font-size: 15px;color: #c1c1c1">题库</span>
+                                    <?php } ?>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 pull-right" style="padding: 0px">
+                        <ul class="nav navbar-nav navbar-right" style="padding: 0px;height: 45px">
+                            <li class="dropdown dropdownHearder" style="padding: 0px" >
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="background-color: #ffffff;height: 42px">
+                                    <span style="font-size: 17px;color: #8fc9ff">{$GLOBALS['ts']['user']['uname']}</span>
+                                    <span style="font-size: 17px;margin-left: 5px;color: #000000"><img src="__APP__/images/dorpdown.jpg"></span>
+                                </a>
+                                <span class="dropdown-arrow"></span>
+                                <ul class="dropdown-menu " id="userInfoDroup" role="menu" style="margin-top:5px !important;text-align: center;">
+                                    <li><a href="#" >修改密码</a></li>
+                                    <li><a href="#" >个人信息</a></li>
+                                    <li><a href="{:U('public/Passport/logout')}" >退出</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <!--<ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown " >
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span style="font-size: 21px;"><b>欧阳宇</b></span>
+                                <span style="font-size: 21px;margin-left: 10px">v</span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" style="border-bottom: 1px solid #70BF41;color: #70BF41">修改密码</a></li>
+                                <li><a href="#" style="border-bottom: 1px solid #70BF41;color: #70BF41">个人信息</a></li>
+                                <li><a href="{:U('public/Passport/logout')}" style="border-bottom: 1px solid #70BF41;color: #70BF41">退出</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav" style="display: table;margin: 0 auto;table-layout: auto;float: none">
+                        <li style="margin-right: 50px" >
+                            <a href="{:U('question/QuestionEdit/index')}" style="">
+                                <span class=""  style="font-size: 21px;"><img src="__APP__/images/edit.png"></span>
+                            </a>
+                        </li>
+                        <li style="margin-left: 0px">
+                            <a href="{:U('question/QuestionEdit/questionRecord')}" style="">
+                                <span class=""  style="font-size: 21px;"><img src="__APP__/images/record.png"></span>
+                            </a>
+                        </li>
+                    </ul>-->
+                </div><!-- /.navbar-collapse -->
+            </div>
+
+        </div><!-- /.container-fluid -->
+    </nav>
+</div>

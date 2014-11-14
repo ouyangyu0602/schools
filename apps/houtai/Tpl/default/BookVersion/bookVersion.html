@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>云测评</title>
+<link rel='stylesheet' id='header-style-css' href='__APP__/header.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css' href='__APP__/footer.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='header-style-css' href='__APP__/houtai.css'
+	type='text/css' media='all' />
+<script type="text/javascript" src="__APP__/jquery-1.9.0.min.js"></script>
+<script type='text/javascript' src='__APP__/jquery.simplemodal.js'></script>
+<script src="__APP__/jquery-ui.js"></script>
+</head>
+
+<body>
+	<include file="__THEME__/public_header" />
+
+	<div id="body_center">
+		<!--添加纪录开始  -->
+		<div id="add">
+			<h2 class="titleh2">新增教材版本信息</h2>
+			<dl>
+				<dd>
+                     <!--<span>-->
+						<!--学校ID:-->
+						<!--&lt;!&ndash; <INPUT type="text" /> &ndash;&gt;-->
+						<!--<SELECT id="schoolid">-->
+                            <!--<option>请选择学校</option>-->
+                            <!--<volist name="schoolMsg" id="svo">-->
+                                <!--<OPTION  value="{$svo.schoolid}" >{$svo.title}</OPTION>-->
+                            <!--</volist>-->
+                        <!--</SELECT>-->
+					<!--</span>-->
+					<span>
+					    教材版本ID:
+						<INPUT id="bookid" type="text"/>
+					</span>
+					<span>
+						教材课本标题:
+						<INPUT id="booktitle" type="text"/>
+					</span>
+					<!--<span>-->
+						<!--教材类型:-->
+                        <!--<select id="classname">-->
+                            <!--<option>请选择班级</option>-->
+                        <!--</select>-->
+					<!--</span>-->
+					<span>
+						教材类型:
+						<INPUT id="contextbook" type="text" />
+					</span>
+                    <span>
+						科目类型:
+						<INPUT id="subject" type="text" style="width: 40px"/>
+					</span>
+                    <span>
+						教材年级类型:
+						<INPUT id="gradebook" type="text" style="width: 40px"/>
+					</span>
+					<input type="button" id="submitGradeMsg" value="  新&nbsp;增  ">
+				</dd>
+			</dl>
+		</div>
+		<!--添加纪录结束  -->
+		<!--列表开始  -->
+		<div id="list">
+			<h2 class="titleh2">教材版本列表</h2>
+			<dl>
+				<dt>
+					<span class="w1" style="width: 50px;">
+						ID
+						<br />
+						(id)
+					</span>
+					<span class="w2">
+						教材版本的ID
+						<br />
+						(section_book_id)
+					</span>
+					<span class="w3" style="width: 200px;">
+						教材课本的标题
+						<br />
+						(section_book_title)
+					</span>
+					<span class="w4">
+						教材的类型
+						<br />
+						(contextbook_type)
+					</span>
+					<span class="w5">
+						科目的类型
+						<br />
+						(subject_type)
+					</span>
+					<span class="w6" style="width: 110px;">
+						教材年级类型
+						<br />
+						(gradebook_type)
+					</span>
+					<span class="w7" style="width: 30px;">
+						选中
+						<br />
+						<INPUT id="mulSel" type="checkbox" />
+						<!-- <a href="javascript:;" onclick="">全选</a> -->
+					</span>
+					<span class="w8" style="width: 50px;">
+						删除
+						<br />
+						<INPUT id="mulDel" type="BUTTON" value="删除选中" />
+					</span>
+					<span class="w9">修改</span>
+				</dt>
+				<volist name="bookVersion" id="vo">
+					<dd>
+						<span class="w1" style="width: 50px;">{$vo.id}</span>
+						<span class="w2">{$vo.section_book_id}</span>
+						<span class="w3" style="width: 200px;">{$vo.section_book_title}</span>
+						<span class="w4">{$vo.contextbook_type}</span>
+						<span class="w5">{$vo.subject_type}</span>
+						<span class="w6" style="width: 110px;">{$vo.gradebook_type}</span>
+						<span class="w7" style="width: 30px;">
+							<input type="checkbox" value="{$vo['id']}" />
+						</span>
+						<span class="w8" style="width: 50px;">
+							<a href="javascript:void(0);" onclick="del('{$vo['id']}')">删除</a>
+						</span>
+						<span class="w9">
+							<a href="{:U('houtai/BookVersion/selectSaveBookVersionInfo',array('id'=>$vo['id']))}" >修改</a>
+							<!-- <a href="javascript:void(0);" onclick="modify('{$vo['grade_id']}')">修改</a> -->
+						</span>
+					</dd>
+				</volist>
+<!-- 				<dd>
+					<span class="w1">11</span>
+					<span class="w2">11</span>
+					<span class="w3">11</span>
+					<span class="w4">11</span>
+					<span class="w5">11</span>
+					<span class="w6">11</span>
+					<span class="w7">
+						<input type="checkbox" />
+					</span>
+					<span class="w8">
+						<a href="javascript:void(0);">删除</a>
+					</span>
+					<span class="w9">
+						<a href="javascript:void(0);">修改</a>
+					</span>
+				</dd> -->
+			</dl>
+		</div>
+		<!--列表结束  -->
+		<div class="pager">
+			{$page}
+		</div>
+        <a href="{:U('houtai/Index/index')}">返回</a>
+	</div>
+	<div id="footer">
+		<img src="__PUBLIC__/123456789.jpg">
+	</div>
+	<script>
+	jQuery(function($) {
+		$("dd :checkbox").click(
+			function (){
+				$chkNum=$("dd :checkbox");
+				//$chkedNum=$("dd :checked");
+				$countChecked=0;
+				for($i=0;$i<$chkNum.length;$i++)
+				{
+					if($chkNum[$i].checked==true)
+					//$strId+=$list[$i].value+",";
+						$countChecked++;
+				}
+				//if($chkNum.length==$chkedNum.length)
+				if($chkNum.length==$countChecked){
+					$("dt :checkbox").prop('checked',true);				
+				}
+				else{
+					$("dt :checkbox").prop('checked',false);
+				}
+			}
+		);		
+		//checkbox点击事件
+		$("#mulSel").click(
+			function (){
+				$check=$(this).prop('checked');
+				if($check)
+				$("dd :checkbox").prop('checked',true);
+				else
+				$("dd :checked").prop('checked',false);
+			}
+		);
+		//多个删除按钮点击事件
+		$("#mulDel").click(
+			function (){
+				$list=$("dd :checkbox");
+				$strId="";
+				for($i=0;$i<$list.length;$i++)
+				{
+					if($list[$i].checked==true)
+					$strId+=$list[$i].value+",";
+				}
+				$strIdAfterSplit=$strId.substr(0,$strId.length-1);
+				if($strIdAfterSplit==null||$strIdAfterSplit=="")
+				{
+					alert('未选择删除的记录！');
+				}
+				else
+				{
+					//alert($strIdAfterSplit);
+					 $urlStr="{:U('houtai/BookVersion/mulDeleteBookVersionInfo',array('ids'=>'"+$strIdAfterSplit+"'))}";
+					$.ajax({
+						type:'post',
+						 url:$urlStr,
+						 cache:false,
+						 //async:false,
+						 dataType:'json',
+						 timeout:30000,
+						 error:function(data){
+							 alert(data['info']);
+							 },
+						 success:function(da){
+							 alert(da['info']);
+                             $("dt:checkbox").prop('checked',false);
+                             location.reload([true]);
+						 }	
+					});
+				}													
+			}		
+		);
+        //设置学校id
+		$("#schoolid").change(
+			function (){
+				$selectSchoolId=$("#schoolid option:selected").val();//获取被选择的学校id
+                $("#schid").val($selectSchoolId);
+//                $subSeed = $seed.substring(0,3);
+			}
+		);
+        //添加
+		$("#submitGradeMsg").click(
+			function(){
+				$urlStr="{:U('houtai/BookVersion/addBookVersionInfo')}";
+				  $.ajax({
+					 type:'post',
+					 url:$urlStr,
+					 data:{'section_book_id':$('#bookid').val(),'section_book_title':$('#booktitle').val(),'contextbook_type':$('#contextbook').val(),'subject_type':$('#subject').val(),'gradebook_type':$("#gradebook").val()},
+					 cache:false,
+					 async:false,
+					 dataType:'json',
+					 timeout:30000,
+					 error:function(da){
+						 alert(da['data']);
+					 },success:function(data1){
+						 alert(data1['data']);
+                          location.reload([true]);
+					 }
+				 });	
+				//alert("添加成功！");
+			}		
+		);
+	});
+	//删除---
+	function del(id)
+	{
+		if(!confirm('确认要删除该条数据吗？')) return;
+		 $urlStr="{:U('houtai/BookVersion/delBookVersionInfo',array('id'=>'"+id+"'))}";
+		 //alert($urlStr);
+		 $.ajax({
+			 type:'post',
+			 url:$urlStr,
+			 cache:false,
+			 async:false,
+			 dataType:'json',
+			 timeout:30000,
+			 success:function(da){
+				 alert(da['info']);
+                 $("dt :checkbox").prop('checked',false);
+                 location.reload([true]);
+			 },error:function(data){
+				 alert(data['info']);
+			 }
+		 });
+	}
+    //获取老师班级
+        $("#teacherid").blur(
+                function (){
+                    $url = "{:U('houtai/Teacher/selectClassByTeacher')}";
+                    $.post($url,{'teacherid':$("#teacherid").val()},function(data){
+                        $("#subject").val(data['data'][0]['subject_type']);
+                        for(var i= 0;i<data['data'].length;i++){
+                            $("#classname").append("<option value="+data['data'][i]['class_id']+">"+data['data'][i]['class_name']+"</option>");
+                        }
+                    },'json');
+                }
+        );
+	</script>
+</body>
+</html>

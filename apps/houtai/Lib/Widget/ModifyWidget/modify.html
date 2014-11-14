@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>uTeach后台</title>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap.css"/>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap-theme.min.css"/>
+    <script src="__THEME__/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="__THEME__/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<style>
+
+.modify{
+    font-size: 23px;
+    font-weight: bolder;
+}
+    .row{
+        margin-top: 20px;
+    }
+    .row.col-md-offset-2{
+        text-align: right;
+    }
+
+    .text{
+        font-size: 20px;
+        width: 100%;
+    }
+
+
+</style>
+<body>
+<div class="row" style="border-bottom: 5px solid #70BF41;margin-bottom: 50px">
+    <h1 style="text-align:center;font-weight: bolder">修改年级信息</h1>
+</div>
+<div class="container" style="margin-top: 50px">
+    <form id="gradeInfo" action="" method="post"  >
+    <div class="row">
+        <div class="col-md-3 col-md-offset-2">
+            <span class="modify pull-right">学校:</span>
+        </div>
+        <div class="col-md-3">
+            <input type="text" name="schoolid" style="display: none" id="schoolid"  value="{$gradeMsgOut['school_id']}" />
+            <span class="modify pull-left">{$gradeMsgOut['schoolName']}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-2">
+            <span class="modify pull-right">年级名称:</span>
+        </div>
+        <div class="col-md-3 col-md-offset-0">
+            <input type="text" style="display: none" name="gradeid" id="gradeid" value="{$gradeMsgOut['grade_id']}" />
+            <input type="text" name="title" id="title" value="{$gradeMsgOut['title']}"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-2">
+            <span class="modify pull-right">年级简称:</span>
+        </div>
+        <div class="col-md-3 col-md-offset-0">
+            <input type="text" name="shortname" id="shortname" value="{$gradeMsgOut['short_name']}"/>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 col-md-offset-2">
+            <span class="modify pull-right">年级排序:</span>
+        </div>
+        <div class="col-md-3 col-md-offset-0">
+            <SELECT class="text" name="sortorder" id="sortorder" style="width: 50%">
+                <option value="{$gradeMsgOut['sort_order']}" selected="selected">{$gradeMsgOut['sort_order']}</option>
+                <OPTION >1</OPTION>
+                <OPTION >2</OPTION>
+                <OPTION >3</OPTION>
+                <OPTION >4</OPTION>
+                <OPTION >5</OPTION>
+                <OPTION >6</OPTION>
+                <OPTION >7</OPTION>
+                <OPTION >8</OPTION>
+                <OPTION >9</OPTION>
+                <OPTION >10</OPTION>
+                <OPTION >11</OPTION>
+                <OPTION >12</OPTION>
+            </SELECT>
+
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-6 ">
+                <a style="text-align:center;width: 100px;background-color: #70BF41;color: #ffffff;font-size: 30px" class="btn pull-right" id="sub" href="" onclick="mGradeInfo()" >修改</a>
+            </div>
+            <div class="col-md-6">
+                <a style="text-align:center;width: 100px;background-color: #70BF41;color: #ffffff;font-size: 30px" class="btn" href="{:U('houtai/Grade/grade')}" >返回</a>
+            </div>
+        </div>
+        </form>
+</div>
+</body>
+
+
+		<script>
+		function mGradeInfo(){
+			var frm=document.getElementById("gradeInfo");
+			//alert(frm.children[0]);
+			frm.method = "post";
+			frm.action = "{:U ('houtai/grade/afterModifyGrade')}";
+			frm.submit();
+			//window.history.back();
+		}
+		</script>
+
+</html>

@@ -1,0 +1,224 @@
+<div id="personalCenterEdit" class="row">
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 70px">
+            <div class="col-md-2 col-md-offset-1" >
+                <a href="#" class="thumbnail" style="background-color: #E3E4E3;border-radius: 30px;">
+                    <img src="__THEME__/image/noavatar/big.jpg" alt="个人头像" class="img-circle" >
+                </a>
+            </div>
+            <div class="col-md-6 col-md-offset-1">
+                <div class="row" style="">
+                    <h1 style="font-size: 3em;font-weight: bolder">
+                        {$studentInfo['studentName']}
+                        <span style="font-size: 31px;">(<?php echo $studentInfo['sex'] == 0 ? "女":"男";?>)</span></h1><br>
+
+                </div>
+                <div class="row">
+                    <h1 style="color:#A5A9A7;font-size: 2em;">{$studentInfo['schoolName']}</h1>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="">
+            <div class="col-md-2 col-md-offset-1 ">
+                <p class="pull-right" style="color:#A5A9A7;font-size: 23px">
+                    班级
+                </p>
+            </div>
+            <div class="col-md-9">
+                <p id="studentClass" class="" style="font-weight:bolder;font-size: 23px">
+                    {$studentInfo['class_name']}
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="">
+            <div class="col-md-2 col-md-offset-1 ">
+                <p  class="pull-right" style="color:#A5A9A7;font-size: 23px">
+                    学号
+                </p>
+            </div>
+            <div class="col-md-9" style="">
+                <p id="studentLogin" class="" style="font-weight:bolder;font-size: 23px">
+                    {$studentInfo['profile_no']}
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="row container-fluid"  style="margin-top: 25px">
+        <div class="col-md-8 col-md-offset-3 container-fluid" style="border-bottom: 1px solid #A5A9A7">
+        </div>
+    </div>
+
+
+    <div class="row"  style="margin-top: 50px">
+        <div class="col-md-12" style="">
+            <div class="col-md-2 col-md-offset-1 ">
+                <p class="pull-right" style="color:#A5A9A7;font-size: 23px">
+                    家长姓名
+                </p>
+            </div>
+            <div class="col-md-9">
+                <p id="parentName" class="" style="font-weight:bolder;font-size: 23px">
+                    {$studentInfo['parentName']}
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="">
+            <div class="col-md-2 col-md-offset-1 ">
+                <p  class="pull-right" style="color:#A5A9A7;font-size: 23px">
+                    家长电话
+                </p>
+            </div>
+            <div class="col-md-9" style="">
+                <p id="parentPhone" class="" style="font-weight:bolder;font-size: 23px">
+                    {$studentInfo['studentParent']}
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <div class="row container-fluid"  style="margin-top: 25px">
+        <div class="col-md-8 col-md-offset-3 container-fluid" style="border-bottom: 1px solid #A5A9A7">
+        </div>
+    </div>
+    <div class="row" style="margin-top: 50px">
+        <div class="col-md-12" style="">
+            <div class="col-md-2 col-md-offset-1 ">
+                <p  class="pull-right" style="color:#A5A9A7;font-size: 23px">
+                    备注
+                </p>
+            </div>
+            <div class="col-md-2" style="">
+                <p id="beizhu" class="" style="font-weight:bolder;font-size: 23px">
+
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="personalCenterCancel" class="row" style="display: none">
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 50px">
+            <div class="col-md-2 col-md-offset-1" >
+                <a href="#" class="thumbnail" style="background-color: #E3E4E3;border-radius: 30px;">
+                    <img src="__THEME__/image/noavatar/big.jpg" alt="个人头像" class="img-circle" >
+                </a>
+            </div>
+            <div class="col-md-4 col-md-offset-1 container-fluid">
+                <div class="row " style="margin-top: 30px">
+                    <div class="input-group " style="width: 100%">
+                        <input type="text" style="font-size: 23px;" class="form-control " value="{$studentInfo['studentName']}">
+                    </div>
+                    </div>
+                <div class="row" style="margin-top: 30px">
+                    <div class="input-group" style="width: 100%">
+                        <input type="text" style="font-size: 23px;" class="form-control " data-text="{$studentInfo['sex']}" value="<?php echo $studentInfo['sex'] == 0 ? '女':'男';?>">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 container-fluid">
+            <div class="row " style="">
+                <div class="input-group " style="width: 100%">
+                    <input type="text" style="font-size: 23px;" class="form-control " value="{$studentInfo['schoolName']}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 50px">
+        <div class="col-md-12" style="">
+            <div class="col-md-2 col-md-offset-2 ">
+                <p class="pull-right" style="color:#A5A9A7;font-size: 23px">
+                    班级
+                </p>
+            </div>
+            <div class="col-md-4 " style="padding-left: 0px">
+                <div class="col-md-12">
+                <div class="row " style="">
+                    <div class="col-md-6">
+                        <select name="searchVersion" class="form-control">
+                            <option value="{$studentInfo['grade_id']}" style="display:none">
+                                {$studentInfo['gradeName']}</option>
+                            <option value="人教版">人教版</option>
+                            <option value="苏教版">苏教版</option>
+                            <option value="北师大版">北师大版</option>
+                            <option value="沪教版">沪教版</option>
+                            <option value="鲁教版">鲁教版</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select name="searchVersion" class="form-control">
+                            <option value="{$studentInfo['class_id']}" style="display:none">
+                                {$studentInfo['class_name']}</option>
+                            <option value="人教版">人教版</option>
+                            <option value="苏教版">苏教版</option>
+                            <option value="北师大版">北师大版</option>
+                            <option value="沪教版">沪教版</option>
+                            <option value="鲁教版">鲁教版</option>
+                        </select>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-md-12" style="">
+            <div class="col-md-2 col-md-offset-2 ">
+                <p  class="pull-right" style="color:#A5A9A7;font-size: 23px">
+                    学号
+                </p>
+            </div>
+                <div class="col-md-4 ">
+                    <div class="input-group " style="width: 100%">
+                        <input type="text" style="font-size: 23px;" class="form-control " value="{$studentInfo['profile_no']}">
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div class="row"  style="margin-top: 50px">
+        <div class="col-md-12" style="">
+            <div class="col-md-2 col-md-offset-2 ">
+                <p class="pull-right" style="color:#A5A9A7;font-size: 23px">
+                    家长姓名
+                </p>
+            </div>
+            <div class="col-md-4 ">
+                <div class="input-group " style="width: 100%">
+                    <input type="text" style="font-size: 23px;" class="form-control " value="{$studentInfo['parentName']}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px">
+        <div class="col-md-12" style="">
+            <div class="col-md-2 col-md-offset-2 ">
+                <p  class="pull-right" style="color:#A5A9A7;font-size: 23px">
+                    家长电话
+                </p>
+            </div>
+            <div class="col-md-4 ">
+                <div class="input-group " style="width: 100%">
+                    <input type="text" style="font-size: 23px;" class="form-control " value="{$studentInfo['studentParent']}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

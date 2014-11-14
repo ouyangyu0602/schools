@@ -1,0 +1,53 @@
+
+<volist name="studentList" id="list">
+    <div class="row " style="background-color: #ECEEEF">
+        <span class="" style="font-size: 18px;margin-left: 20px"><B>{$list['sort']}</B></span>
+    </div>
+
+        <volist name="list['child']" id="student">
+<div class="row " style="border-bottom: 1px solid #C8CBCB">
+    <a href="#" data-class_id="{$student['class_id']}" data-student_id="{$student['login']}"  class="btn btn-lg  pull-left container-fluid studentInfo" type="button" style="text-align: left;width:100%;font-size: 23px;color: #000000;font-weight: bolder;">
+        <div class="col-md-4 container-fluid">
+            <span style="" class="pull-left">{$student['uname']}</span>
+
+        </div>
+        <div class="col-md-7 col-md-offset-1 ">
+            <span style="" class="pull-left">{$student['profile_no']}</span>
+
+        </div>
+    </a>
+</div>
+        </volist>
+        </volist>
+
+        <script language="JavaScript">
+            $("#studentCount").text("共{$studentCount}位学生");
+            $("#rightStudentCount").text("共{$studentCount}位学生");
+            $('#studentList a').click(function() {
+
+                $('#personalCenterEdit').show('fast');
+                $('#personalCenterCancel').hide();
+                $("#rightStudentCount").hide();
+                $('#userOperation').show('fast');
+                var studentID = $(this).attr("data-student_id");
+                var classID = $(this).attr("data-class_id");
+                $('#studentList a').parent().css('background-color','');
+                $(this).parent().css('background-color','#EAF4E7');
+                $.post("{:U('excelUp/StudentInfo/ajaxStudentInfo')}", {'student_id': studentID,'class_id': classID}, function (data) {
+                    $('#studentEdit').html(data);
+                });
+            });
+            /*$('.xueshengxinxi').click(function (e) {
+                var $target = $(e.target);
+                var studentID = $target.attr("data-student_id");
+                var classID = $target.attr("data-class_id");
+                alert($target.attr("data-student_id"));
+                $.post("{:U('excelUp/StudentInfo/ajaxStudentInfo')}", {'student_id': studentID,'class_id': classID}, function (data) {
+                    $('#studentEdit').html(data);
+                });
+
+
+                //alert($target.data('school_id'));
+            });*/
+        </script>
+

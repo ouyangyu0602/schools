@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.4
+X-COMMENT: Main-Class will be added automatically by build
+Class-Path: lib/httpclient-4.0.3.jar lib/httpcore-4.0.1.jar lib/httpmi
+ me-4.0.3.jar lib/apache-mime4j-0.6.jar lib/commons-logging-1.1.3.jar 
+ lib/swing-layout-1.0.4.jar
+Created-By: 1.7.0_25-b16 (Oracle Corporation)
+Main-Class: examapplet.Examapplet
+
+Name: com/reremouse/applet/FileAdapter.class
+SHA1-Digest: cPTfbgIhCKXB69b0N2VaXVEyIHk=
+
+Name: com/reremouse/applet/FileAdapter$2.class
+SHA1-Digest: AMEFrD31DQQHkoYcQlhYvgrChak=
+
+Name: com/reremouse/applet/SendFile.class
+SHA1-Digest: 3GfDldowHN0MS2dqxaS1LwxPAxk=
+
+Name: logo2-2.png
+SHA1-Digest: FAqvvdf+sEFM02gEISqB7xfE5w0=
+
+Name: com/reremouse/applet/FileAdapter$3.class
+SHA1-Digest: ZyhPiPSpyf39WXrwGsCD5vq6XTk=
+
+Name: com/reremouse/applet/FileAdapter$1.class
+SHA1-Digest: sDpfJ4Pok4iOagkLexL6PUMLN30=
+

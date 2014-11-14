@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>uTeach</title>
+<link href="__THEME__/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link rel='stylesheet' id='base-style-css' href='__APP__/base.css'
+	type='text/css' media='all' />
+<link rel='stylesheet' id='index-style-css' href='__APP__/index.css'
+	type='text/css' media='all' />
+<link href="__APP__/account.css" rel="stylesheet" type="text/css" />
+<script src="__APP__/jquery-1.9.0.min.js" type="text/javascript"></script>
+<script src="__APP__/jquery.placeholder.js" type="text/javascript"></script>
+<script type='text/javascript' src='__APP__/jquery.simplemodal.js'></script>
+<script src="__THEME__/js/module.form.js"></script>
+
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap.css"/>
+    <link  rel="stylesheet" href="__THEME__/bootstrap/css/bootstrap-theme.min.css"/>
+
+    <script src="__THEME__/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script>
+	
+</script>
+</head>
+
+<body>
+<div id="user_info_content">
+<h3>个人中心</h3>
+<ul>
+
+	<li><strong>姓名：</strong>{$user.uname}</li>
+	<li><b>学校：</b>{$tsc[0].title}</li>
+	<li><b>邮箱：</b>{$user.email}</li>
+	<li><b>职务：</b>年级主任</li>
+	<li><b>科目：</b>{$tsc[0].subject_type_desc}</li>
+</ul>
+<a ONCLICK="" id="xgmm" class="btn1">修改密码</a>
+<div id="editpass">
+<form action="{:U('public/Account/doModifyPassword')}" method="post" id="passwd_form">
+<ul>
+	<li><label>旧密码：</label><input event-node="input_text" name="oldpassword" type="password" class="input" autocomplete='off' /></li>
+	<li><label>新密码：</label><input event-node="input_text" name="password" type="password" class="input" onkeydown="pwStrength(this.value)" onBlur="pwStrength(this.value)" />
+	<div id="passsafe"><a id="strength_L">弱</a><a id="strength_M">中</a><a	id="strength_H">强</a></div>
+	</li>
+    <li><label>确认密码：</label><input event-node="input_text"
+		name="repassword" type="password" class="input" /></li>
+    <li><label>验证码：</label><INPUT id="yanzhenma" TYPE="text" NAME=""
+		class="yzm"> <input type="text" onclick="createCode()"
+		readonly="readonly" id="checkCode" class="unchanged"
+		style="width: 80px" /></li>
+    <li><label></label><INPUT id="submit" TYPE="button" VALUE="确认修改"
+		onclick="" class="btn"></li>
+</ul>
+
+</form>
+
+</div>
+
+</div>
+
+<script src="__APP__/index_security.js" type="text/javascript"></script>
+<div id="index_div"><a href="{:U('public/Passport/logout')}" class="logo"><img
+	src="__THEME__/images/back1.png"></a>
+
+<div id="user_info"></div>
+
+<!-- 
+<img src='__APP__/images/user.png'><a href="#" onclick="window.open('__APP__/user_info.html')">{$user.uname}</a>
+ -->
+<div class="container" style="margin-top: 30px">
+    <div class="row" style="position: inherit">
+        <div class="col-md-12">
+            <div class="col-md-3" style="">
+                <a href = "{:U('question/QuestionEdit/index')}"  class="container-fluid btn btn-lg" >
+                    <h1>题库</h1>
+                </a>
+            </div>
+            <div class="col-md-3 " style="">
+                <a href = "{:U('excelUp/Index/index')}" type="buttom" class="container-fluid btn btn-lg" >
+                    <h1>体测</h1>
+                </a>
+            </div>
+            <div class="col-md-3 " style="">
+                <a href = "{:U('houtai/Index/index')}" type="buttom" class="container-fluid btn btn-lg" >
+                    <h1>设置</h1>
+                </a>
+            </div>
+
+            <div class="col-md-3 " style="">
+                <a href = "{:U('excelUp/SchoolInfo/index')}" type="buttom" class="container-fluid btn btn-lg">
+                    <h1>上传</h1>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+    h1{
+        color: #06F152;font-size: 63px;
+    }
+.code {
+	background-image: url(code.jpg);
+	font-family: Arial;
+	font-style: italic;
+	color: Red;
+	border: 0;
+	padding: 2px 3px;
+	letter-spacing: 3px;
+	font-weight: bolder;
+}
+
+.unchanged {
+	border: 0;
+}
+</style>
+<script language="javascript" type="text/javascript">
+	var code; //在全局 定义验证码
+	function createCode() {
+		code = "";
+		var codeLength = 6;//验证码的长度
+		var checkCode = document.getElementById("checkCode");
+		var selectChar = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A',
+				'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+				'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');//所有候选组成验证码的字符，当然也可以用中文的
+
+		for ( var i = 0; i < codeLength; i++) {
+
+			var charIndex = Math.floor(Math.random() * 36);
+			code += selectChar[charIndex];
+
+		}
+		//       alert(code);
+		if (checkCode) {
+			checkCode.className = "code";
+			checkCode.value = code;
+		}
+
+	}
+
+	function validate() {
+		var inputCode = document.getElementById("yanzhenma").value;
+		
+		inputCode = inputCode.toUpperCase();
+		
+		if (inputCode.length <= 0) {
+			alert("请输入验证码！");
+		} else if (inputCode != code ) {
+			alert("验证码输入错误！");
+			document.getElementById("yanzhenma").value = "";
+			$("#yanzhenma").focus();
+			createCode();//刷新验证码
+		} else {
+			return false;
+		}
+
+		return true;
+	}
+</script>
+
+
+
+
+
+<script>
+	//CharMode函数 
+	//测试某个字符是属于哪一类. 
+	function CharMode(iN) {
+		if (iN >= 48 && iN <= 57) //数字 
+			return 1;
+		if (iN >= 65 && iN <= 90) //大写字母 
+			return 2;
+		if (iN >= 97 && iN <= 122) //小写 
+			return 4;
+		else
+			return 8; //特殊字符 
+	}
+	//bitTotal函数 
+	//计算出当前密码当中一共有多少种模式 
+	function bitTotal(num) {
+		modes = 0;
+		for (i = 0; i < 4; i++) {
+			if (num & 1)
+				modes++;
+			num >>>= 1;
+		}
+		return modes;
+	}
+	//checkStrong函数 
+	//返回密码的强度级别 
+	function checkStrong(sPW) {
+		if (sPW.length <= 4)
+			return 0; //密码太短 
+		Modes = 0;
+		for (i = 0; i < sPW.length; i++) {
+			//测试每一个字符的类别并统计一共有多少种模式. 
+			Modes |= CharMode(sPW.charCodeAt(i));
+		}
+		return bitTotal(Modes);
+	}
+	//pwStrength函数 
+	//当用户放开键盘或密码输入框失去焦点时,根据不同的级别显示不同的颜色 
+	function pwStrength(pwd) {
+		O_color = "#eeeeee";
+		L_color = "#FF0000";
+		M_color = "#FF9900";
+		H_color = "#33CC00";
+		if (pwd == null || pwd == '') {
+			//Lcolor=Mcolor=Hcolor=O_color; 
+		} else {
+			S_level = checkStrong(pwd);
+			switch (S_level) {
+			case 0:
+				Lcolor = Mcolor = Hcolor = O_color;
+			case 1:
+				Lcolor = L_color;
+				Mcolor = Hcolor = O_color;
+				break;
+			case 2:
+				Lcolor = Mcolor = M_color;
+				Hcolor = O_color;
+				break;
+			default:
+				Lcolor = Mcolor = Hcolor = H_color;
+			}
+		}
+		document.getElementById("strength_L").style.background = Lcolor;
+		document.getElementById("strength_M").style.background = Mcolor;
+		document.getElementById("strength_H").style.background = Hcolor;
+        if(document.getElementsByName("password")[0].value==""){
+            document.getElementById("strength_L").style.background = "#eeeeee";
+            document.getElementById("strength_M").style.background = "#eeeeee";
+            document.getElementById("strength_H").style.background = "#eeeeee";
+        }
+		return;
+	}
+
+	$("#submit")
+			.click(
+					function() {
+                        var frm = passwd_form;
+                        //document.getElementById('passwd_form');
+                        //var a =$("#passwd_form").serializeArray();
+                        //alert(frm.action);
+                        if (document.getElementsByName("oldpassword")[0].value.length == 0) {
+                            alert("请输入旧密码！");
+                            document.getElementsByName("oldpassword")[0].value = "";
+                            document.getElementsByName("oldpassword")[0]
+                                    .focus();
+                        } else if (document.getElementsByName("password")[0].value.length == 0) {
+                            alert("请输入新密码！");
+                            document.getElementsByName("password")[0].value = "";
+                            document.getElementsByName("password")[0].focus();
+                        } else if (document.getElementsByName("repassword")[0].value.length == 0) {
+                            alert("请输入确认密码！");
+                            document.getElementsByName("repassword")[0].value = "";
+                            document.getElementsByName("repassword")[0].focus();
+                        } else if (validate()) {
+
+                        } else if (document.getElementsByName("oldpassword")[0].value==
+                                document.getElementsByName("password")[0].value){
+                            alert("旧密码和新密码一致，请修改！");
+                            //document.getElementsByName("oldpassword")[0].value = "";
+                            document.getElementsByName("password")[0].value = "";
+                            document.getElementById("strength_L").style.background = "#eeeeee";
+                            document.getElementById("strength_M").style.background = "#eeeeee";
+                            document.getElementById("strength_H").style.background = "#eeeeee";
+                            document.getElementsByName("repassword")[0].value = "";
+                            document.getElementsByName("password")[0]
+                                    .focus();
+                            document.getElementById("yanzhenma").value = "";
+                            createCode();
+                        } else if (document.getElementsByName("password")[0].value!=
+                                document.getElementsByName("repassword")[0].value){
+                            alert("新密码和确认密码不一致");
+                            document.getElementsByName("password")[0].value = "";
+                            document.getElementById("strength_L").style.background = "#eeeeee";
+                            document.getElementById("strength_M").style.background = "#eeeeee";
+                            document.getElementById("strength_H").style.background = "#eeeeee";
+                            document.getElementsByName("repassword")[0].value = "";
+                            document.getElementsByName("password")[0]
+                                    .focus();
+                            document.getElementById("yanzhenma").value = "";
+                            createCode();
+                        } else {
+
+							
+							
+							
+							$
+									.post(
+											frm.action,
+											$("#passwd_form").serialize(),
+											function(i) {
+												if (i.status == 1) {
+													alert(i.info);
+													$('#user_info_content')
+															.fadeOut(1000);
+													location.reload();
+												} else {
+
+													alert(i.info);
+													document
+															.getElementsByName("oldpassword")[0].value = "";
+													document
+															.getElementsByName("repassword")[0].value = "";
+													document
+															.getElementsByName("password")[0].value = "";
+													document
+															.getElementsByName("oldpassword")[0]
+															.focus();
+												}
+											}, 'json');
+							document.getElementById("yanzhenma").value = "";
+						}
+
+					});
+	$('#index_div').fadeIn(3000);
+	$("#index_div").css("display", "block");
+
+	$("#user_info").html("<img src='__APP__/images/user.png'> {$user.uname}");
+	jQuery(function($) {
+		$("#user_info").click(function(e) {
+
+			$("#editpass").css("display", "none");
+			$('#user_info_content').modal({
+				position: ["23%",],
+				containerCss : {
+					height : 268,
+					width : 320
+				}
+			});
+			return false;
+		});
+		$("#xgmm").click(function() {
+
+			$('#simplemodal-container').css("height", "486px");
+			$("#editpass").css("display", "block");
+			createCode();
+		});
+	});
+
+	$("#forget").click(function(e) {
+		alert("您点击了忘记密码！");
+	});
+
+	$(function() {
+		$('input').placeholder();
+	});
+</script>
+
+
+
+
+</body>
+</html>

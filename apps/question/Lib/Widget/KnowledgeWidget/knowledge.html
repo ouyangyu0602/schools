@@ -1,0 +1,398 @@
+<style>
+    .leftRow{
+        background-color: #F3F3F3;
+    }
+    .knowledgeList{
+        overflow-y: auto;
+        overflow-x: hidden;
+        background-color: #f3f3f3;
+
+    }
+    .knowledgeList a{
+        color: #434343;
+
+        text-align: left;
+        width: 100%;
+        letter-spacing:0xp;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        -o-text-overflow:ellipsis;
+        white-space:nowrap;
+        font-weight: bolder;
+
+    }
+
+
+    .btn-lg, .btn-group-lg > .btn{
+        border-radius: 0px;
+    }
+
+    .knowledgeList span{
+
+    }
+
+    .knowledgeLevel1 a{
+        font-size: 13px;
+        padding-left: 10px;
+        padding-right: 0px;
+    }
+    .knowledgeLevel2 a{
+        font-size: 12px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .knowledgeLevel3 a{
+        font-size: 12px;
+        height: 23px;
+        padding: 0px;
+
+    }
+    .knowledgeLevel2 {
+        border-bottom: 1px solid #D3D5D5;
+        padding-left: 0px;
+        padding-right: 10px;
+
+    }
+    .knowledgeLevel1{
+        border-bottom: 1px solid #D3D5D5;
+
+        margin-right: 0px;
+        padding-right: 10px;
+    }
+    .knowledgeLevel3{
+        padding-right: 10px;
+    }
+
+    .badge{
+        border:1px solid #c1c1c1;
+        background-color: #f3f3f3;
+        color: #c1c1c1;
+        padding: 2px 3px 1px 2px;
+        font-size: 9px;
+        margin-top: 2px;
+        /*margin-right: 5px;*/
+    }
+
+
+    .gradeListDroupDown > #gradeListDroupDownLI{
+        max-width: 100px;
+        margin-left: 40px;
+        text-align: center;
+    }
+    #gradeListDroupDownLI > li{
+        min-width: 100px;
+
+    }
+    #gradeListDroupDownLI > li > a{
+
+        padding: 0px;
+        min-width: 100px;
+        margin: 0px;
+    }
+</style>
+<div class="row leftRow" style="border-bottom: 1px solid #C8CBCB;">
+    <div class="btn-group gradeListDroupDown" style="width:100%;text-align: center;height: 46px">
+        <a href="#" class="btn dropdown-toggle" data-toggle="dropdown" style="width: 100%;height: 40px;margin-top: 5px">
+            <span style="font-size: 15px;margin-left: 10px;color: #000000;font-weight: bolder">{$gradeList[$sort_order]['grade_list_name']}</span>
+            <span class="pull-right" style="font-size: 15px;color: #000000"><img src="__APP__/images/upAndDown.png"></span>
+        </a>
+        <ul id="gradeListDroupDownLI" class="dropdown-menu" role="menu" style="width: 100%;text-align: center" >
+            <volist name="gradeList" id="selectGradeList">
+                <?php if($selectGradeList['sort_order'] > 12){?>
+                <li>
+                    <a href="{:U('question/QuestionEdit/index',array('sort_order'=>$selectGradeList['sort_order']))}">
+                        {$selectGradeList['grade_list_name']}
+                    </a>
+                </li>
+                <?php }?>
+
+            </volist>
+
+        </ul>
+    </div>
+
+    <!--<select class="" name='grade_list_id' >
+        <volist name="gradeList" id="selectGradeList">
+            <option value="{$selectGradeList['grade_list_id']}" <?php echo $selectGradeList['grade_list_id'] == '1307S1702' ? 'selected="selected"' : ''?>>{$selectGradeList['grade_list_name']}</option>
+        </volist>
+    </select>-->
+</div>
+<div class="row knowledgeList">
+    <input style="display: none" value="{$badge}" type="text" id="badgeActive">
+    <volist name="knowledgeListArray['level1']" id="level1">
+        <div class="row knowledgeLevel1 container-fluid knowledgeMouseOver" style="">
+
+            <a id="{$level1['knowledge_id']}" href="#" data-toggle="tooltip" data-placement="bottom" title="{$level1['knowledge_name']}"  data-level="{$level1['level']}" onclick='$(".knowledgeLevel2").hide();$(".knowledgeLevel3").hide();$(".{$level1['knowledge_id']}").toggle("fast");' data-knowledge_id="{$level1['knowledge_id']}" class="btn btn-lg container-fluid pull-left" type="button" >
+            <span class="pull-right badge"><?php echo $badge == 0?"": $level1['question_count'];?></span>{$level1['knowledge_name']}
+            </a>
+        </div>
+<!--
+        <?php echo $level1['question_count'] == 0?"": $level1['question_count'];?>
+-->
+
+            <volist name="level1['level2']" id="level2">
+                <div class="row  container-fluid" >
+                    <div class="{$level1['knowledge_id']} text-overflow knowledgeLevel2 knowledgeMouseOver col-sm-11 col-sm-offset-1" style="display: none">
+                        <a  id="{$level2['knowledge_id']}" href="#" data-toggle="tooltip" data-placement="bottom" title="{$level2['knowledge_name']}" data-level="{$level2['level']}" onclick='$(".knowledgeLevel3").hide();$(".{$level2['knowledge_id']}").toggle("fast");' data-knowledge_id="{$level2['knowledge_id']}" class="btn btn-lg container-fluid text-overflow" type="button" >
+                        <span class="pull-right badge"><?php echo $badge == 0?"": $level2['question_count'];?></span>{$level2['knowledge_name']}
+                        </a>
+                    </div>
+
+                </div>
+                    <volist name="level2['level3']" id="level3">
+                        <div class="row  container-fluid" >
+                            <div class="{$level2['knowledge_id']} knowledgeMouseOver knowledgeLevel3 col-sm-11 col-sm-offset-1" style="display: none">
+                                <a id="{$level3['knowledge_id']}" href="#" data-toggle="tooltip" data-placement="bottom" title="{$level3['knowledge_name']}" data-level="{$level3['level']}" data-knowledge_id="{$level3['knowledge_id']}" class="text-overflow btn btn-lg container-fluid" type="button" >
+                                    <span class="pull-right badge" ><?php echo $badge == 0?"": $level3['question_count'];?></span>
+                                    {$level3['knowledge_name']}
+                                </a>
+                            </div>
+                        </div>
+                    </volist>
+
+            </volist>
+
+
+
+
+    </volist>
+</div>
+
+
+
+<script>
+
+
+
+
+    $('.knowledgeMouseOver').mouseover(function(){
+        $(".knowledgeMouseOver").each(function(){
+            if($(this).attr("data-is_click") != '1') {
+                $(this).css('background-color','#f3f3f3');
+            }
+        });
+
+
+
+        $(".knowledgeLevel3").each(function(){
+            if($(this).attr("data-is_click") != '1') {
+                $(this).css('background-color','#ffffff');
+                $(this).parent().css('background-color','#ffffff');
+            }
+        });
+        if($(this).attr("data-is_click") != '1') {
+            if($(this).children().attr('data-level') == '1') {
+                $(this).css('background-color','#8fc9ff');
+            }
+            if($(this).children().attr('data-level') == '2') {
+                $(this).css('background-color','#8fc9ff');
+                $(this).parent().css('background-color','#8fc9ff');
+            }
+            if($(this).children().attr('data-level') == '3') {
+                $(this).css('background-color','#8fc9ff');
+                $(this).parent().css('background-color','#8fc9ff');
+            }
+
+
+        }
+    }).mouseout(function(){
+        $(".knowledgeLevel1").each(function(){
+            if($(this).attr("data-is_click") != '1') {
+                $(this).css('background-color','#f3f3f3');
+            }
+        });
+        $(".knowledgeLevel2").each(function(){
+            if($(this).attr("data-is_click") != '1') {
+                $(this).css('background-color','#f3f3f3');
+                $(this).parent().css('background-color','#f3f3f3');
+            }
+        });
+        $(".knowledgeLevel3").each(function(){
+            if($(this).attr("data-is_click") != '1') {
+                $(this).css('background-color','#ffffff');
+                $(this).parent().css('background-color','#ffffff');
+
+            }
+        });
+
+
+    });
+
+
+
+    $('.knowledgeLevel1 a').click(function(){
+        $('.knowledgeLevel1').attr('data-is_click','0');
+        $('.knowledgeLevel2').attr('data-is_click','0');
+        $('.knowledgeLevel3').attr('data-is_click','0');
+        $(this).parent().attr('data-is_click','1');
+
+        $('.knowledgeLevel1').css('background-color','');
+        $('.knowledgeLevel1').css('border-right','');
+        $(this).parent().css('padding-right','10px');
+        $(this).parent().css('padding-right','5px');
+
+        $(this).parent().css('background-color','#e3e3e3');
+        $(this).parent().css('border-right','5px solid #0077e5');
+        //$(".knowledgeLevel1 .badge").css("margin-right","0px");
+
+
+        $('.knowledgeLevel1 a').css('color','#434343');
+        $(this).css('color','#F7F7F7');
+        $('.knowledgeLevel2').parent().css('background-color','');
+        $('.knowledgeLevel2 a').css('color','#434343');
+
+        var level1_id = $(this).attr('data-knowledge_id');
+        $("#knowledgeLevel1ID").val(level1_id);
+        $("#knowledgeLevel2ID").val("");
+        $("#knowledgeLevel3ID").val("");
+        $(".knowledgeLevel2 .badge").css("background-color","#f3f3f3");
+        $(".knowledgeLevel2 .badge").css("color","#c1c1c1");
+        $(".knowledgeLevel2 .badge").css("border","1px solid #c1c1c1");
+        $(".knowledgeLevel3 .badge").css("color","#c1c1c1");
+        $(".knowledgeLevel3 .badge").css('border','1px solid #c1c1c1');
+    });
+    $('.knowledgeLevel2 a').click(function(){
+
+        $('.knowledgeLevel2').attr('data-is_click','0');
+        $('.knowledgeLevel3').attr('data-is_click','0');
+        $(this).parent().attr('data-is_click','1');
+
+        $('.knowledgeLevel2').css('background-color','');
+        $('.knowledgeLevel2').parent().css('background-color','#F0F0F0');
+        $(this).parent().parent().css('background-color','#ffffff');
+        $('.knowledgeLevel2 a').css('color','#434343');
+        $('.knowledgeLevel3').parent().css('background-color','#ffffff');
+        $('.knowledgeLevel3').css('background-color','#ffffff');
+        $('.knowledgeLevel3 a').css('color','#626262');
+        $(this).css('color','#0077e5');
+
+        var level2_id = $(this).attr('data-knowledge_id');
+        $("#knowledgeLevel2ID").val(level2_id);
+        $("#knowledgeLevel3ID").val("");
+        $(".knowledgeLevel2 .badge").css("background-color","#f3f3f3");
+        $(".knowledgeLevel2 .badge").css("color","#c1c1c1");
+        $(".knowledgeLevel2 .badge").css("border","1px solid #c1c1c1");
+        $(this).children().css('color','#0077e5');
+        $(this).children().css('background-color','#ffffff');
+        $(this).children().css('border','1px solid #0077e5');
+
+
+        $(".knowledgeLevel3 .badge").css("background-color","#ffffff");
+        $(".knowledgeLevel3 .badge").css("color","#c1c1c1");
+        $(".knowledgeLevel3 .badge").css('border','1px solid #c1c1c1');
+
+
+    });
+    $('.knowledgeLevel3 a').click(function(){
+
+        $('.knowledgeLevel3').attr('data-is_click','0');
+        $(this).parent().attr('data-is_click','1');
+
+        //$('.knowledgeLevel3').css('background-color','#ffffff');
+        $('.knowledgeLevel3').parent().css('background-color','#ffffff');
+        $('.knowledgeLevel3').css('background-color','#ffffff');
+        $(this).parent().css('background-color','#0077e5');
+        $(this).parent().parent().css('background-color','#0077e5');
+        $('.knowledgeLevel3 a').css('color','#626262');
+        $(this).css('color','#ffffff');
+        var level3_id = $(this).attr('data-knowledge_id');
+        $("#knowledgeLevel3ID").val(level3_id);
+
+
+        $(".knowledgeLevel3 .badge").css("color","#c1c1c1");
+        $(".knowledgeLevel3 .badge").css('border','1px solid #c1c1c1');
+        $(this).children().css('color','#0077e5');
+        $(".knowledgeLevel2 .badge").css("color","1px solid #c1c1c1");
+        $(this).children().css('border','1px solid #ffffff');
+    });
+
+    $(".knowledgeList a").click(function(){
+        if($("#badgeActive").val() == '1') {
+            viewQuestionList();
+        }
+    });
+
+    function viewQuestionList(){
+        var formData = $('#questionViewForm').serialize();
+        $.ajax({
+            type : "POST",
+            url  : "{:U('question/QuestionEdit/ajaxQuestionList')}",
+            cache : false,
+            data : formData,
+            success : onSuccess,
+            error : onError
+        });
+        return false;
+
+    }
+
+    function onSuccess(data,status){
+        $('#questionListView').html(data);
+
+
+        //数量统计，赋值过去
+        //alert(data);
+    }
+    function onError(data,status){
+        //进行错误处理
+        //alert(data);
+    }
+
+
+    $(function (){
+
+        /*var list = $(".knowledgeList a");
+
+        list.each(function(index, element) {
+
+            var str = $(this).innerText;
+            if($(this).text().length > 2) {
+                $(this).text(cutStr(str,2)+'...');
+
+            }
+
+        });*/
+
+
+
+    });
+
+    //截取中英字符串
+
+    function cutStr(str,cutLen){
+
+        var returnStr = '',    //返回的字符串
+
+                reCN = /[^\x00-\xff]/,    //中文字符
+
+                strCNLen = str.replace(/[^\x00-\xff]/g,'**').length;//一个中文字符算2个字节
+
+        if(cutLen>=strCNLen){
+
+            return str;
+
+        }
+
+        for(var i=0,len=0;len<cutLen;i++){
+
+            returnStr += str.charAt(i);
+
+            if(reCN.test(str.charAt(i))){
+
+                len+=2;
+
+            }else{
+
+                len++;
+
+            }
+
+        }
+
+        return returnStr;
+
+    }
+
+
+</script>

@@ -1,0 +1,189 @@
+<style>
+    .title{
+        font-size: 13px;
+
+        color: #005BE0
+    }
+    .content{
+        font-size: 13px;
+
+
+    }
+    .modal-header{
+        padding: 0px;
+        background-color: #0C5FDF;
+        margin: 0px;
+    }
+    .modal-content{
+        border: 0px;
+        border-radius: 0px;
+    }
+    .modal-header-row{
+        margin-top: 10px;
+        margin-bottom:10px;
+
+    }
+    .modal-header-row span{
+        color: #ffffff;
+    }
+    .modal-header-row div{
+        text-align: center;
+    }
+    .questionShengLie{
+        overflow: hidden;
+        text-overflow:ellipsis;
+        -o-text-overflow:ellipsis;
+        white-space:nowrap;
+    }
+
+</style>
+<volist name="arrayListView" id="view">
+
+
+<div class="col-md-4" style="margin-top:20px;">
+    <div class="row container-fluid questionMouseOver" style="margin:0px;border: 1px solid #C8CBCB;">
+        <div class="row questionShengLie" data-toggle="modal" data-target="#questionModal{$view['id']}"  style="height: 190px;margin: 5px">
+            <span class="">{$view['question_content']}</span>
+        </div>
+        <div class="row pull-right" style="height:50px;margin: 5px">
+            <div class="row" style="margin: 10px">
+                <a class="downloadChange"  href="#"  style="">
+                    <img src="__APP__/images/download.jpg">
+                </a>
+                <a class="deleteChange"  href="{:U('question/QuestionEdit/questionRecord',array('questionId'=>$view['id']))}" style="margin-left: 20px">
+                    <img src="__APP__/images/delete.jpg">
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+    <div class="modal" id="questionModal{$view['id']}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header row" style="">
+                    <div class="modal-header-row row" style="color: #ffffff;margin-top: 5px;margin-bottom: 5px" >
+                        <div class="row" style="margin-right:12px;margin-left:12px;margin-bottom: 5px">
+
+                        <div class=" col-sm-3" style="text-align: left;padding-left: 20px;">
+                            <span class="title ">编号:</span>
+                            <span class="content ">{$view['id']}</span>
+                        </div>
+                        <div class=" col-sm-3">
+                            <span class="title">题型:</span>
+                            <span class="content">{$view['type_name']}</span>
+                        </div>
+                        <div class=" col-sm-3">
+                            <span class="title">难度:</span>
+                            <span class="content">{$view['difficult_name']}</span>
+                        </div>
+                        <div class=" col-sm-3" style="text-align: right;padding-right: 20px;">
+                            <span class="title">上传人:</span>
+                            <span class="content">{$view['create_name']}</span>
+                        </div>
+                            </div>
+                        <div class="row" style="">
+                            <div class="container-fluid" style="padding:0px;margin-right:30px;margin-left:30px;text-align:center;border-top: 1px solid #bbbbbb;">
+
+                                <div class="col-sm-6" style="text-align: left;padding-left: 20px;margin-top:5px;">
+                                    <span class="title" style="" >知识点:</span>
+                                    <span class="content" style="" >{$view['levelKnowledgeName']}</span>
+                                </div>
+                                <div class="col-sm-3 pull-right" style="text-align: right;padding-right: 20px;margin-top:5px;">
+                                    <span class="title" style="" >来源:</span>
+                                    <span class="content" style="" >{$view['where_name']}</span>
+                                </div>
+
+                            </div>
+                            </div>
+
+                            </div>
+                </div>
+                <div class="modal-body" style="padding: 0px">
+
+
+                    <div class="container-fluid" style="margin-top: 20px;margin-right:20px;margin-left:20px;border-bottom: 1px solid #C8CBCB;">
+                        <div class="col-sm-12" style="margin-bottom: 10px;padding: 0px">
+                            <span class="content">
+                                {$view['question_content']}
+                            </span>
+
+                        </div>
+
+                    </div>
+                    <!--<div class="row" style="margin: 30px;border-bottom: 1px solid #C8CBCB;">
+                        <span class="content">A.37</span>
+                        <span class="content">B.27</span>
+                        <span class="content">C.97</span>
+                        <span class="content">D.47</span>
+                    </div>-->
+                    <div class="container-fluid">
+                        <div class="row" style="margin: 20px;">
+                            <span class="title">答案:</span>
+                            <span class="content">{$view['answer']}</span>
+                        </div>
+                        <div class="row" style="margin: 20px;">
+                            <span class="title">统计:</span>
+                            <span class="content">本题共被作答{$view['use_count']}次,正确率为{$view['question_value']}%,共被下载{$view['download_count']}次</span>
+                        </div>
+                        <div class="row" style="margin: 20px;">
+                            <span class="title">使用:</span>
+                            <!--<span class="content">2012年七年级上学期期中考试</span>
+                            <span class="content">2013年七年级上学期期中考试</span>-->
+                        </div>
+                        <div class="row" style="margin: 20px;">
+                            <span class="title">解析:</span>
+                            <span class="content">{$view['answer_text']}</span>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer" style="padding-top: 0px;padding-bottom: 0px">
+                    <a href="#"  data-dismiss="modal" class="btn dismissModal" style="font-size: 19px;margin-right: 60px">关闭</a>
+
+                    <a href="{:U('question/QuestionEdit/index',array('questionID'=>$view['id']))}" class="btn " style="font-size: 19px">修改</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</volist>
+
+        <?php $countList = count($arrayListView);?>
+
+<script>
+            $("#questionCount").text("{$countList}");
+
+            $('.questionMouseOver').mouseover(function(){
+                $('.questionMouseOver').css('border','1px solid #C8CBCB');
+                $(this).css('border','1px solid #0C5FDF');
+            }).mouseout(function(){
+                $('.questionMouseOver').css('border','1px solid #C8CBCB');
+            });
+
+            $('.downloadChange').mouseover(function(){
+                $('.downloadChange img').attr('src',"__APP__/images/download.jpg");
+
+                $(this).children('img').attr('src',"__APP__/images/download1.jpg");
+            }).mouseout(function(){
+                $('.downloadChange img').attr('src',"__APP__/images/download.jpg");
+            });
+            $('.deleteChange').mouseover(function(){
+                $('.deleteChange img').attr('src',"__APP__/images/delete.jpg");
+
+                $(this).children('img').attr('src',"__APP__/images/delete1.jpg");
+            }).mouseout(function(){
+                $('.deleteChange img').attr('src',"__APP__/images/delete.jpg");
+
+            });
+
+            $('.dismissModal').click(function(){
+                $(this).dblclick();
+            });
+</script>
