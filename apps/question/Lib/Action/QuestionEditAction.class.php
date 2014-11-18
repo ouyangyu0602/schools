@@ -631,8 +631,9 @@ class QuestionEditAction extends Action {
         $questionData['use_count'] = $updateQuestion['use_count'];
         $questionData['question_value'] = $updateQuestion['question_value'];
 
-        $saveQuestionResult = M('uteach_question')->where(array('id'=>$updateQuestion['id']))->data($questionData)->save();
+       // $saveQuestionResult = M('uteach_question')->where(array('id'=>$updateQuestion['id']))->data($questionData)->save();
 
+        $saveQuestionResult = M('uteach_question')->add($questionData);
         if($saveQuestionResult){
             echo "<script>alert('修改成功！！')</script>";
             $returnData['knowledge_level1'] = $level1;
