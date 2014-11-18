@@ -95,8 +95,10 @@ alert("您点击了忘记密码！");
   </script>
 
 <script>
-    var widthlogin = (screen.width - 800)/2;
-    $('#uteachloginwith').css('margin-left',widthlogin);
+    var widthlogin = (screen.width - 800)/2/screen.width*100;
+
+
+    $('#uteachloginwith').css('left',widthlogin+'%');
 
 function mimaclick() {
 	
