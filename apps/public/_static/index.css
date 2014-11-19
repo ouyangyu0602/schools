@@ -22,16 +22,16 @@ body{background:#4c4d54 url(images/uteachLogin.jpg);overflow: hidden;}
 }
 #loginRememberStyle{
     margin-top: 30px;
-    margin-left: 170px;
+    margin-left: 100px;
 }
 #login_div{display:none;}
 
 #logo{width:328px; height:65px; margin:0px auto;}
-.login{width:820px; height:320px; margin:0px auto;top:30%;position:absolute;z-index:999;}
+.login{width:610px; height:320px; margin:0px auto;top:30%;position:absolute;z-index:999;}
 .login input{vertical-align:middle; color:#706c70; font-size:14px;line-height:180%; font-weight:300;}
 .login #name{
-    width:271px;
-    height:37px;
+    width:170px;
+    height:28px;
     line-height:21px;
 background-image: url(images/uteachInput.png);
     font-size: 21px;
@@ -45,8 +45,8 @@ background:no-repeat 0 0 scroll #EEEEEE;
     outline:medium;
 }
 .login #pass{
-    width:271px;
-    height:37px;
+    width:170px;
+    height:28px;
     line-height:21px;
 background-image: url(images/uteachInput.png);
     font-size: 21px;
