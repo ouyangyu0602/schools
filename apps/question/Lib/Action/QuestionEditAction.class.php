@@ -79,7 +79,9 @@ class QuestionEditAction extends Action {
                         ->where("login = ".$userInfo['login']." AND school_id = ".$userInfo['school_id'])
                         ->find();
 
-
+        dump(M()->getLastsql());
+        dump($subjectId);
+        die();
         $gradeList = D("Knowledge")->getGradeList(null,$subjectId['subject_type']);
         //年级学年的id
         if(empty($_REQUEST['sort_order'])) {
