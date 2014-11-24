@@ -75,13 +75,11 @@ class QuestionEditAction extends Action {
         $userInfo['school_id'] = $GLOBALS['ts']['user']['school_id'];
 
         $subjectId = M('teacher_subject_classes')
-                        ->field('subject_id')
-                        ->where("login = ".$userInfo['login']." AND school_id = ".$userInfo['school_id'])
+                        ->field('subject_type')
+                        ->where("login = '".$userInfo['login']."' AND school_id = '".$userInfo['school_id']."'")
                         ->find();
 
-        dump(M()->getLastsql());
-        dump($subjectId);
-        die();
+
         $gradeList = D("Knowledge")->getGradeList(null,$subjectId['subject_type']);
         //年级学年的id
         if(empty($_REQUEST['sort_order'])) {
@@ -122,8 +120,8 @@ class QuestionEditAction extends Action {
         $userInfo['school_id'] = $GLOBALS['ts']['user']['school_id'];
 
         $subjectId = M('teacher_subject_classes')
-            ->field('subject_id')
-            ->where("login = ".$userInfo['login']." AND school_id = ".$userInfo['school_id'])
+            ->field('subject_type')
+            ->where("login = '".$userInfo['login']."' AND school_id = '".$userInfo['school_id']."'")
             ->find();
 
 
