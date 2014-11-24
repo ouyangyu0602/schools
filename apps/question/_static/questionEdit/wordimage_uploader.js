@@ -77,6 +77,7 @@ function WordImageUploader(s_url, app_name,image_URL)
             return 0;
         }
         var ed = editorInstance;
+        //alert(ed);
         var txt = ed.getData();
 
         var txt0 = txt;

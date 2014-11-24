@@ -70,8 +70,17 @@ class QuestionEditAction extends Action {
 
         }
 
+        $userInfo['uname'] = $GLOBALS['ts']['user']['uname'];
+        $userInfo['login'] = $GLOBALS['ts']['user']['login'];
+        $userInfo['school_id'] = $GLOBALS['ts']['user']['school_id'];
 
-        $gradeList = D("Knowledge")->getGradeList(null,'02');
+        $subjectId = M('teacher_subject_classes')
+                        ->field('subject_id')
+                        ->where("login = ".$userInfo['login']." AND school_id = ".$userInfo['school_id'])
+                        ->find();
+
+
+        $gradeList = D("Knowledge")->getGradeList(null,$subjectId['subject_type']);
         //年级学年的id
         if(empty($_REQUEST['sort_order'])) {
             $sort_order = '12';//七年级上学期数学
@@ -106,7 +115,18 @@ class QuestionEditAction extends Action {
             $this->assign("questionClick",$deleteQuestion);
         }
 
-        $gradeList = D("Knowledge")->getGradeList(null,'02');
+        $userInfo['uname'] = $GLOBALS['ts']['user']['uname'];
+        $userInfo['login'] = $GLOBALS['ts']['user']['login'];
+        $userInfo['school_id'] = $GLOBALS['ts']['user']['school_id'];
+
+        $subjectId = M('teacher_subject_classes')
+            ->field('subject_id')
+            ->where("login = ".$userInfo['login']." AND school_id = ".$userInfo['school_id'])
+            ->find();
+
+
+        $gradeList = D("Knowledge")->getGradeList(null,$subjectId['subject_type']);
+        //$gradeList = D("Knowledge")->getGradeList(null,'02');
         //年级学年的id
         if(empty($_REQUEST['sort_order'])) {
             $sort_order = '12';//七年级上学期数学
