@@ -36,7 +36,7 @@ class PassportAction extends Action
 		$this->appCssList[] = 'login.css';
 		if(model('Passport')->isLogged()){
 			//model('Passport')->logoutLocal();
-			U('public/Index/index','',true);
+			U('question/QuestionEdit/index','',true);
 		}
 
 		// 获取邮箱后缀

@@ -79,7 +79,7 @@ function WordImageUploader(s_url, app_name,image_URL)
         var ed = editorInstance;
         //alert(ed);
         var txt = ed.getData();
-
+        alert(txt);
         var txt0 = txt;
 txt = txt.replace(new RegExp('width=\"1\"',"gm"), '');
 txt = txt.replace(new RegExp('width=\"\"',"gm"), '');
